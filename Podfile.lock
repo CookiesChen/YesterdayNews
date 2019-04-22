@@ -1,0 +1,22 @@
+PODS:
+  - Colours (5.13.0):
+    - Colours/ObjC (= 5.13.0)
+  - Colours/ObjC (5.13.0)
+  - ReactiveObjC (3.1.0)
+
+DEPENDENCIES:
+  - Colours
+  - ReactiveObjC (~> 3.1.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Colours
+    - ReactiveObjC
+
+SPEC CHECKSUMS:
+  Colours: f24220c38f13deac88612667e9b4a7fb96b871d4
+  ReactiveObjC: 2a38ea15335de4119d8b17caf1db1484f61db902
+
+PODFILE CHECKSUM: 831c74e1b315dca971347da8869c542b771f4a50
+
+COCOAPODS: 1.6.1
