@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		24ED755E226DFB3F00894C0E /* fontello.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 24ED755D226DFB3F00894C0E /* fontello.ttf */; };
 		48683DE9C36519E3B3F73368 /* libPods-YesterdayNews.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E45E69A9B4FF88D7B55EC24E /* libPods-YesterdayNews.a */; };
 		5130268B226DA86E00A1C652 /* NavigationBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5130268A226DA86E00A1C652 /* NavigationBarViewController.m */; };
 		5144FADA226B57FD00101E22 /* HomePageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5144FAD9226B57FD00101E22 /* HomePageViewModel.m */; };
@@ -48,6 +49,7 @@
 /* Begin PBXFileReference section */
 		07AA0FE3601FE1262409EB2B /* libPods-YesterdayNewsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YesterdayNewsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F0E4A0C7DDF17D008A78D0E /* libPods-YesterdayNewsUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YesterdayNewsUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		24ED755D226DFB3F00894C0E /* fontello.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fontello.ttf; sourceTree = "<group>"; };
 		5130268A226DA86E00A1C652 /* NavigationBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NavigationBarViewController.m; sourceTree = "<group>"; };
 		5130268C226DA88600A1C652 /* NavigationBarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NavigationBarViewController.h; sourceTree = "<group>"; };
 		5144FAD6226B57C100101E22 /* HomePageViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePageViewModel.h; sourceTree = "<group>"; };
@@ -118,6 +120,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		24ED755C226DFB3F00894C0E /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				24ED755D226DFB3F00894C0E /* fontello.ttf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
 		5144FADF226B73EA00101E22 /* HomePage */ = {
 			isa = PBXGroup;
 			children = (
@@ -187,6 +197,7 @@
 		51C3AD01226B0D1600EA3FD9 /* YesterdayNews */ = {
 			isa = PBXGroup;
 			children = (
+				24ED755C226DFB3F00894C0E /* fonts */,
 				51C3AD41226B149100EA3FD9 /* until */,
 				51C3AD36226B0D5C00EA3FD9 /* Model */,
 				51C3AD35226B0D4D00EA3FD9 /* ViewController */,
@@ -385,6 +396,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				51C3AD0F226B0D1B00EA3FD9 /* LaunchScreen.storyboard in Resources */,
+				24ED755E226DFB3F00894C0E /* fontello.ttf in Resources */,
 				51C3AD0C226B0D1B00EA3FD9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
