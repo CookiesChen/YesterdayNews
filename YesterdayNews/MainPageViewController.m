@@ -24,10 +24,12 @@
 
 @property(nonatomic, strong) MainPageViewModel *ViewModel;
 @property(nonatomic) NSInteger bar_height;
+
 @end
 
 @implementation MainPageViewController
 
+/* -- progma mark - life cycle -- */
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -36,6 +38,12 @@
     [self bindViewModel];
 }
 
+- (void)viewDidLayoutSubviews {
+    [self.tabBar setFrame: CGRectMake(0, WINDOW_HEIGHT-self.bar_height, WINDOW_WIDTH, self.bar_height)];
+}
+
+
+/* -- progma mark - private methods -- */
 // 初始化
 - (instancetype)init {
     self = [super init];
@@ -57,8 +65,21 @@
 }
 
 // UI布局
-- (void)setupView{
-    // 菜单栏自定义
+- (void)setupView {
+    [self initTabBar];
+}
+
+// viewmodel绑定
+- (void)bindViewModel {
+    self.ViewModel = [[MainPageViewModel alloc] init];
+}
+
+
+/* -- progma mark - Delegate -- */
+
+
+/* -- progma mark - getters and setters -- */
+- (void )initTabBar {
     UITabBar *bar = self.tabBar;
     NSArray *titles = @[@"首页", @"我的"];
     NSArray *images = @[@"icon_home.png", @"icon_user.png"];
@@ -78,22 +99,13 @@
     [self setTabBarItem: item];
     
     int index = 0;
-    for(UITabBarItem *item in bar.items){
+    for(UITabBarItem *item in bar.items) {
         [item setTitle: titles[index]];
         item.titlePositionAdjustment = UIOffsetMake(0, 20);
         [item setImage: [UIImage imageNamed:images[index]]];
         [item setImageInsets:UIEdgeInsetsMake(10, 0, -10, 0)];
         index++;
     }
-}
-
-// viewmodel绑定
-- (void)bindViewModel{
-    self.ViewModel = [[MainPageViewModel alloc] init];
-}
-
-- (void)viewDidLayoutSubviews {
-    [self.tabBar setFrame: CGRectMake(0, WINDOW_HEIGHT-_bar_height, WINDOW_WIDTH, _bar_height)];
 }
 
 @end

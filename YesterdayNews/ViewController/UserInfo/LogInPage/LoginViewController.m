@@ -41,26 +41,35 @@
     
     // email
     self.emailInput = ({
-        UITextField *tf = [[UITextField alloc] initWithFrame:CGRectMake(50, 150, self.view.frame.size.width - 100, 35)];
-        tf.borderStyle = UITextBorderStyleLine;
-        tf.layer.cornerRadius = 20;
-        tf.placeholder = @"邮箱";
+        UITextField *tf = [[UITextField alloc] initWithFrame:CGRectMake(50, 160, self.view.frame.size.width - 100, 35)];
+        tf.borderStyle = UITextBorderStyleRoundedRect;
+        tf.font = [UIFont systemFontOfSize:14];
+        tf.layer.cornerRadius = 17.5;
+        tf.layer.masksToBounds = YES;
+        [tf.layer setBorderWidth:1];
+        [tf.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
+        tf.placeholder = @"    邮箱";
         tf;
     });
     [self.view addSubview:self.emailInput];
     
     // password
     self.passwordInput = ({
-        UITextField *tf = [[UITextField alloc] initWithFrame:CGRectMake(50, 200, self.view.frame.size.width - 100, 35)];
-        tf.borderStyle = UITextBorderStyleBezel;
-        tf.placeholder = @"密码";
+        UITextField *tf = [[UITextField alloc] initWithFrame:CGRectMake(50, 220, self.view.frame.size.width - 100, 35)];
+        tf.borderStyle = UITextBorderStyleRoundedRect;
+        tf.font = [UIFont systemFontOfSize:14];
+        tf.layer.cornerRadius = 17.5;
+        tf.layer.masksToBounds = YES;
+        [tf.layer setBorderWidth:1];
+        [tf.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
+        tf.placeholder = @"    密码";
         tf;
     });
     [self.view addSubview:self.passwordInput];
     
     // login button
     self.loginButton = ({
-        UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(50, 250, self.view.frame.size.width - 100, 35)];
+        UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(50, 280, self.view.frame.size.width - 100, 35)];
         [btn setTitle:@"秘技----一键登录" forState:UIControlStateNormal];
         btn.titleLabel.font = [UIFont systemFontOfSize:14];
         btn.backgroundColor = ZXColorFromRGB(0xf38181);
