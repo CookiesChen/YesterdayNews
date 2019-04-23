@@ -6,28 +6,31 @@
 //  Copyright © 2019 Cookieschen. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import "UserInfoViewController.h"
+#import "ProfileViewController.h"
+
 
 @interface UserInfoViewController ()
+
+
 
 @end
 
 @implementation UserInfoViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    [self setupView];
+- (instancetype)init {
+    ProfileViewController *profile = [[ProfileViewController alloc] init];
+    return [self initWithRootViewController:profile];
 }
 
-- (void)setupView{
-    [self.view setBackgroundColor: UIColor.whiteColor];
-    UILabel *label = [[UILabel alloc] init];
-    [label setFrame: CGRectMake(200, 200, 100, 40)];
-    [label setText: @"这是个人信息"];
-    [label setTextColor: UIColor.blackColor];
-    
-    [self.view addSubview: label];
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 @end
