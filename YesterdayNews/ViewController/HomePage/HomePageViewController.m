@@ -21,7 +21,9 @@
 @property(nonatomic, strong) HomePageViewModel *ViewModel;
 @property(nonnull, nonatomic) PageViewController *pageVC;
 @property(nonnull, nonatomic) NavigationBarViewController *navbarVC;
+
 @property(nonatomic, strong) UICollectionView *tabBar;
+
 @property(nonatomic, strong) NSArray *tabs;
 @property(nonatomic) NSInteger tab_height;
 @property(nonatomic) NSInteger margin_top;
@@ -30,13 +32,17 @@
 
 @implementation HomePageViewController
 
+
+/* -- progma mark - life cycle -- */
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self createViewController];
     [self setupView];
     [self bindViewModel];
 }
+
+
+/* -- progma mark - private methods -- */
 
 //初始化
 - (instancetype)init {
@@ -51,25 +57,15 @@
     self.margin_top = 70;
 }
 
-// vc创建
-- (void)createViewController {
-    self.pageVC = [[PageViewController alloc] init];
-    self.navbarVC = [[NavigationBarViewController alloc] initWithHeight: self.tab_height];
-}
-
 // ui布局
 - (void)setupView {
     [self.view setBackgroundColor: [UIColor infoBlueColor]];
     
-    [self.navbarVC.view setFrame:CGRectMake(0, self.margin_top,
-                                            self.view.frame.size.width, self.tab_height)];
-    [self.pageVC.view setFrame: CGRectMake(0, self.margin_top+self.tab_height,
-                                           WINDOW_WIDTH, WINDOW_HEIGHT-self.tab_height)];
-    [self addChildViewController: self.pageVC];
-    [self addChildViewController: self.navbarVC];
     [self.view addSubview: self.pageVC.view];
     [self.view addSubview: self.navbarVC.view];
     
+    [self addChildViewController: self.pageVC];
+    [self addChildViewController: self.navbarVC];
 }
 
 // viewmodel绑定
@@ -79,6 +75,30 @@
     [RACObserve(self.navbarVC, current_index) subscribeNext:^(NSNumber*  _Nullable x) {
         [self.pageVC setIndex: [x integerValue]];
     }];
+}
+
+
+/* -- progma mark - Delegate -- */
+
+
+/* -- progma mark - getters and setters -- */
+
+- (PageViewController *)pageVC {
+    if(_pageVC == nil){
+        _pageVC = [[PageViewController alloc] init];
+        [_pageVC.view setFrame: CGRectMake(0, self.margin_top+self.tab_height,
+                                               WINDOW_WIDTH, WINDOW_HEIGHT-self.tab_height)];
+    }
+    return _pageVC;
+}
+
+- (NavigationBarViewController *)navbarVC {
+    if(_navbarVC == nil){
+        _navbarVC = [[NavigationBarViewController alloc] initWithHeight: self.tab_height];
+        [_navbarVC.view setFrame:CGRectMake(0, self.margin_top,
+                                                self.view.frame.size.width, self.tab_height)];
+    }
+    return _navbarVC;
 }
 
 @end
