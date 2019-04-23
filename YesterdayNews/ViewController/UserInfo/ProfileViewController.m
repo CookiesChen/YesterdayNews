@@ -8,6 +8,8 @@
 
 #import "ProfileViewController.h"
 #import "UserTarBar/UserTarBarViewController.h"
+#import "LogInPage/LoginViewController.h"
+#import "SignUpPage/SignupViewController.h"
 #define ICON_SIZE 22
 #define ICON_LABEL_SIZE 12
 #define NAME_SIZE 24
@@ -45,6 +47,9 @@
 
 @property(nonatomic, strong) NSMutableArray<NSMutableArray<NSString*>*> *tableItems;
 
+@property(nonatomic, strong) LoginViewController *loginVC;
+@property(nonatomic, strong) SignupViewController *signupVC;
+
 @end
 
 @implementation ProfileViewController
@@ -58,6 +63,10 @@
     NSOperationQueue *operationQueue = [[NSOperationQueue alloc] init];
     NSInvocationOperation *op = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(downloadImage) object:nil];
     [operationQueue addOperation:op];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)setupView{
@@ -276,16 +285,6 @@
         view;
     });
     [self.view addSubview:self.part3];
-    // label
-    self.loginTitleLabel = ({
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, self.part3.frame.size.width, 30)];
-        label.textColor = [UIColor blackColor];
-        label.textAlignment = NSTextAlignmentCenter;
-        label.font = [UIFont systemFontOfSize:20];
-        [label setText:@"登陆你的头条，掌握昨日信息"];
-        label;
-    });
-    [self.part3 addSubview:self.loginTitleLabel];
     // close button
     UIButton *closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.part3.frame.size.width-150, 10, 150, 30)];
     [closeBtn setTitle:@"close" forState:UIControlStateNormal];
@@ -293,22 +292,18 @@
     [closeBtn setTitleColor:[UIColor grayColor]forState:UIControlStateNormal];
     [closeBtn addTarget:self action:@selector(closeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.part3 addSubview:closeBtn];
-    // login button
-    self.loginButton2 = ({
-        UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(50, 250, self.part3.frame.size.width - 100, 35)];
-        [btn setTitle:@"秘技----一键登录" forState:UIControlStateNormal];
-        btn.titleLabel.font = [UIFont systemFontOfSize:14];
-        btn.backgroundColor = ZXColorFromRGB(0xf38181);
-        btn.layer.cornerRadius = 20;
-        btn;
-    });
-    [self.loginButton2 addTarget:self action:@selector(LoginButtonClick2:) forControlEvents:UIControlEventTouchUpInside];
-    [self.part3 addSubview:self.loginButton2];
+
+    // child VC
+    self.loginVC = [[LoginViewController alloc] init];
+    // 添加到父控制器中
+    [self addChildViewController:self.loginVC];
+    self.loginVC.view.frame = CGRectMake(0, 40, self.part3.frame.size.width, self.part3.frame.size.height);
+    [self.part3 addSubview:self.loginVC.view];
+    [self.loginVC didMoveToParentViewController:self];
     
     self.part3.transform = CGAffineTransformTranslate(self.part3.transform, 0, self.part3.frame.size.height);
     // ------------------------------------------------------------
-    
-    
+ 
 }
 
 - (void)downloadImage {

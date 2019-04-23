@@ -29,5 +29,8 @@
     [self.view setBackgroundColor:[UIColor whiteColor]];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
 
 @end

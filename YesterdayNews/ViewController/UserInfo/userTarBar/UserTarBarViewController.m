@@ -42,8 +42,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    //[self.navigationController setNavigationBarHidden:NO animated:YES];
-    //NSLog(@"[NetworkAccessViewController] viewWillAppear");
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)onClickBack:(id)sender {
