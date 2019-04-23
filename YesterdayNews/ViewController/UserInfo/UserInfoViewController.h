@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UserInfoViewController : UIViewController
+@interface UserInfoViewController : UINavigationController
+
+- (instancetype)init;
 
 @end

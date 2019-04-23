@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		24ED755E226DFB3F00894C0E /* fontello.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 24ED755D226DFB3F00894C0E /* fontello.ttf */; };
+		24ED7565226EAA5200894C0E /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED7564226EAA5200894C0E /* ProfileViewController.m */; };
+		24ED7569226EABDB00894C0E /* UserTarBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED7568226EABDB00894C0E /* UserTarBarViewController.m */; };
 		48683DE9C36519E3B3F73368 /* libPods-YesterdayNews.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E45E69A9B4FF88D7B55EC24E /* libPods-YesterdayNews.a */; };
 		5130268B226DA86E00A1C652 /* NavigationBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5130268A226DA86E00A1C652 /* NavigationBarViewController.m */; };
 		5144FADA226B57FD00101E22 /* HomePageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5144FAD9226B57FD00101E22 /* HomePageViewModel.m */; };
@@ -50,6 +52,10 @@
 		07AA0FE3601FE1262409EB2B /* libPods-YesterdayNewsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YesterdayNewsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F0E4A0C7DDF17D008A78D0E /* libPods-YesterdayNewsUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YesterdayNewsUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		24ED755D226DFB3F00894C0E /* fontello.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fontello.ttf; sourceTree = "<group>"; };
+		24ED7563226EAA5200894C0E /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		24ED7564226EAA5200894C0E /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		24ED7567226EABDB00894C0E /* UserTarBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTarBarViewController.h; sourceTree = "<group>"; };
+		24ED7568226EABDB00894C0E /* UserTarBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTarBarViewController.m; sourceTree = "<group>"; };
 		5130268A226DA86E00A1C652 /* NavigationBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NavigationBarViewController.m; sourceTree = "<group>"; };
 		5130268C226DA88600A1C652 /* NavigationBarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NavigationBarViewController.h; sourceTree = "<group>"; };
 		5144FAD6226B57C100101E22 /* HomePageViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePageViewModel.h; sourceTree = "<group>"; };
@@ -128,6 +134,15 @@
 			path = fonts;
 			sourceTree = "<group>";
 		};
+		24ED7566226EABDB00894C0E /* UserTarBar */ = {
+			isa = PBXGroup;
+			children = (
+				24ED7567226EABDB00894C0E /* UserTarBarViewController.h */,
+				24ED7568226EABDB00894C0E /* UserTarBarViewController.m */,
+			);
+			path = UserTarBar;
+			sourceTree = "<group>";
+		};
 		5144FADF226B73EA00101E22 /* HomePage */ = {
 			isa = PBXGroup;
 			children = (
@@ -148,8 +163,11 @@
 		5144FAE0226B73FD00101E22 /* UserInfo */ = {
 			isa = PBXGroup;
 			children = (
+				24ED7566226EABDB00894C0E /* UserTarBar */,
 				51C3AD44226B152D00EA3FD9 /* UserInfoViewController.h */,
 				51C3AD42226B150700EA3FD9 /* UserInfoViewController.m */,
+				24ED7563226EAA5200894C0E /* ProfileViewController.h */,
+				24ED7564226EAA5200894C0E /* ProfileViewController.m */,
 			);
 			path = UserInfo;
 			sourceTree = "<group>";
@@ -494,7 +512,9 @@
 				5130268B226DA86E00A1C652 /* NavigationBarViewController.m in Sources */,
 				5144FADC226B581000101E22 /* UserInfoViewModel.m in Sources */,
 				5144FAE9226B779800101E22 /* RecommendViewController.m in Sources */,
+				24ED7565226EAA5200894C0E /* ProfileViewController.m in Sources */,
 				5144FADA226B57FD00101E22 /* HomePageViewModel.m in Sources */,
+				24ED7569226EABDB00894C0E /* UserTarBarViewController.m in Sources */,
 				5144FAE5226B74C500101E22 /* PageViewController.m in Sources */,
 				5144FAEC226C31AD00101E22 /* HotspotViewController.m in Sources */,
 				51C3AD43226B150700EA3FD9 /* UserInfoViewController.m in Sources */,
