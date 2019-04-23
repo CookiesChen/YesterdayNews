@@ -12,6 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ProfileViewController : UIViewController
 
+- (void)hideLoginPageAnimation;
+- (void)showLoginPageAnimation;
+- (void)showUserInfoAnimation;
+
 @end
 
 NS_ASSUME_NONNULL_END
