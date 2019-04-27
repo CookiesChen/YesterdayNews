@@ -7,6 +7,7 @@
 //
 
 #import "RecommendViewController.h"
+#import "../../Utils/Notification/INotification.h"
 
 @interface RecommendViewController(){
     
@@ -30,6 +31,19 @@
     [label setTextColor: UIColor.blackColor];
     
     [self.view addSubview: label];
+    [self sendMsg];
+}
+
+- (void)sendMsg {
+    // An invoking notification sample
+    if ([INotification checkNotificationEnable]) {
+        [INotification sendNotificationWithTitle:@"Attention"
+                                        subTitle:@"Here's a notification"
+                                            body:@"Congratulations! Notification works!"
+                                           delay:[NSDate dateWithTimeIntervalSinceNow: 5]];
+    } else {
+        [INotification showAlertView];
+    }
 }
 
 @end
