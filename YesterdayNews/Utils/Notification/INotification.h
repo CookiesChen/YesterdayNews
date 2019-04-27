@@ -14,7 +14,7 @@
 
 @interface INotification : NSObject
 
-+ (void)sendNotificationWithTitle:(NSString *)title subTitle:(NSString *)subTitle body:(NSString *)body delay:(NSDate *) time;
++ (void)sendNotificationWithTitle:(NSString *)title subTitle:(NSString *)subTitle body:(NSString *)body delay:(NSDate *) time badge:(NSNumber *) badge;
 
 + (void)removeNotificationwithID:(NSString *)noticeID;
 

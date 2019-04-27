@@ -12,7 +12,11 @@
 
 @implementation INotification
 
-+ (void)sendNotificationWithTitle:(NSString *)title subTitle:(NSString *)subTitle body:(NSString *)body delay:(NSDate *) time; {
++ (void)sendNotificationWithTitle:(NSString *)title
+                         subTitle:(NSString *)subTitle
+                             body:(NSString *)body
+                            delay:(NSDate *) time
+                            badge:(NSNumber *) badge {
     [self removeNotificationwithID:@"noticeID"];
     if (@available(iOS 10.0, *)) { // device >= iOS 10
         UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
@@ -21,7 +25,7 @@
         content.subtitle = subTitle;
         content.body = body;
         content.sound = [UNNotificationSound defaultSound];
-        content.badge = @1;
+        content.badge = badge;
         UNTimeIntervalNotificationTrigger *trigger =
             [UNTimeIntervalNotificationTrigger triggerWithTimeInterval: [time timeIntervalSinceNow]
                                                                repeats: NO];
@@ -111,8 +115,8 @@
         NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
         if ([application canOpenURL: url]) {
             if (@available(iOS 10.0, *)) { // device >= iOS 10
-                if  ([application respondsToSelector:@selector(openURL:options:completionHandler:)]) {
-                    [application openURL:url options:@{} completionHandler:nil];
+                if  ([application respondsToSelector: @selector(openURL:options:completionHandler:)]) {
+                    [application openURL:url options: @{} completionHandler:nil];
                 }
             } else { // device < iOS 10
                 [application openURL:url];

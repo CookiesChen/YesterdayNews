@@ -32,7 +32,7 @@
     if (@available(iOS 10.0, *)) { // device >= iOS 10
         UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
         [center setDelegate: (id)self];
-        [center requestAuthorizationWithOptions:(UNAuthorizationOptionAlert + UNAuthorizationOptionSound)
+        [center requestAuthorizationWithOptions:(UNAuthorizationOptionAlert + UNAuthorizationOptionSound + UNAuthorizationOptionBadge)
                               completionHandler:^(BOOL granted, NSError * _Nullable err) {}];
         
     } else { // device < iOS 10
