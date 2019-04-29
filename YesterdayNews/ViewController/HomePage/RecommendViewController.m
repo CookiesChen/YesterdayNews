@@ -40,7 +40,8 @@
         [INotification sendNotificationWithTitle:@"Attention"
                                         subTitle:@"Here's a notification"
                                             body:@"Congratulations! Notification works!"
-                                           delay:[NSDate dateWithTimeIntervalSinceNow: 5]];
+                                           delay:[NSDate dateWithTimeIntervalSinceNow: 5]
+                                           badge:@1];
     } else {
         [INotification showAlertView];
     }
