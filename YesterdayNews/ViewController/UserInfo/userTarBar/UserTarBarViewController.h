@@ -10,7 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UserTarBarViewController : UIViewController
+@interface UserTarBarViewController : UIViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
+
+// 当前index
+@property(nonatomic) NSInteger current_index;
+// 子控制器Array
+@property(nonatomic, strong) NSArray *pages;
 
 @end
 
