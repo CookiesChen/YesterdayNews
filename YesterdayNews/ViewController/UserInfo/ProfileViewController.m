@@ -18,6 +18,7 @@
 #define NUM_SIZE 20
 #define NUM_LABEL_SIZE 14
 #define TITLE_SIZE 28
+#define ICON_TAG 50
 
 #define ZXColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
@@ -47,6 +48,9 @@
 @property(nonatomic, strong) UILabel *loginTitleLabel;
 
 @property(nonatomic, strong) NSMutableArray<NSMutableArray<NSString*>*> *tableItems;
+@property(nonatomic, strong) NSArray<NSString *> *iconArr;
+@property(nonatomic, strong) NSArray<NSString *> *iconNameArr;
+@property(nonatomic, strong) NSArray<NSNumber *> *iconColorArr;
 
 @property(nonatomic, strong) LoginViewController *loginVC;
 @property(nonatomic, strong) SignupViewController *signupVC;
@@ -61,6 +65,7 @@
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self bindViewModel];
+    [self initData];
     [self setupView];
     
     //  异步加载图片
@@ -71,6 +76,13 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
+- (void) initData {
+    self.tableItems = [@[@[@"我的关注",@"个人信息", @"消息通知"], @[@"用户反馈", @"系统设置"]] mutableCopy];
+    self.iconNameArr = @[@"我的收藏", @"我的评论", @"我的点赞", @"我的历史"];
+    self.iconArr = @[@"\U0000E800", @"\U0000E804", @"\U0000F164", @"\U0000E803"];
+    self.iconColorArr = @[@0xfce38a, @0x3ec1d3, @0xf38181, @0x00b8a9];
 }
 
 - (void)setupView{
@@ -161,7 +173,6 @@
     });
     [self.view addSubview:self.part2];
     // table view
-    self.tableItems = [@[@[@"我的关注",@"个人信息", @"消息通知"], @[@"用户反馈", @"系统设置"]] mutableCopy];
     self.tableView = ({
         UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 330) style:UITableViewStyleGrouped];
         tableView.delegate = self;
@@ -175,14 +186,12 @@
     paraStyle.lineSpacing = 8.0f;
     paraStyle.alignment = NSTextAlignmentCenter;
     // icon buttons
-    self.collecionIcon = [self createIconButtonWithFrame:CGRectMake(0, 20, self.view.frame.size.width/4, 80) text:@"我的收藏" icon:@"\U0000E800" color:ZXColorFromRGB(0xfce38a) paraStyle:paraStyle];
-    self.commentIcon = [self createIconButtonWithFrame:CGRectMake(self.view.frame.size.width/4, 20, self.view.frame.size.width/4, 80) text:@"我的评论" icon:@"\U0000E804" color:ZXColorFromRGB(0x3ec1d3) paraStyle:paraStyle];
-    self.likeIcon = [self createIconButtonWithFrame:CGRectMake(self.view.frame.size.width/4*2, 20, self.view.frame.size.width/4, 80) text:@"我的点赞" icon:@"\U0000F164" color:ZXColorFromRGB(0xf38181) paraStyle:paraStyle];
-    self.historyIcon = [self createIconButtonWithFrame:CGRectMake(self.view.frame.size.width/4*3, 20, self.view.frame.size.width/4, 80) text:@"浏览历史" icon:@"\U0000E803" color:ZXColorFromRGB(0x00b8a9) paraStyle:paraStyle];
-    [self.part2 addSubview:self.collecionIcon];
-    [self.part2 addSubview:self.commentIcon];
-    [self.part2 addSubview:self.likeIcon];
-    [self.part2 addSubview:self.historyIcon];
+    for (int i = 0; i < self.iconArr.count; i ++) {
+        NSNumber* rgbVal = self.iconColorArr[i];
+        UIButton *icon = [self createIconButtonWithFrame:CGRectMake(self.view.frame.size.width / 4 * i, 20, self.view.frame.size.width/4, 80) text:self.iconNameArr[i] icon:self.iconArr[i] color:ZXColorFromRGB([rgbVal intValue]) paraStyle:paraStyle];
+        icon.tag = i + ICON_TAG;
+        [self.part2 addSubview:icon];
+    }
     // ------------------------------------------------------------
     
     // -------------------------------------------------black
@@ -295,6 +304,7 @@
     btn.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
     [[btn rac_signalForControlEvents: UIControlEventTouchUpInside] subscribeNext:^(UIButton *x) {
         UserTarBarViewController *controller = [[UserTarBarViewController alloc] init];
+        [controller setCurrentPage:x.tag - ICON_TAG];
         controller.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:controller animated:YES];
     }];
