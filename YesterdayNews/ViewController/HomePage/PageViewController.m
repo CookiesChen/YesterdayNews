@@ -7,8 +7,8 @@
 //
 
 #import "PageViewController.h"
-#import "RecommendViewController.h"
-#import "HotspotViewController.h"
+#import "Recommend/RecommendViewController.h"
+#import "Hotspot/HotspotViewController.h"
 
 @interface PageViewController()
 {
@@ -36,8 +36,7 @@
 
 /* -- progma mark - private methods -- */
 - (void)setupView {
-    [self.view setBackgroundColor: [UIColor whiteColor]];
-    
+
     [self setIndex: 0];
     self.delegate = self;
     self.dataSource = self;
@@ -103,7 +102,8 @@
 
 - (RecommendViewController *)recommendVC {
     if(_hotspotVC == nil){
-        _recommendVC = [[RecommendViewController alloc] init];
+        _recommendVC = [[RecommendViewController alloc] initWithCollectionViewLayout:[[UICollectionViewFlowLayout alloc] init]];
+        [_recommendVC.view setFrame: self.view.frame];
     }
     return _recommendVC;
 }
@@ -111,6 +111,7 @@
 - (HotspotViewController *)hotspotVC {
     if(_hotspotVC == nil){
         _hotspotVC = [[HotspotViewController alloc] init];
+        [_hotspotVC.view setFrame: self.view.frame];
     }
     return _hotspotVC;
 }

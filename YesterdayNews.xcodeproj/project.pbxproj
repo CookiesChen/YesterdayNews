@@ -13,7 +13,6 @@
 		24ED756E226F113C00894C0E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED756D226F113C00894C0E /* LoginViewController.m */; };
 		24ED7571226F115000894C0E /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED7570226F115000894C0E /* SignupViewController.m */; };
 		48683DE9C36519E3B3F73368 /* libPods-YesterdayNews.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E45E69A9B4FF88D7B55EC24E /* libPods-YesterdayNews.a */; };
-		5130268B226DA86E00A1C652 /* NavigationBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5130268A226DA86E00A1C652 /* NavigationBarViewController.m */; };
 		5144FADA226B57FD00101E22 /* HomePageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5144FAD9226B57FD00101E22 /* HomePageViewModel.m */; };
 		5144FADC226B581000101E22 /* UserInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5144FADB226B581000101E22 /* UserInfoViewModel.m */; };
 		5144FADE226B582100101E22 /* MainPageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5144FADD226B582100101E22 /* MainPageViewModel.m */; };
@@ -63,8 +62,6 @@
 		24ED756D226F113C00894C0E /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		24ED756F226F115000894C0E /* SignupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignupViewController.h; sourceTree = "<group>"; };
 		24ED7570226F115000894C0E /* SignupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignupViewController.m; sourceTree = "<group>"; };
-		5130268A226DA86E00A1C652 /* NavigationBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NavigationBarViewController.m; sourceTree = "<group>"; };
-		5130268C226DA88600A1C652 /* NavigationBarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NavigationBarViewController.h; sourceTree = "<group>"; };
 		5144FAD6226B57C100101E22 /* HomePageViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePageViewModel.h; sourceTree = "<group>"; };
 		5144FAD7226B57CF00101E22 /* UserInfoViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoViewModel.h; sourceTree = "<group>"; };
 		5144FAD8226B57E200101E22 /* MainPageViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainPageViewModel.h; sourceTree = "<group>"; };
@@ -177,14 +174,10 @@
 			children = (
 				51C3AD3E226B13F400EA3FD9 /* HomePageViewController.h */,
 				51C3AD3F226B140A00EA3FD9 /* HomePageViewController.m */,
-				5130268C226DA88600A1C652 /* NavigationBarViewController.h */,
-				5130268A226DA86E00A1C652 /* NavigationBarViewController.m */,
 				5144FAE6226B74D300101E22 /* PageViewController.h */,
 				5144FAE4226B74C500101E22 /* PageViewController.m */,
-				5144FAE7226B777C00101E22 /* RecommendViewController.h */,
-				5144FAE8226B779800101E22 /* RecommendViewController.m */,
-				5144FAEA226C319B00101E22 /* HotspotViewController.h */,
-				5144FAEB226C31AD00101E22 /* HotspotViewController.m */,
+				51B329692277328200696FB5 /* Recommend */,
+				51B3296B227732A100696FB5 /* Hotspot */,
 			);
 			path = HomePage;
 			sourceTree = "<group>";
@@ -221,6 +214,24 @@
 			path = UserInfo;
 			sourceTree = "<group>";
 		};
+		51B329692277328200696FB5 /* Recommend */ = {
+			isa = PBXGroup;
+			children = (
+				5144FAE7226B777C00101E22 /* RecommendViewController.h */,
+				5144FAE8226B779800101E22 /* RecommendViewController.m */,
+			);
+			path = Recommend;
+			sourceTree = "<group>";
+		};
+		51B3296B227732A100696FB5 /* Hotspot */ = {
+			isa = PBXGroup;
+			children = (
+				5144FAEA226C319B00101E22 /* HotspotViewController.h */,
+				5144FAEB226C31AD00101E22 /* HotspotViewController.m */,
+			);
+			path = Hotspot;
+			sourceTree = "<group>";
+		};
 		51C3ACF6226B0D1600EA3FD9 = {
 			isa = PBXGroup;
 			children = (
@@ -249,7 +260,6 @@
 				E79A7E9F2274058700FB5F9D /* YesterdayNews.entitlements */,
 				E79A7E9A2273F25E00FB5F9D /* Utils */,
 				24ED755C226DFB3F00894C0E /* fonts */,
-				51C3AD41226B149100EA3FD9 /* until */,
 				51C3AD36226B0D5C00EA3FD9 /* Model */,
 				51C3AD35226B0D4D00EA3FD9 /* ViewController */,
 				51C3AD34226B0D4400EA3FD9 /* ViewModel */,
@@ -308,13 +318,6 @@
 			children = (
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		51C3AD41226B149100EA3FD9 /* until */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = until;
 			sourceTree = "<group>";
 		};
 		58AE3DD52C84B8BCD37DBE09 /* Pods */ = {
@@ -565,7 +568,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5130268B226DA86E00A1C652 /* NavigationBarViewController.m in Sources */,
 				5144FADC226B581000101E22 /* UserInfoViewModel.m in Sources */,
 				5144FAE9226B779800101E22 /* RecommendViewController.m in Sources */,
 				24ED7565226EAA5200894C0E /* ProfileViewController.m in Sources */,
