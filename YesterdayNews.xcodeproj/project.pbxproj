@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		24ED0A27227B602E00F9814A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED0A1A227B602E00F9814A /* LoginViewController.m */; };
+		24ED0A28227B602E00F9814A /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED0A1D227B602E00F9814A /* UserInfoViewController.m */; };
+		24ED0A29227B602E00F9814A /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED0A1E227B602E00F9814A /* ProfileViewController.m */; };
+		24ED0A2A227B602E00F9814A /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED0A20227B602E00F9814A /* SignupViewController.m */; };
+		24ED0A2B227B602E00F9814A /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED0A23227B602E00F9814A /* ListViewController.m */; };
+		24ED0A2C227B602E00F9814A /* UserTarBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED0A26227B602E00F9814A /* UserTarBarViewController.m */; };
 		24ED755E226DFB3F00894C0E /* fontello.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 24ED755D226DFB3F00894C0E /* fontello.ttf */; };
-		24ED7565226EAA5200894C0E /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED7564226EAA5200894C0E /* ProfileViewController.m */; };
-		24ED7569226EABDB00894C0E /* UserTarBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED7568226EABDB00894C0E /* UserTarBarViewController.m */; };
-		24ED756E226F113C00894C0E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED756D226F113C00894C0E /* LoginViewController.m */; };
-		24ED7571226F115000894C0E /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED7570226F115000894C0E /* SignupViewController.m */; };
 		48683DE9C36519E3B3F73368 /* libPods-YesterdayNews.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E45E69A9B4FF88D7B55EC24E /* libPods-YesterdayNews.a */; };
 		5144FADA226B57FD00101E22 /* HomePageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5144FAD9226B57FD00101E22 /* HomePageViewModel.m */; };
 		5144FADC226B581000101E22 /* UserInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5144FADB226B581000101E22 /* UserInfoViewModel.m */; };
@@ -28,7 +30,6 @@
 		51C3AD27226B0D1B00EA3FD9 /* YesterdayNewsUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C3AD26226B0D1B00EA3FD9 /* YesterdayNewsUITests.m */; };
 		51C3AD3A226B0EE700EA3FD9 /* MainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C3AD39226B0EE700EA3FD9 /* MainPageViewController.m */; };
 		51C3AD40226B140A00EA3FD9 /* HomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C3AD3F226B140A00EA3FD9 /* HomePageViewController.m */; };
-		51C3AD43226B150700EA3FD9 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C3AD42226B150700EA3FD9 /* UserInfoViewController.m */; };
 		7CB4A9D9D37BBADE1282A7BB /* libPods-YesterdayNewsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07AA0FE3601FE1262409EB2B /* libPods-YesterdayNewsTests.a */; };
 		E79A7E9E2273F34300FB5F9D /* INotification.m in Sources */ = {isa = PBXBuildFile; fileRef = E79A7E9D2273F34300FB5F9D /* INotification.m */; };
 		FAD94154CCF45B7284193A6E /* libPods-YesterdayNewsUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F0E4A0C7DDF17D008A78D0E /* libPods-YesterdayNewsUITests.a */; };
@@ -54,15 +55,19 @@
 /* Begin PBXFileReference section */
 		07AA0FE3601FE1262409EB2B /* libPods-YesterdayNewsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YesterdayNewsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F0E4A0C7DDF17D008A78D0E /* libPods-YesterdayNewsUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YesterdayNewsUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		24ED0A18227B602E00F9814A /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoViewController.h; sourceTree = "<group>"; };
+		24ED0A1A227B602E00F9814A /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		24ED0A1B227B602E00F9814A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		24ED0A1C227B602E00F9814A /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		24ED0A1D227B602E00F9814A /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoViewController.m; sourceTree = "<group>"; };
+		24ED0A1E227B602E00F9814A /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		24ED0A20227B602E00F9814A /* SignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupViewController.m; sourceTree = "<group>"; };
+		24ED0A21227B602E00F9814A /* SignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupViewController.h; sourceTree = "<group>"; };
+		24ED0A23227B602E00F9814A /* ListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
+		24ED0A24227B602E00F9814A /* UserTarBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTarBarViewController.h; sourceTree = "<group>"; };
+		24ED0A25227B602E00F9814A /* ListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
+		24ED0A26227B602E00F9814A /* UserTarBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTarBarViewController.m; sourceTree = "<group>"; };
 		24ED755D226DFB3F00894C0E /* fontello.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fontello.ttf; sourceTree = "<group>"; };
-		24ED7563226EAA5200894C0E /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
-		24ED7564226EAA5200894C0E /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
-		24ED7567226EABDB00894C0E /* UserTarBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTarBarViewController.h; sourceTree = "<group>"; };
-		24ED7568226EABDB00894C0E /* UserTarBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTarBarViewController.m; sourceTree = "<group>"; };
-		24ED756C226F113C00894C0E /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		24ED756D226F113C00894C0E /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
-		24ED756F226F115000894C0E /* SignupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignupViewController.h; sourceTree = "<group>"; };
-		24ED7570226F115000894C0E /* SignupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignupViewController.m; sourceTree = "<group>"; };
 		5144FAD6226B57C100101E22 /* HomePageViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePageViewModel.h; sourceTree = "<group>"; };
 		5144FAD7226B57CF00101E22 /* UserInfoViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoViewModel.h; sourceTree = "<group>"; };
 		5144FAD8226B57E200101E22 /* MainPageViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainPageViewModel.h; sourceTree = "<group>"; };
@@ -94,8 +99,6 @@
 		51C3AD3B226B0F2C00EA3FD9 /* MainPageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainPageViewController.h; sourceTree = "<group>"; };
 		51C3AD3E226B13F400EA3FD9 /* HomePageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePageViewController.h; sourceTree = "<group>"; };
 		51C3AD3F226B140A00EA3FD9 /* HomePageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomePageViewController.m; sourceTree = "<group>"; };
-		51C3AD42226B150700EA3FD9 /* UserInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserInfoViewController.m; sourceTree = "<group>"; };
-		51C3AD44226B152D00EA3FD9 /* UserInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoViewController.h; sourceTree = "<group>"; };
 		7FEEE29897871650AE6FB86C /* Pods-YesterdayNews.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YesterdayNews.release.xcconfig"; path = "Target Support Files/Pods-YesterdayNews/Pods-YesterdayNews.release.xcconfig"; sourceTree = "<group>"; };
 		8E8ADFFE286784EE7AD6AE06 /* Pods-YesterdayNews.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YesterdayNews.debug.xcconfig"; path = "Target Support Files/Pods-YesterdayNews/Pods-YesterdayNews.debug.xcconfig"; sourceTree = "<group>"; };
 		A6121034484CFC8C4251811E /* Pods-YesterdayNewsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YesterdayNewsTests.debug.xcconfig"; path = "Target Support Files/Pods-YesterdayNewsTests/Pods-YesterdayNewsTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -137,39 +140,55 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		24ED0A17227B602E00F9814A /* UserInfo */ = {
+			isa = PBXGroup;
+			children = (
+				24ED0A18227B602E00F9814A /* UserInfoViewController.h */,
+				24ED0A19227B602E00F9814A /* LogInPage */,
+				24ED0A1C227B602E00F9814A /* ProfileViewController.h */,
+				24ED0A1D227B602E00F9814A /* UserInfoViewController.m */,
+				24ED0A1E227B602E00F9814A /* ProfileViewController.m */,
+				24ED0A1F227B602E00F9814A /* SignUpPage */,
+				24ED0A22227B602E00F9814A /* UserTarBar */,
+			);
+			path = UserInfo;
+			sourceTree = "<group>";
+		};
+		24ED0A19227B602E00F9814A /* LogInPage */ = {
+			isa = PBXGroup;
+			children = (
+				24ED0A1A227B602E00F9814A /* LoginViewController.m */,
+				24ED0A1B227B602E00F9814A /* LoginViewController.h */,
+			);
+			path = LogInPage;
+			sourceTree = "<group>";
+		};
+		24ED0A1F227B602E00F9814A /* SignUpPage */ = {
+			isa = PBXGroup;
+			children = (
+				24ED0A20227B602E00F9814A /* SignupViewController.m */,
+				24ED0A21227B602E00F9814A /* SignupViewController.h */,
+			);
+			path = SignUpPage;
+			sourceTree = "<group>";
+		};
+		24ED0A22227B602E00F9814A /* UserTarBar */ = {
+			isa = PBXGroup;
+			children = (
+				24ED0A23227B602E00F9814A /* ListViewController.m */,
+				24ED0A24227B602E00F9814A /* UserTarBarViewController.h */,
+				24ED0A25227B602E00F9814A /* ListViewController.h */,
+				24ED0A26227B602E00F9814A /* UserTarBarViewController.m */,
+			);
+			path = UserTarBar;
+			sourceTree = "<group>";
+		};
 		24ED755C226DFB3F00894C0E /* fonts */ = {
 			isa = PBXGroup;
 			children = (
 				24ED755D226DFB3F00894C0E /* fontello.ttf */,
 			);
 			path = fonts;
-			sourceTree = "<group>";
-		};
-		24ED7566226EABDB00894C0E /* UserTarBar */ = {
-			isa = PBXGroup;
-			children = (
-				24ED7567226EABDB00894C0E /* UserTarBarViewController.h */,
-				24ED7568226EABDB00894C0E /* UserTarBarViewController.m */,
-			);
-			path = UserTarBar;
-			sourceTree = "<group>";
-		};
-		24ED756A226F112100894C0E /* SignUpPage */ = {
-			isa = PBXGroup;
-			children = (
-				24ED756F226F115000894C0E /* SignupViewController.h */,
-				24ED7570226F115000894C0E /* SignupViewController.m */,
-			);
-			path = SignUpPage;
-			sourceTree = "<group>";
-		};
-		24ED756B226F112100894C0E /* LogInPage */ = {
-			isa = PBXGroup;
-			children = (
-				24ED756C226F113C00894C0E /* LoginViewController.h */,
-				24ED756D226F113C00894C0E /* LoginViewController.m */,
-			);
-			path = LogInPage;
 			sourceTree = "<group>";
 		};
 		5144FADF226B73EA00101E22 /* HomePage */ = {
@@ -183,20 +202,6 @@
 				51B3296B227732A100696FB5 /* Hotspot */,
 			);
 			path = HomePage;
-			sourceTree = "<group>";
-		};
-		5144FAE0226B73FD00101E22 /* UserInfo */ = {
-			isa = PBXGroup;
-			children = (
-				24ED756B226F112100894C0E /* LogInPage */,
-				24ED756A226F112100894C0E /* SignUpPage */,
-				24ED7566226EABDB00894C0E /* UserTarBar */,
-				51C3AD44226B152D00EA3FD9 /* UserInfoViewController.h */,
-				51C3AD42226B150700EA3FD9 /* UserInfoViewController.m */,
-				24ED7563226EAA5200894C0E /* ProfileViewController.h */,
-				24ED7564226EAA5200894C0E /* ProfileViewController.m */,
-			);
-			path = UserInfo;
 			sourceTree = "<group>";
 		};
 		5144FAE1226B740F00101E22 /* HomePage */ = {
@@ -320,8 +325,8 @@
 		51C3AD35226B0D4D00EA3FD9 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				24ED0A17227B602E00F9814A /* UserInfo */,
 				5144FADF226B73EA00101E22 /* HomePage */,
-				5144FAE0226B73FD00101E22 /* UserInfo */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -583,21 +588,22 @@
 			files = (
 				5144FADC226B581000101E22 /* UserInfoViewModel.m in Sources */,
 				5144FAE9226B779800101E22 /* RecommendViewController.m in Sources */,
-				24ED7565226EAA5200894C0E /* ProfileViewController.m in Sources */,
+				24ED0A27227B602E00F9814A /* LoginViewController.m in Sources */,
 				5144FADA226B57FD00101E22 /* HomePageViewModel.m in Sources */,
-				24ED7569226EABDB00894C0E /* UserTarBarViewController.m in Sources */,
-				24ED7571226F115000894C0E /* SignupViewController.m in Sources */,
+				24ED0A29227B602E00F9814A /* ProfileViewController.m in Sources */,
 				5144FAE5226B74C500101E22 /* PageViewController.m in Sources */,
+				24ED0A2A227B602E00F9814A /* SignupViewController.m in Sources */,
+				24ED0A2B227B602E00F9814A /* ListViewController.m in Sources */,
+				24ED0A28227B602E00F9814A /* UserInfoViewController.m in Sources */,
 				5144FAEC226C31AD00101E22 /* HotspotViewController.m in Sources */,
 				E79A7E9E2273F34300FB5F9D /* INotification.m in Sources */,
-				51C3AD43226B150700EA3FD9 /* UserInfoViewController.m in Sources */,
 				51C3AD40226B140A00EA3FD9 /* HomePageViewController.m in Sources */,
 				517F4FB9227ACA6100FE65B3 /* RecommendViewModel.m in Sources */,
 				5144FADE226B582100101E22 /* MainPageViewModel.m in Sources */,
 				51C3AD3A226B0EE700EA3FD9 /* MainPageViewController.m in Sources */,
 				51C3AD12226B0D1B00EA3FD9 /* main.m in Sources */,
 				51C3AD04226B0D1600EA3FD9 /* AppDelegate.m in Sources */,
-				24ED756E226F113C00894C0E /* LoginViewController.m in Sources */,
+				24ED0A2C227B602E00F9814A /* UserTarBarViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

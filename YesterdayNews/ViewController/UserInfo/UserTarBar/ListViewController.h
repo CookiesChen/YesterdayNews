@@ -1,8 +1,8 @@
 //
-//  UserTarBarViewController.h
+//  ListViewController.h
 //  YesterdayNews
 //
-//  Created by 陈统盼 on 2019/4/23.
+//  Created by 陈统盼 on 2019/4/29.
 //  Copyright © 2019 Cookieschen. All rights reserved.
 //
 
@@ -10,7 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UserTarBarViewController : UIViewController
+@interface ListViewController : UIViewController
+
+@property(nonatomic) NSString *pageTitle;
 
 @end
 
