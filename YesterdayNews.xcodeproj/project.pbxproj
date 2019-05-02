@@ -12,7 +12,6 @@
 		24ED7569226EABDB00894C0E /* UserTarBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED7568226EABDB00894C0E /* UserTarBarViewController.m */; };
 		24ED756E226F113C00894C0E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED756D226F113C00894C0E /* LoginViewController.m */; };
 		24ED7571226F115000894C0E /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED7570226F115000894C0E /* SignupViewController.m */; };
-		24ED75772277476F00894C0E /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED75762277476F00894C0E /* ListViewController.m */; };
 		48683DE9C36519E3B3F73368 /* libPods-YesterdayNews.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E45E69A9B4FF88D7B55EC24E /* libPods-YesterdayNews.a */; };
 		5144FADA226B57FD00101E22 /* HomePageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5144FAD9226B57FD00101E22 /* HomePageViewModel.m */; };
 		5144FADC226B581000101E22 /* UserInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5144FADB226B581000101E22 /* UserInfoViewModel.m */; };
@@ -151,8 +150,6 @@
 			children = (
 				24ED7567226EABDB00894C0E /* UserTarBarViewController.h */,
 				24ED7568226EABDB00894C0E /* UserTarBarViewController.m */,
-				24ED75752277476F00894C0E /* ListViewController.h */,
-				24ED75762277476F00894C0E /* ListViewController.m */,
 			);
 			path = UserTarBar;
 			sourceTree = "<group>";
@@ -585,7 +582,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5144FADC226B581000101E22 /* UserInfoViewModel.m in Sources */,
-				24ED75772277476F00894C0E /* ListViewController.m in Sources */,
 				5144FAE9226B779800101E22 /* RecommendViewController.m in Sources */,
 				24ED7565226EAA5200894C0E /* ProfileViewController.m in Sources */,
 				5144FADA226B57FD00101E22 /* HomePageViewModel.m in Sources */,

@@ -10,7 +10,6 @@
 #import "UserTarBar/UserTarBarViewController.h"
 #import "LogInPage/LoginViewController.h"
 #import "SignUpPage/SignupViewController.h"
-#import "../../ViewModel/UserInfo/UserInfoViewModel.h"
 #define ICON_SIZE 22
 #define ICON_LABEL_SIZE 12
 #define NAME_SIZE 24
@@ -18,7 +17,6 @@
 #define NUM_SIZE 20
 #define NUM_LABEL_SIZE 14
 #define TITLE_SIZE 28
-#define ICON_TAG 50
 
 #define ZXColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
@@ -48,14 +46,9 @@
 @property(nonatomic, strong) UILabel *loginTitleLabel;
 
 @property(nonatomic, strong) NSMutableArray<NSMutableArray<NSString*>*> *tableItems;
-@property(nonatomic, strong) NSArray<NSString *> *iconArr;
-@property(nonatomic, strong) NSArray<NSString *> *iconNameArr;
-@property(nonatomic, strong) NSArray<NSNumber *> *iconColorArr;
 
 @property(nonatomic, strong) LoginViewController *loginVC;
 @property(nonatomic, strong) SignupViewController *signupVC;
-
-@property (strong, nonatomic) UserInfoViewModel *viewModel;
 
 @end
 
@@ -64,8 +57,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor whiteColor]];
-    [self bindViewModel];
-    [self initData];
     [self setupView];
     
     //  异步加载图片
@@ -76,13 +67,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-}
-
-- (void) initData {
-    self.tableItems = [@[@[@"我的关注",@"个人信息", @"消息通知"], @[@"用户反馈", @"系统设置"]] mutableCopy];
-    self.iconNameArr = @[@"我的收藏", @"我的评论", @"我的点赞", @"我的历史"];
-    self.iconArr = @[@"\U0000E800", @"\U0000E804", @"\U0000F164", @"\U0000E803"];
-    self.iconColorArr = @[@0xfce38a, @0x3ec1d3, @0xf38181, @0x00b8a9];
 }
 
 - (void)setupView{
@@ -133,19 +117,50 @@
     });
     [self.part1 addSubview:self.userSignLabel];
     // other labels
-    UILabel *label_following = [self createDataTitleLabelWithFrame:CGRectMake(30, 280, 100, 30) text:@"关注" color:[UIColor lightGrayColor]];
-    UILabel *label_likes = [self createDataTitleLabelWithFrame:CGRectMake(self.view.frame.size.width/2 - 50, 280, 100, 30) text:@"获赞" color:[UIColor lightGrayColor]];
-    UILabel *label_followers = [self createDataTitleLabelWithFrame:CGRectMake(self.view.frame.size.width - 130, 280, 100, 30) text:@"粉丝" color:[UIColor lightGrayColor]];
+    UILabel *label_following = [[UILabel alloc] initWithFrame:CGRectMake(30, 280, 100, 30)];
+    label_following.textColor = [UIColor lightGrayColor];
+    label_following.textAlignment = NSTextAlignmentCenter;
+    label_following.font = [UIFont systemFontOfSize:NUM_LABEL_SIZE];
+    label_following.text = @"关注";
+    UILabel *label_likes = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 - 50, 280, 100, 30)];
+    label_likes.textColor = [UIColor lightGrayColor];
+    label_likes.textAlignment = NSTextAlignmentCenter;
+    label_likes.font = [UIFont systemFontOfSize:NUM_LABEL_SIZE];
+    label_likes.text = @"获赞";
+    UILabel *label_followers = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 130, 280, 100, 30)];
+    label_followers.textColor = [UIColor lightGrayColor];
+    label_followers.textAlignment = NSTextAlignmentCenter;
+    label_followers.font = [UIFont systemFontOfSize:NUM_LABEL_SIZE];
+    label_followers.text = @"粉丝";
     [self.part1 addSubview:label_following];
     [self.part1 addSubview:label_followers];
     [self.part1 addSubview:label_likes];
-    
-    // data labels
-    self.followingNumLabel = [self createDataLabelWithFrame:CGRectMake(label_following.frame.origin.x, label_following.frame.origin.y - 25, 100, 30) color:[UIColor whiteColor]];
-    self.likesNumLabel = [self createDataLabelWithFrame:CGRectMake(label_likes.frame.origin.x, label_likes.frame.origin.y - 25, 100, 30) color:[UIColor whiteColor]];
-    self.follersNumLabel = [self createDataLabelWithFrame:CGRectMake(label_followers.frame.origin.x, label_followers.frame.origin.y - 25, 100, 30) color:[UIColor whiteColor]];
+    // following num
+    self.followingNumLabel = ({
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(label_following.frame.origin.x, label_following.frame.origin.y - 25, 100, 30)];
+        label.textColor = [UIColor whiteColor];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.font = [UIFont boldSystemFontOfSize:NUM_SIZE];
+        label;
+    });
     [self.part1 addSubview:self.followingNumLabel];
+    //likes num
+    self.likesNumLabel = ({
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(label_likes.frame.origin.x, label_likes.frame.origin.y - 25, 100, 30)];
+        label.textColor = [UIColor whiteColor];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.font = [UIFont boldSystemFontOfSize:NUM_SIZE];
+        label;
+    });
     [self.part1 addSubview:self.likesNumLabel];
+    // followers num
+    self.follersNumLabel = ({
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(label_followers.frame.origin.x, label_followers.frame.origin.y - 25, 100, 30)];
+        label.textColor = [UIColor whiteColor];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.font = [UIFont boldSystemFontOfSize:NUM_SIZE];
+        label;
+    });
     [self.part1 addSubview:self.follersNumLabel];
     
     self.part1.alpha = 0;
@@ -173,6 +188,7 @@
     });
     [self.view addSubview:self.part2];
     // table view
+    self.tableItems = [@[@[@"我的关注",@"个人信息", @"消息通知"], @[@"用户反馈", @"系统设置"]] mutableCopy];
     self.tableView = ({
         UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 330) style:UITableViewStyleGrouped];
         tableView.delegate = self;
@@ -185,13 +201,71 @@
     NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
     paraStyle.lineSpacing = 8.0f;
     paraStyle.alignment = NSTextAlignmentCenter;
-    // icon buttons
-    for (int i = 0; i < self.iconArr.count; i ++) {
-        NSNumber* rgbVal = self.iconColorArr[i];
-        UIButton *icon = [self createIconButtonWithFrame:CGRectMake(self.view.frame.size.width / 4 * i, 20, self.view.frame.size.width/4, 80) text:self.iconNameArr[i] icon:self.iconArr[i] color:ZXColorFromRGB([rgbVal intValue]) paraStyle:paraStyle];
-        icon.tag = i + ICON_TAG;
-        [self.part2 addSubview:icon];
-    }
+    // collection icon
+    self.collecionIcon = ({
+        UIButton *icon = [[UIButton alloc] initWithFrame:CGRectMake(0, 20, self.view.frame.size.width/4, 80)];
+        [icon setTitle:@"\U0000E800\n我的收藏" forState:UIControlStateNormal];
+        icon.titleLabel.font = [UIFont systemFontOfSize:ICON_LABEL_SIZE];
+        NSMutableAttributedString *str0 = [[NSMutableAttributedString alloc] initWithString:icon.titleLabel.text];
+        [str0 addAttribute:(NSString*)NSForegroundColorAttributeName value:[UIColor blackColor] range:[icon.titleLabel.text rangeOfString:@"我的收藏"]];
+        [str0 addAttribute:(NSString*)NSForegroundColorAttributeName value:ZXColorFromRGB(0xfce38a) range:[icon.titleLabel.text rangeOfString:@"\U0000E800"]];
+        [str0 addAttribute:(NSString*)NSFontAttributeName value:[UIFont fontWithName:@"fontello" size:ICON_SIZE] range:[icon.titleLabel.text rangeOfString:@"\U0000E800"]];
+        [str0 addAttribute:(NSString*)NSParagraphStyleAttributeName value:paraStyle range:[icon.titleLabel.text rangeOfString:icon.titleLabel.text]];
+        [icon setAttributedTitle:str0 forState:UIControlStateNormal];
+        icon.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
+        icon;
+    });
+    [self.collecionIcon addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+    // comment icon
+    self.commentIcon = ({
+        UIButton *icon = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width/4, 20, self.view.frame.size.width/4, 80)];
+        [icon setTitle:@"\U0000E804\n我的评论" forState:UIControlStateNormal];
+        icon.titleLabel.font = [UIFont systemFontOfSize:ICON_LABEL_SIZE];
+        NSMutableAttributedString *str0 = [[NSMutableAttributedString alloc] initWithString:icon.titleLabel.text];
+        [str0 addAttribute:(NSString*)NSForegroundColorAttributeName value:[UIColor blackColor] range:[icon.titleLabel.text rangeOfString:@"我的评论"]];
+        [str0 addAttribute:(NSString*)NSForegroundColorAttributeName value:ZXColorFromRGB(0x3ec1d3) range:[icon.titleLabel.text rangeOfString:@"\U0000E804"]];
+        [str0 addAttribute:(NSString*)NSFontAttributeName value:[UIFont fontWithName:@"fontello" size:ICON_SIZE] range:[icon.titleLabel.text rangeOfString:@"\U0000E804"]];
+        [str0 addAttribute:(NSString*)NSParagraphStyleAttributeName value:paraStyle range:[icon.titleLabel.text rangeOfString:icon.titleLabel.text]];
+        [icon setAttributedTitle:str0 forState:UIControlStateNormal];
+        icon.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
+        icon;
+    });
+    [self.commentIcon addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+    // like icon
+    self.likeIcon = ({
+        UIButton *icon = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width/4*2, 20, self.view.frame.size.width/4, 80)];
+        [icon setTitle:@"\U0000F164\n我的点赞" forState:UIControlStateNormal];
+        icon.titleLabel.font = [UIFont systemFontOfSize:ICON_LABEL_SIZE];
+        NSMutableAttributedString *str0 = [[NSMutableAttributedString alloc] initWithString:icon.titleLabel.text];
+        [str0 addAttribute:(NSString*)NSForegroundColorAttributeName value:[UIColor blackColor] range:[icon.titleLabel.text rangeOfString:@"我的点赞"]];
+        [str0 addAttribute:(NSString*)NSForegroundColorAttributeName value:ZXColorFromRGB(0xf38181) range:[icon.titleLabel.text rangeOfString:@"\U0000F164"]];
+        [str0 addAttribute:(NSString*)NSFontAttributeName value:[UIFont fontWithName:@"fontello" size:ICON_SIZE] range:[icon.titleLabel.text rangeOfString:@"\U0000F164"]];
+        [str0 addAttribute:(NSString*)NSParagraphStyleAttributeName value:paraStyle range:[icon.titleLabel.text rangeOfString:icon.titleLabel.text]];
+        [icon setAttributedTitle:str0 forState:UIControlStateNormal];
+        icon.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
+        icon;
+    });
+    [self.likeIcon addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+    // history icon
+    self.historyIcon = ({
+        UIButton *icon = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width/4*3, 20, self.view.frame.size.width/4, 80)];
+        [icon setTitle:@"\U0000E803\n浏览历史" forState:UIControlStateNormal];
+        icon.titleLabel.font = [UIFont systemFontOfSize:ICON_LABEL_SIZE];
+        NSMutableAttributedString *str0 = [[NSMutableAttributedString alloc] initWithString:icon.titleLabel.text];
+        [str0 addAttribute:(NSString*)NSForegroundColorAttributeName value:[UIColor blackColor] range:[icon.titleLabel.text rangeOfString:@"浏览历史"]];
+        [str0 addAttribute:(NSString*)NSForegroundColorAttributeName value:ZXColorFromRGB(0x00b8a9) range:[icon.titleLabel.text rangeOfString:@"\U0000E803"]];
+        [str0 addAttribute:(NSString*)NSFontAttributeName value:[UIFont fontWithName:@"fontello" size:ICON_SIZE] range:[icon.titleLabel.text rangeOfString:@"\U0000E803"]];
+        [str0 addAttribute:(NSString*)NSParagraphStyleAttributeName value:paraStyle range:[icon.titleLabel.text rangeOfString:icon.titleLabel.text]];
+        [icon setAttributedTitle:str0 forState:UIControlStateNormal];
+        icon.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
+        icon;
+    });
+    [self.historyIcon addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.part2 addSubview:self.collecionIcon];
+    [self.part2 addSubview:self.commentIcon];
+    [self.part2 addSubview:self.likeIcon];
+    [self.part2 addSubview:self.historyIcon];
     // ------------------------------------------------------------
     
     // -------------------------------------------------black
@@ -218,37 +292,18 @@
     [closeBtn setTitleColor:[UIColor grayColor]forState:UIControlStateNormal];
     [closeBtn addTarget:self action:@selector(closeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.part3 addSubview:closeBtn];
-    
+
     // child VC
-    self.signupVC = [[SignupViewController alloc] init];
-    [self addChildViewController:self.signupVC];
-    self.signupVC.view.frame = CGRectMake(0, 40, self.part3.frame.size.width, self.part3.frame.size.height - 300);
-    [self.part3 addSubview:self.signupVC.view];
-    [self.signupVC didMoveToParentViewController:self];
-    
     self.loginVC = [[LoginViewController alloc] init];
+    // 添加到父控制器中
     [self addChildViewController:self.loginVC];
-    self.loginVC.view.frame = CGRectMake(0, 40, self.part3.frame.size.width, self.part3.frame.size.height - 300);
+    self.loginVC.view.frame = CGRectMake(0, 40, self.part3.frame.size.width, self.part3.frame.size.height);
     [self.part3 addSubview:self.loginVC.view];
     [self.loginVC didMoveToParentViewController:self];
-    
-    // switch buttons
-    UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"登录",@"注册"]];
-    segmentedControl.frame = CGRectMake(self.part3.frame.size.width/2 - 75, self.part3.frame.size.height - 200, 150, 35);
-    segmentedControl.tintColor = ZXColorFromRGB(0xf38181);
-    segmentedControl.selectedSegmentIndex = 0;
-    [segmentedControl addTarget:self action:@selector(indexDidChangeForSegmentedControl:) forControlEvents:UIControlEventValueChanged];
-    [self.part3 addSubview:segmentedControl];
-    
     
     self.part3.transform = CGAffineTransformTranslate(self.part3.transform, 0, self.part3.frame.size.height);
     // ------------------------------------------------------------
  
-}
-
-#pragma mark - private
-- (void)bindViewModel {
-    self.viewModel = [[UserInfoViewModel alloc] init];
 }
 
 - (void)downloadImage {
@@ -268,66 +323,6 @@
     self.followingNumLabel.text = @"10";
     self.follersNumLabel.text = @"66";
     self.likesNumLabel.text = @"233";
-}
-
-#pragma UI setting
-// 创建Label（“关注数”, “点赞数” ...）
--(UILabel *)createDataTitleLabelWithFrame:(CGRect)frame text:(NSString *)text color:(UIColor *)color {
-    UILabel *label = [[UILabel alloc] initWithFrame:frame];
-    label.textColor = color;
-    label.textAlignment = NSTextAlignmentCenter;
-    label.font = [UIFont systemFontOfSize:NUM_LABEL_SIZE];
-    label.text = text;
-    return label;
-}
-
-// 创建数字Label
--(UILabel *)createDataLabelWithFrame:(CGRect)frame color:(UIColor *)color {
-    UILabel *label = [[UILabel alloc] initWithFrame:frame];
-    label.textColor = color;
-    label.textAlignment = NSTextAlignmentCenter;
-    label.font = [UIFont boldSystemFontOfSize:NUM_SIZE];
-    return label;
-}
-
-// 创建图标按钮
--(UIButton *)createIconButtonWithFrame:(CGRect)frame text:(NSString *)text icon:(NSString *)icon color:(UIColor *)color paraStyle:(NSMutableParagraphStyle *)paraStyle {
-    UIButton *btn = [[UIButton alloc] initWithFrame:frame];
-    [btn setTitle:[NSString stringWithFormat:@"%@\n%@", icon, text] forState:UIControlStateNormal];
-    btn.titleLabel.font = [UIFont systemFontOfSize:ICON_LABEL_SIZE];
-    NSMutableAttributedString *str0 = [[NSMutableAttributedString alloc] initWithString:btn.titleLabel.text];
-    [str0 addAttribute:(NSString*)NSForegroundColorAttributeName value:[UIColor blackColor] range:[btn.titleLabel.text rangeOfString:text]];
-    [str0 addAttribute:(NSString*)NSForegroundColorAttributeName value:color range:[btn.titleLabel.text rangeOfString:icon]];
-    [str0 addAttribute:(NSString*)NSFontAttributeName value:[UIFont fontWithName:@"fontello" size:ICON_SIZE] range:[btn.titleLabel.text rangeOfString:icon]];
-    [str0 addAttribute:(NSString*)NSParagraphStyleAttributeName value:paraStyle range:[btn.titleLabel.text rangeOfString:btn.titleLabel.text]];
-    [btn setAttributedTitle:str0 forState:UIControlStateNormal];
-    btn.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
-    [[btn rac_signalForControlEvents: UIControlEventTouchUpInside] subscribeNext:^(UIButton *x) {
-        UserTarBarViewController *controller = [[UserTarBarViewController alloc] init];
-        [controller setCurrentPage:x.tag - ICON_TAG];
-        controller.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:controller animated:YES];
-    }];
-    return btn;
-}
-
-#pragma segmentedControl
--(void)indexDidChangeForSegmentedControl:(UISegmentedControl *)sender {
-    NSInteger selecIndex = sender.selectedSegmentIndex;
-    switch (selecIndex) {
-        case 0:
-            //self.viewModel.operationType = LOGIN;
-            self.loginVC.view.hidden = NO;
-            self.signupVC.view.hidden = YES;
-            break;
-        case 1:
-            //self.viewModel.operationType = SIGNUP;
-            self.loginVC.view.hidden = YES;
-            self.signupVC.view.hidden = NO;
-            break;
-        default:
-            break;
-    }
 }
 
 #pragma Animation
@@ -355,8 +350,6 @@
     }];
 }
 
-
-// test
 -(void)buttonClick:(id)sender
 {
     NSLog(@"%@", sender);

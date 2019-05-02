@@ -10,15 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UserTarBarViewController : UIViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
-// page view controller
-@property(nonnull, nonatomic) UIPageViewController *pageVC;
-// 当前index
-@property(nonatomic) NSInteger current_index;
-// 子控制器Array
-@property(nonatomic, strong) NSArray *pages;
-// 切换page, button, current_index
-- (void)setCurrentPage:(NSInteger) index;
+@interface UserTarBarViewController : UIViewController
 
 @end
 
