@@ -10,7 +10,9 @@
 
 @interface PageViewController: UIPageViewController <UIPageViewControllerDelegate, UIPageViewControllerDataSource>
 
-- (void) setIndex:(NSInteger) index;
 @property(nonatomic) NSInteger current_index;
+
+- (void) setIndex:(NSInteger) index;
+- (instancetype)initWithFrame:(CGRect)frame;
 
 @end

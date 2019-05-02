@@ -24,6 +24,7 @@
 @property(nonatomic, strong) UserInfoViewController *userVC;
 
 @property(nonatomic, strong) UIView *buttom_bar;
+@property(nonatomic, strong) UIView *separator_line;
 @property(nonatomic, strong) UIButton *selected_button;
 
 @property(nonatomic) NSInteger buttom_bar_height;
@@ -64,6 +65,7 @@
     [self.tabBar setHidden: YES];
     
     [self.view addSubview: self.buttom_bar];
+    [self.view addSubview: self.separator_line];
     self.viewControllers = @[self.homeVC, self.userVC];
 }
 
@@ -77,8 +79,7 @@
 /* -- progma mark - getters and setters -- */
 - (HomePageViewController *)homeVC {
     if(_homeVC == nil){
-        _homeVC = [[HomePageViewController alloc] init];
-        [_homeVC.view setFrame: CGRectMake(0, 0, WIDTH, HEIGHT - self.buttom_bar_height)];
+        _homeVC = [[HomePageViewController alloc] initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT - self.buttom_bar_height)];
     }
     return _homeVC;
 }
@@ -159,6 +160,14 @@
         }
     }
     return _buttom_bar;
+}
+
+- (UIView *)separator_line {
+    if(_separator_line == nil){
+        _separator_line = [[UIView alloc] initWithFrame:CGRectMake(0, HEIGHT - self.buttom_bar_height, WIDTH, 1)];
+        [_separator_line setBackgroundColor:[UIColor wheatColor]];
+    }
+    return _separator_line;
 }
 
 @end

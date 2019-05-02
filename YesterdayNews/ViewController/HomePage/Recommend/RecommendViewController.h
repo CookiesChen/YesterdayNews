@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RecommendViewController : UICollectionViewController
+@interface RecommendViewController : UIViewController
+
+- (instancetype)initWithFrame:(CGRect)frame;
 
 @end

@@ -8,6 +8,7 @@
 
 #import "RecommendViewController.h"
 #import "../../../Utils/Notification/INotification.h"
+#import "../../../ViewModel/HomePage/Recommend/RecommendViewModel.h"
 #import <Colours.h>
 #import <ReactiveObjC.h>
 
@@ -16,10 +17,16 @@
 
 @interface RecommendViewController() <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
+@property(nonatomic) CGRect frame;
+@property(nonatomic, strong) RecommendViewModel *ViewModel;
+
+@property(nonatomic, strong) UICollectionView *content;
+@property(nonatomic, strong) UIRefreshControl *refreshControl;
+
 @property(nonatomic, strong) NSMutableArray *data;
 @property(nonatomic, strong) NSString *identifier;
-@property(nonatomic)NSInteger cell_height;
-@property(nonatomic)NSInteger margin_bottom;
+@property(nonatomic) NSInteger cell_height;
+@property(nonatomic) NSInteger margin_bottom;
 
 @end
 
@@ -35,25 +42,44 @@
 
 /* -- progma mark - private methods -- */
 - (void)setupView {
-    // 顶部留白去除
-    if(@available(iOS 11.0, *)){
-        [self.collectionView setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
-    } else{
-        [self setAutomaticallyAdjustsScrollViewInsets: NO];
-    }
-    [self initCollectionView];
-    
+    [self.view setFrame: self.frame];
+    [self.view addSubview: self.content];
     //[self sendMsg];
 }
 
 - (void)bindViewModel {
-
+    self.ViewModel = [[RecommendViewModel alloc] init];
+    
+    // 刷新控制
+    [[self.refreshControl rac_signalForControlEvents:UIControlEventValueChanged] subscribeNext:^(__kindof UIControl * _Nullable x) {
+        [self.refreshControl setAttributedTitle:[[NSAttributedString alloc] initWithString:@"加载中..." attributes:NULL]];
+        [self.ViewModel refresh];
+    }];
+    
+    // 刷新成功
+    [self.ViewModel.success subscribeNext:^(id  _Nullable x) {
+        //切换回主线程更新UI
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [self.refreshControl endRefreshing];
+            // reload Data
+        }];
+    }];
+    
+    // 刷新失败
+    [self.ViewModel.fail subscribeNext:^(id  _Nullable x) {
+        //切换回主线程更新UI
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [self.refreshControl endRefreshing];
+            // catch error
+        }];
+    }];
 }
 
 // 初始化
-- (instancetype)initWithCollectionViewLayout:(UICollectionViewLayout *)layout
+- (instancetype)initWithFrame:(CGRect)frame
 {
-    self = [super initWithCollectionViewLayout: layout];
+    self.frame = frame;
+    self = [super init];
     if(self){
         [self initialize];
     }
@@ -65,26 +91,6 @@
     self.identifier = @"news";
     self.cell_height = 100;
     self.margin_bottom = 10;
-}
-
-- (void)initCollectionView {
-    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionViewLayout;
-    [layout setScrollDirection: UICollectionViewScrollDirectionVertical];
-    [layout setItemSize:CGSizeMake(WIDTH, 100)];
-    [layout setHeaderReferenceSize: CGSizeMake(WIDTH, 50.0f)];
-    [layout setFooterReferenceSize: CGSizeMake(WIDTH, 50.0f)];
-    
-    [self.collectionView setFrame: CGRectMake(0, 0, WIDTH, HEIGHT)];
-    [self.collectionView setBackgroundColor: [UIColor colorFromHexString:@"#efeff4"]];
-    [self.collectionView setAlwaysBounceVertical: YES];
-    // 注册cell
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier: self.identifier];
-    // 注册组头
-    [self.collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"newsHeader"];
-    // 注册组尾
-    [self.collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"newsFooter"];
-    self.collectionView.delegate = self;
-    self.collectionView.dataSource = self;
 }
 
 // 消息推送样例
@@ -102,12 +108,13 @@
 }
 
 /* -- progma mark - UICollectionViewDataDelegate -- */
+// 数量
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return 1;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 1;
+    return 10;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -116,7 +123,7 @@
     UIButton *button = [[UIButton alloc] init];
     [button setFrame: CGRectMake(0, 0, WIDTH, 100)];
     [button setTitleColor:[UIColor black75PercentColor] forState:UIControlStateNormal];
-    [button setTitle:@"123" forState:UIControlStateNormal];
+    [button setTitle:[NSString stringWithFormat:@"%ld", (long)indexPath.row] forState:UIControlStateNormal];
     [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
     [button setBackgroundColor: [UIColor whiteColor]];
     [[button rac_signalForControlEvents: UIControlEventTouchUpInside] subscribeNext:^(UIButton *x) {
@@ -127,36 +134,38 @@
     return cell;
 }
 
-- (UICollectionReusableView*)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
-    // 上拉刷新布局
-    if([kind isEqualToString:UICollectionElementKindSectionHeader]){
-        UICollectionReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"newsHeader" forIndexPath:indexPath];
-        [header setBackgroundColor:[UIColor blackColor]];
-        
-        UILabel *label = [[UILabel alloc] initWithFrame: CGRectMake(0, 0, WIDTH, header.frame.size.height)];
-        [label setBackgroundColor:[UIColor redColor]];
-        [label setText:@"刷新"];
-        [label setTextColor:[UIColor blackColor]];
-        [header addSubview:label];
-        return header;
-    }
-    // 下拉加载布局
-    else if([kind isEqualToString:UICollectionElementKindSectionFooter]){
-        UICollectionReusableView *footer = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"newsFooter" forIndexPath:indexPath];
-        [footer setBackgroundColor:[UIColor blackColor]];
-        
-        return footer;
-    }
-    return nil;
-}
-
 /* -- progma mark - UICollectionViewDelegateFlowLayout -- */
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
     return self.margin_bottom;
 }
 
 /* -- progma mark - getters and setters -- */
+- (UICollectionView* )content {
+    if(_content == nil){
+        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+        [layout setScrollDirection: UICollectionViewScrollDirectionVertical];
+        [layout setItemSize:CGSizeMake(WIDTH, 100)];
+        
+        _content = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT) collectionViewLayout:layout];
+        [_content setBackgroundColor: [UIColor colorFromHexString:@"#efeff4"]];
+        [_content setAlwaysBounceVertical:YES];
+        // 注册cell
+        [_content registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier: self.identifier];
+        
+        [_content addSubview: self.refreshControl];
+        _content.delegate = self;
+        _content.dataSource = self;
+    }
+    return _content;
+}
 
-
+- (UIRefreshControl *)refreshControl {
+    if(_refreshControl == nil){
+        _refreshControl = [UIRefreshControl new];
+        [_refreshControl setTintColor: [UIColor infoBlueColor]];
+        [_refreshControl setAttributedTitle: [[NSAttributedString alloc] initWithString:@"" attributes:NULL]];
+    }
+    return _refreshControl;
+}
 
 @end

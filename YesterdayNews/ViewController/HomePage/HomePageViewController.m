@@ -17,6 +17,8 @@
 
 @interface HomePageViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
+@property(nonatomic) CGRect frame;
+
 @property(nonatomic, strong) HomePageViewModel *ViewModel;
 @property(nonnull, nonatomic) PageViewController *pageVC;
 
@@ -50,13 +52,15 @@
 /* -- progma mark - private methods -- */
 
 //初始化
-- (instancetype)init {
+- (instancetype)initWithFrame:(CGRect)frame {
+    self.frame = frame;
     self = [super init];
     if(self){
         [self initialize];
     }
     return self;
 }
+
 - (void)initialize {
     self.margin_top = 75;
     self.tab_height = 45;
@@ -69,13 +73,14 @@
 // ui布局
 - (void)setupView {
     [self.view setBackgroundColor: [UIColor infoBlueColor]];
+    [self.view setFrame: self.frame];
+    
+    [self.view addSubview: self.pageVC.view];
+    [self addChildViewController: self.pageVC];
     
     [self.view addSubview: self.tab_bar];
     [self.view addSubview: self.separator_line];
     [self.view addSubview: self.bottom_line];
-    
-    [self.view addSubview: self.pageVC.view];
-    [self addChildViewController: self.pageVC];
 }
 
 // viewmodel绑定
@@ -134,9 +139,7 @@
 /* -- progma mark - getters and setters -- */
 - (PageViewController *)pageVC {
     if(_pageVC == nil){
-        _pageVC = [[PageViewController alloc] init];
-        [_pageVC.view setFrame: CGRectMake(0, self.margin_top+self.tab_height,
-                                           WIDTH, HEIGHT-self.tab_height)];
+        _pageVC = [[PageViewController alloc] initWithFrame:CGRectMake(0, self.margin_top+self.tab_height, WIDTH, HEIGHT-self.tab_height-self.margin_top)];
     }
     return _pageVC;
 }

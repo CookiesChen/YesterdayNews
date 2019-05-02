@@ -15,6 +15,8 @@
     
 }
 
+@property(nonatomic) CGRect frame;
+
 @property(nonatomic, strong) NSArray *pages;
 @property(nonatomic) NSInteger page_num;
 
@@ -36,7 +38,7 @@
 
 /* -- progma mark - private methods -- */
 - (void)setupView {
-
+    [self.view setFrame:self.frame];
     [self setIndex: 0];
     self.delegate = self;
     self.dataSource = self;
@@ -47,8 +49,8 @@
 }
 
 // 初始化
-- (instancetype)init
-{
+- (instancetype)initWithFrame:(CGRect)frame {
+    self.frame = frame;
     self = [super initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
     if(self){
         [self initialize];
@@ -101,9 +103,8 @@
 /* -- progma mark - getters and setters -- */
 
 - (RecommendViewController *)recommendVC {
-    if(_hotspotVC == nil){
-        _recommendVC = [[RecommendViewController alloc] initWithCollectionViewLayout:[[UICollectionViewFlowLayout alloc] init]];
-        [_recommendVC.view setFrame: self.view.frame];
+    if(_recommendVC == nil){
+        _recommendVC = [[RecommendViewController alloc] initWithFrame:self.view.frame];
     }
     return _recommendVC;
 }

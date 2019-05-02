@@ -10,4 +10,6 @@
 
 @interface HomePageViewController : UIViewController
 
+- (instancetype)initWithFrame:(CGRect)frame;
+
 @end
