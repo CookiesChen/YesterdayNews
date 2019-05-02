@@ -14,7 +14,6 @@
 		24ED7571226F115000894C0E /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED7570226F115000894C0E /* SignupViewController.m */; };
 		24ED75772277476F00894C0E /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED75762277476F00894C0E /* ListViewController.m */; };
 		48683DE9C36519E3B3F73368 /* libPods-YesterdayNews.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E45E69A9B4FF88D7B55EC24E /* libPods-YesterdayNews.a */; };
-		5130268B226DA86E00A1C652 /* NavigationBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5130268A226DA86E00A1C652 /* NavigationBarViewController.m */; };
 		5144FADA226B57FD00101E22 /* HomePageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5144FAD9226B57FD00101E22 /* HomePageViewModel.m */; };
 		5144FADC226B581000101E22 /* UserInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5144FADB226B581000101E22 /* UserInfoViewModel.m */; };
 		5144FADE226B582100101E22 /* MainPageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5144FADD226B582100101E22 /* MainPageViewModel.m */; };
@@ -31,6 +30,7 @@
 		51C3AD40226B140A00EA3FD9 /* HomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C3AD3F226B140A00EA3FD9 /* HomePageViewController.m */; };
 		51C3AD43226B150700EA3FD9 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C3AD42226B150700EA3FD9 /* UserInfoViewController.m */; };
 		7CB4A9D9D37BBADE1282A7BB /* libPods-YesterdayNewsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07AA0FE3601FE1262409EB2B /* libPods-YesterdayNewsTests.a */; };
+		E79A7E9E2273F34300FB5F9D /* INotification.m in Sources */ = {isa = PBXBuildFile; fileRef = E79A7E9D2273F34300FB5F9D /* INotification.m */; };
 		FAD94154CCF45B7284193A6E /* libPods-YesterdayNewsUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F0E4A0C7DDF17D008A78D0E /* libPods-YesterdayNewsUITests.a */; };
 /* End PBXBuildFile section */
 
@@ -63,10 +63,6 @@
 		24ED756D226F113C00894C0E /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		24ED756F226F115000894C0E /* SignupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignupViewController.h; sourceTree = "<group>"; };
 		24ED7570226F115000894C0E /* SignupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignupViewController.m; sourceTree = "<group>"; };
-		24ED75752277476F00894C0E /* ListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
-		24ED75762277476F00894C0E /* ListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
-		5130268A226DA86E00A1C652 /* NavigationBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NavigationBarViewController.m; sourceTree = "<group>"; };
-		5130268C226DA88600A1C652 /* NavigationBarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NavigationBarViewController.h; sourceTree = "<group>"; };
 		5144FAD6226B57C100101E22 /* HomePageViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePageViewModel.h; sourceTree = "<group>"; };
 		5144FAD7226B57CF00101E22 /* UserInfoViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoViewModel.h; sourceTree = "<group>"; };
 		5144FAD8226B57E200101E22 /* MainPageViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainPageViewModel.h; sourceTree = "<group>"; };
@@ -104,6 +100,10 @@
 		C40C061FF41A21E77B65E621 /* Pods-YesterdayNewsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YesterdayNewsTests.release.xcconfig"; path = "Target Support Files/Pods-YesterdayNewsTests/Pods-YesterdayNewsTests.release.xcconfig"; sourceTree = "<group>"; };
 		D2278CB1DAE72FEFB9926061 /* Pods-YesterdayNewsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YesterdayNewsUITests.debug.xcconfig"; path = "Target Support Files/Pods-YesterdayNewsUITests/Pods-YesterdayNewsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		E45E69A9B4FF88D7B55EC24E /* libPods-YesterdayNews.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YesterdayNews.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E79A7E9C2273F28900FB5F9D /* INotification.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = INotification.h; sourceTree = "<group>"; };
+		E79A7E9D2273F34300FB5F9D /* INotification.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = INotification.m; sourceTree = "<group>"; };
+		E79A7E9F2274058700FB5F9D /* YesterdayNews.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YesterdayNews.entitlements; sourceTree = "<group>"; };
+		E79A7EA02274367700FB5F9D /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		FBF26118C12B96AD20D47FD2 /* Pods-YesterdayNewsUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YesterdayNewsUITests.release.xcconfig"; path = "Target Support Files/Pods-YesterdayNewsUITests/Pods-YesterdayNewsUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -177,14 +177,10 @@
 			children = (
 				51C3AD3E226B13F400EA3FD9 /* HomePageViewController.h */,
 				51C3AD3F226B140A00EA3FD9 /* HomePageViewController.m */,
-				5130268C226DA88600A1C652 /* NavigationBarViewController.h */,
-				5130268A226DA86E00A1C652 /* NavigationBarViewController.m */,
 				5144FAE6226B74D300101E22 /* PageViewController.h */,
 				5144FAE4226B74C500101E22 /* PageViewController.m */,
-				5144FAE7226B777C00101E22 /* RecommendViewController.h */,
-				5144FAE8226B779800101E22 /* RecommendViewController.m */,
-				5144FAEA226C319B00101E22 /* HotspotViewController.h */,
-				5144FAEB226C31AD00101E22 /* HotspotViewController.m */,
+				51B329692277328200696FB5 /* Recommend */,
+				51B3296B227732A100696FB5 /* Hotspot */,
 			);
 			path = HomePage;
 			sourceTree = "<group>";
@@ -221,6 +217,24 @@
 			path = UserInfo;
 			sourceTree = "<group>";
 		};
+		51B329692277328200696FB5 /* Recommend */ = {
+			isa = PBXGroup;
+			children = (
+				5144FAE7226B777C00101E22 /* RecommendViewController.h */,
+				5144FAE8226B779800101E22 /* RecommendViewController.m */,
+			);
+			path = Recommend;
+			sourceTree = "<group>";
+		};
+		51B3296B227732A100696FB5 /* Hotspot */ = {
+			isa = PBXGroup;
+			children = (
+				5144FAEA226C319B00101E22 /* HotspotViewController.h */,
+				5144FAEB226C31AD00101E22 /* HotspotViewController.m */,
+			);
+			path = Hotspot;
+			sourceTree = "<group>";
+		};
 		51C3ACF6226B0D1600EA3FD9 = {
 			isa = PBXGroup;
 			children = (
@@ -246,8 +260,9 @@
 		51C3AD01226B0D1600EA3FD9 /* YesterdayNews */ = {
 			isa = PBXGroup;
 			children = (
+				E79A7E9F2274058700FB5F9D /* YesterdayNews.entitlements */,
+				E79A7E9A2273F25E00FB5F9D /* Utils */,
 				24ED755C226DFB3F00894C0E /* fonts */,
-				51C3AD41226B149100EA3FD9 /* until */,
 				51C3AD36226B0D5C00EA3FD9 /* Model */,
 				51C3AD35226B0D4D00EA3FD9 /* ViewController */,
 				51C3AD34226B0D4400EA3FD9 /* ViewModel */,
@@ -308,13 +323,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		51C3AD41226B149100EA3FD9 /* until */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = until;
-			sourceTree = "<group>";
-		};
 		58AE3DD52C84B8BCD37DBE09 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -331,11 +339,29 @@
 		5DD0DE358D79C27241D36F98 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E79A7EA02274367700FB5F9D /* UserNotifications.framework */,
 				E45E69A9B4FF88D7B55EC24E /* libPods-YesterdayNews.a */,
 				07AA0FE3601FE1262409EB2B /* libPods-YesterdayNewsTests.a */,
 				0F0E4A0C7DDF17D008A78D0E /* libPods-YesterdayNewsUITests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E79A7E9A2273F25E00FB5F9D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				E79A7E9B2273F27000FB5F9D /* Notification */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		E79A7E9B2273F27000FB5F9D /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				E79A7E9C2273F28900FB5F9D /* INotification.h */,
+				E79A7E9D2273F34300FB5F9D /* INotification.m */,
+			);
+			path = Notification;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -408,6 +434,11 @@
 				TargetAttributes = {
 					51C3ACFE226B0D1600EA3FD9 = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					51C3AD16226B0D1B00EA3FD9 = {
 						CreatedOnToolsVersion = 10.1;
@@ -540,7 +571,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5130268B226DA86E00A1C652 /* NavigationBarViewController.m in Sources */,
 				5144FADC226B581000101E22 /* UserInfoViewModel.m in Sources */,
 				24ED75772277476F00894C0E /* ListViewController.m in Sources */,
 				5144FAE9226B779800101E22 /* RecommendViewController.m in Sources */,
@@ -550,6 +580,7 @@
 				24ED7571226F115000894C0E /* SignupViewController.m in Sources */,
 				5144FAE5226B74C500101E22 /* PageViewController.m in Sources */,
 				5144FAEC226C31AD00101E22 /* HotspotViewController.m in Sources */,
+				E79A7E9E2273F34300FB5F9D /* INotification.m in Sources */,
 				51C3AD43226B150700EA3FD9 /* UserInfoViewController.m in Sources */,
 				51C3AD40226B140A00EA3FD9 /* HomePageViewController.m in Sources */,
 				5144FADE226B582100101E22 /* MainPageViewModel.m in Sources */,
@@ -720,6 +751,7 @@
 			baseConfigurationReference = 8E8ADFFE286784EE7AD6AE06 /* Pods-YesterdayNews.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = YesterdayNews/YesterdayNews.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B768GGLAKW;
 				INFOPLIST_FILE = YesterdayNews/Info.plist;
@@ -738,6 +770,7 @@
 			baseConfigurationReference = 7FEEE29897871650AE6FB86C /* Pods-YesterdayNews.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = YesterdayNews/YesterdayNews.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B768GGLAKW;
 				INFOPLIST_FILE = YesterdayNews/Info.plist;
