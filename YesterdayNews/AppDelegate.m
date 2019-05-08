@@ -7,11 +7,11 @@
 //
 
 #import "AppDelegate.h"
-#import "MainPageViewController.h"
+#import "ViewController.h"
 #import <UserNotifications/UserNotifications.h>
 
 @interface AppDelegate (){
-    MainPageViewController *vc;
+    ViewController *vc;
 }
 @end
 
@@ -20,7 +20,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame: [UIScreen mainScreen].bounds];
-    vc = [[MainPageViewController alloc] init];
+    vc = [[ViewController alloc] init];
     [self.window makeKeyAndVisible];
     [self.window setRootViewController: vc];
     
