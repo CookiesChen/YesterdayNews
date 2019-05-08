@@ -22,6 +22,12 @@
 		5144FAE9226B779800101E22 /* RecommendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5144FAE8226B779800101E22 /* RecommendViewController.m */; };
 		5144FAEC226C31AD00101E22 /* HotspotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5144FAEB226C31AD00101E22 /* HotspotViewController.m */; };
 		517F4FB9227ACA6100FE65B3 /* RecommendViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 517F4FB8227ACA6100FE65B3 /* RecommendViewModel.m */; };
+		51B51D29227F4273007AA44B /* HotspotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51B51D27227F4273007AA44B /* HotspotViewController.m */; };
+		51B51D302281D7CA007AA44B /* News.m in Sources */ = {isa = PBXBuildFile; fileRef = 51B51D2F2281D7CA007AA44B /* News.m */; };
+		51B51D362281FAF8007AA44B /* TimeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 51B51D352281FAF8007AA44B /* TimeUtils.m */; };
+		51B51D3D228298FB007AA44B /* SingleImageNews.m in Sources */ = {isa = PBXBuildFile; fileRef = 51B51D3C228298FB007AA44B /* SingleImageNews.m */; };
+		51B51D3F22829960007AA44B /* MultiImagesNews.m in Sources */ = {isa = PBXBuildFile; fileRef = 51B51D3E22829960007AA44B /* MultiImagesNews.m */; };
+		51B51D452282B397007AA44B /* NewsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51B51D442282B397007AA44B /* NewsDetailViewController.m */; };
 		51C3AD04226B0D1600EA3FD9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C3AD03226B0D1600EA3FD9 /* AppDelegate.m */; };
 		51C3AD0C226B0D1B00EA3FD9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51C3AD0B226B0D1B00EA3FD9 /* Assets.xcassets */; };
 		51C3AD0F226B0D1B00EA3FD9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51C3AD0D226B0D1B00EA3FD9 /* LaunchScreen.storyboard */; };
@@ -82,6 +88,18 @@
 		5144FAEB226C31AD00101E22 /* HotspotViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HotspotViewController.m; sourceTree = "<group>"; };
 		517F4FB8227ACA6100FE65B3 /* RecommendViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecommendViewModel.m; sourceTree = "<group>"; };
 		517F4FBA227ACA7100FE65B3 /* RecommendViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecommendViewModel.h; sourceTree = "<group>"; };
+		51B51D27227F4273007AA44B /* HotspotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotspotViewController.m; sourceTree = "<group>"; };
+		51B51D28227F4273007AA44B /* HotspotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotspotViewController.h; sourceTree = "<group>"; };
+		51B51D2F2281D7CA007AA44B /* News.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = News.m; sourceTree = "<group>"; };
+		51B51D312281D7D5007AA44B /* News.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = News.h; sourceTree = "<group>"; };
+		51B51D332281FADF007AA44B /* TimeUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimeUtils.h; sourceTree = "<group>"; };
+		51B51D352281FAF8007AA44B /* TimeUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimeUtils.m; sourceTree = "<group>"; };
+		51B51D3B228298EA007AA44B /* SingleImageNews.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SingleImageNews.h; sourceTree = "<group>"; };
+		51B51D3C228298FB007AA44B /* SingleImageNews.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SingleImageNews.m; sourceTree = "<group>"; };
+		51B51D3E22829960007AA44B /* MultiImagesNews.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MultiImagesNews.m; sourceTree = "<group>"; };
+		51B51D402282996A007AA44B /* MultiImagesNews.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MultiImagesNews.h; sourceTree = "<group>"; };
+		51B51D432282B384007AA44B /* NewsDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewsDetailViewController.h; sourceTree = "<group>"; };
+		51B51D442282B397007AA44B /* NewsDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewsDetailViewController.m; sourceTree = "<group>"; };
 		51C3ACFF226B0D1600EA3FD9 /* YesterdayNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YesterdayNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51C3AD02226B0D1600EA3FD9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		51C3AD03226B0D1600EA3FD9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -144,10 +162,10 @@
 			isa = PBXGroup;
 			children = (
 				24ED0A18227B602E00F9814A /* UserInfoViewController.h */,
-				24ED0A19227B602E00F9814A /* LogInPage */,
 				24ED0A1C227B602E00F9814A /* ProfileViewController.h */,
 				24ED0A1D227B602E00F9814A /* UserInfoViewController.m */,
 				24ED0A1E227B602E00F9814A /* ProfileViewController.m */,
+				24ED0A19227B602E00F9814A /* LogInPage */,
 				24ED0A1F227B602E00F9814A /* SignUpPage */,
 				24ED0A22227B602E00F9814A /* UserTarBar */,
 			);
@@ -210,6 +228,7 @@
 				5144FAD6226B57C100101E22 /* HomePageViewModel.h */,
 				5144FAD9226B57FD00101E22 /* HomePageViewModel.m */,
 				517F4FB7227ACA2F00FE65B3 /* Recommend */,
+				51B51D26227F4273007AA44B /* Hotspot */,
 			);
 			path = HomePage;
 			sourceTree = "<group>";
@@ -250,6 +269,45 @@
 			path = Hotspot;
 			sourceTree = "<group>";
 		};
+		51B51D26227F4273007AA44B /* Hotspot */ = {
+			isa = PBXGroup;
+			children = (
+				51B51D27227F4273007AA44B /* HotspotViewController.m */,
+				51B51D28227F4273007AA44B /* HotspotViewController.h */,
+			);
+			name = Hotspot;
+			path = YesterdayNews/ViewController/HomePage/Hotspot;
+			sourceTree = SOURCE_ROOT;
+		};
+		51B51D342281FAE3007AA44B /* TimeUtils */ = {
+			isa = PBXGroup;
+			children = (
+				51B51D332281FADF007AA44B /* TimeUtils.h */,
+				51B51D352281FAF8007AA44B /* TimeUtils.m */,
+			);
+			path = TimeUtils;
+			sourceTree = "<group>";
+		};
+		51B51D372282989C007AA44B /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				51B51D3B228298EA007AA44B /* SingleImageNews.h */,
+				51B51D3C228298FB007AA44B /* SingleImageNews.m */,
+				51B51D402282996A007AA44B /* MultiImagesNews.h */,
+				51B51D3E22829960007AA44B /* MultiImagesNews.m */,
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
+		51B51D412282B329007AA44B /* NewsDetail */ = {
+			isa = PBXGroup;
+			children = (
+				51B51D432282B384007AA44B /* NewsDetailViewController.h */,
+				51B51D442282B397007AA44B /* NewsDetailViewController.m */,
+			);
+			path = NewsDetail;
+			sourceTree = "<group>";
+		};
 		51C3ACF6226B0D1600EA3FD9 = {
 			isa = PBXGroup;
 			children = (
@@ -276,6 +334,7 @@
 			isa = PBXGroup;
 			children = (
 				E79A7E9F2274058700FB5F9D /* YesterdayNews.entitlements */,
+				51B51D372282989C007AA44B /* Layout */,
 				E79A7E9A2273F25E00FB5F9D /* Utils */,
 				24ED755C226DFB3F00894C0E /* fonts */,
 				51C3AD36226B0D5C00EA3FD9 /* Model */,
@@ -325,8 +384,9 @@
 		51C3AD35226B0D4D00EA3FD9 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				24ED0A17227B602E00F9814A /* UserInfo */,
 				5144FADF226B73EA00101E22 /* HomePage */,
+				51B51D412282B329007AA44B /* NewsDetail */,
+				24ED0A17227B602E00F9814A /* UserInfo */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -334,6 +394,8 @@
 		51C3AD36226B0D5C00EA3FD9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				51B51D312281D7D5007AA44B /* News.h */,
+				51B51D2F2281D7CA007AA44B /* News.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -365,6 +427,7 @@
 		E79A7E9A2273F25E00FB5F9D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				51B51D342281FAE3007AA44B /* TimeUtils */,
 				E79A7E9B2273F27000FB5F9D /* Notification */,
 			);
 			path = Utils;
@@ -589,13 +652,19 @@
 				5144FADC226B581000101E22 /* UserInfoViewModel.m in Sources */,
 				5144FAE9226B779800101E22 /* RecommendViewController.m in Sources */,
 				24ED0A27227B602E00F9814A /* LoginViewController.m in Sources */,
+				51B51D29227F4273007AA44B /* HotspotViewController.m in Sources */,
+				51B51D452282B397007AA44B /* NewsDetailViewController.m in Sources */,
 				5144FADA226B57FD00101E22 /* HomePageViewModel.m in Sources */,
 				24ED0A29227B602E00F9814A /* ProfileViewController.m in Sources */,
 				5144FAE5226B74C500101E22 /* PageViewController.m in Sources */,
+				51B51D362281FAF8007AA44B /* TimeUtils.m in Sources */,
 				24ED0A2A227B602E00F9814A /* SignupViewController.m in Sources */,
 				24ED0A2B227B602E00F9814A /* ListViewController.m in Sources */,
+				51B51D3F22829960007AA44B /* MultiImagesNews.m in Sources */,
 				24ED0A28227B602E00F9814A /* UserInfoViewController.m in Sources */,
+				51B51D302281D7CA007AA44B /* News.m in Sources */,
 				5144FAEC226C31AD00101E22 /* HotspotViewController.m in Sources */,
+				51B51D3D228298FB007AA44B /* SingleImageNews.m in Sources */,
 				E79A7E9E2273F34300FB5F9D /* INotification.m in Sources */,
 				51C3AD40226B140A00EA3FD9 /* HomePageViewController.m in Sources */,
 				517F4FB9227ACA6100FE65B3 /* RecommendViewModel.m in Sources */,

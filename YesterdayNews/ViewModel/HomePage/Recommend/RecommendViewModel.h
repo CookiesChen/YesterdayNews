@@ -15,5 +15,8 @@
 @property(nonatomic, strong) RACSubject *success;
 @property(nonatomic, strong) RACSubject *fail;
 
+@property(nonatomic, strong) NSMutableArray* news;
+
 - (void)refresh;
+
 @end

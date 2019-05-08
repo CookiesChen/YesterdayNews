@@ -7,6 +7,7 @@
 //
 
 #import "RecommendViewModel.h"
+#import "../../../Model/News.h"
 
 @interface RecommendViewModel()
 
@@ -25,6 +26,11 @@
 - (void)initialize {
     self.success = [RACSubject subject];
     self.fail = [RACSubject subject];
+    self.news = [[NSMutableArray alloc] init];
+    [self.news addObject: [[News alloc] init]];
+    [self.news addObject: [[News alloc] init]];
+    [self.news addObject: [[News alloc] init]];
+    [self.news addObject: [[News alloc] init]];
 }
 
 - (void)refresh {
