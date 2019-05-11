@@ -21,6 +21,7 @@
 		5144FAE5226B74C500101E22 /* PageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5144FAE4226B74C500101E22 /* PageViewController.m */; };
 		5144FAE9226B779800101E22 /* RecommendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5144FAE8226B779800101E22 /* RecommendViewController.m */; };
 		5144FAEC226C31AD00101E22 /* HotspotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5144FAEB226C31AD00101E22 /* HotspotViewController.m */; };
+		5175E4062286726E00ED6AC2 /* NewsLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 5175E4052286726E00ED6AC2 /* NewsLayout.m */; };
 		517F4FB9227ACA6100FE65B3 /* RecommendViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 517F4FB8227ACA6100FE65B3 /* RecommendViewModel.m */; };
 		51B51D29227F4273007AA44B /* HotspotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51B51D27227F4273007AA44B /* HotspotViewController.m */; };
 		51B51D302281D7CA007AA44B /* News.m in Sources */ = {isa = PBXBuildFile; fileRef = 51B51D2F2281D7CA007AA44B /* News.m */; };
@@ -87,6 +88,8 @@
 		5144FAE8226B779800101E22 /* RecommendViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecommendViewController.m; sourceTree = "<group>"; };
 		5144FAEA226C319B00101E22 /* HotspotViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HotspotViewController.h; sourceTree = "<group>"; };
 		5144FAEB226C31AD00101E22 /* HotspotViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HotspotViewController.m; sourceTree = "<group>"; };
+		5175E4052286726E00ED6AC2 /* NewsLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewsLayout.m; sourceTree = "<group>"; };
+		5175E4082286728600ED6AC2 /* NewsLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewsLayout.h; sourceTree = "<group>"; };
 		517F4FB8227ACA6100FE65B3 /* RecommendViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecommendViewModel.m; sourceTree = "<group>"; };
 		517F4FBA227ACA7100FE65B3 /* RecommendViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecommendViewModel.h; sourceTree = "<group>"; };
 		51B51D27227F4273007AA44B /* HotspotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotspotViewController.m; sourceTree = "<group>"; };
@@ -298,6 +301,8 @@
 				51B51D3C228298FB007AA44B /* SingleImageNews.m */,
 				51B51D402282996A007AA44B /* MultiImagesNews.h */,
 				51B51D3E22829960007AA44B /* MultiImagesNews.m */,
+				5175E4082286728600ED6AC2 /* NewsLayout.h */,
+				5175E4052286726E00ED6AC2 /* NewsLayout.m */,
 			);
 			path = Layout;
 			sourceTree = "<group>";
@@ -670,6 +675,7 @@
 				51B51D302281D7CA007AA44B /* News.m in Sources */,
 				5144FAEC226C31AD00101E22 /* HotspotViewController.m in Sources */,
 				51B51D3D228298FB007AA44B /* SingleImageNews.m in Sources */,
+				5175E4062286726E00ED6AC2 /* NewsLayout.m in Sources */,
 				E79A7E9E2273F34300FB5F9D /* INotification.m in Sources */,
 				51C3AD40226B140A00EA3FD9 /* HomePageViewController.m in Sources */,
 				517F4FB9227ACA6100FE65B3 /* RecommendViewModel.m in Sources */,
