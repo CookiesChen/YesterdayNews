@@ -149,7 +149,16 @@
 
 // Cell尺寸
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    return CGSizeMake(WIDTH, 230);
+    NSInteger type = 0;
+    CGSize cellSize;
+    switch (type) {
+        case 0:
+            cellSize = CGSizeMake(WIDTH, 230);
+            break;
+        case 1:
+            cellSize = CGSizeMake(WIDTH, 230);
+    }
+    return cellSize;
 }
 
 /* -- progma mark - UIScrollViewDelegate -- */
