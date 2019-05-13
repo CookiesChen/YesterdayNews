@@ -8,6 +8,9 @@ target 'YesterdayNews' do
   # Pods for YesterdayNews
   pod 'Colours'
   pod 'ReactiveObjC', '~> 3.1.0'
+  pod 'SDWebImage', '~> 5.0'
+  pod 'YBImageBrowser'
+  
   target 'YesterdayNewsTests' do
     inherit! :search_paths
     # Pods for testing
