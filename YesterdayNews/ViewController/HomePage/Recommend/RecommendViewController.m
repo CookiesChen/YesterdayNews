@@ -112,8 +112,7 @@
 
 /* -- progma mark - UICollectionViewDelegate -- */
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"1");
-    [self.navigationController pushViewController:[[NewsDetailViewController alloc]init] animated:YES];
+    //[self.navigationController pushViewController:[[NewsDetailViewController alloc]init] animated:YES];
 }
 
 /* -- progma mark - UICollectionViewDataDelegate -- */

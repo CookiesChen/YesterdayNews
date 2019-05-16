@@ -22,6 +22,7 @@
 		5144FAE9226B779800101E22 /* RecommendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5144FAE8226B779800101E22 /* RecommendViewController.m */; };
 		5144FAEC226C31AD00101E22 /* HotspotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5144FAEB226C31AD00101E22 /* HotspotViewController.m */; };
 		517F4FB9227ACA6100FE65B3 /* RecommendViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 517F4FB8227ACA6100FE65B3 /* RecommendViewModel.m */; };
+		5180E9F9228997630093220B /* ImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5180E9F8228997630093220B /* ImageCell.m */; };
 		51B51D29227F4273007AA44B /* HotspotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51B51D27227F4273007AA44B /* HotspotViewController.m */; };
 		51B51D302281D7CA007AA44B /* News.m in Sources */ = {isa = PBXBuildFile; fileRef = 51B51D2F2281D7CA007AA44B /* News.m */; };
 		51B51D362281FAF8007AA44B /* TimeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 51B51D352281FAF8007AA44B /* TimeUtils.m */; };
@@ -89,6 +90,8 @@
 		5144FAEB226C31AD00101E22 /* HotspotViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HotspotViewController.m; sourceTree = "<group>"; };
 		517F4FB8227ACA6100FE65B3 /* RecommendViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecommendViewModel.m; sourceTree = "<group>"; };
 		517F4FBA227ACA7100FE65B3 /* RecommendViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecommendViewModel.h; sourceTree = "<group>"; };
+		5180E9F7228997570093220B /* ImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageCell.h; sourceTree = "<group>"; };
+		5180E9F8228997630093220B /* ImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageCell.m; sourceTree = "<group>"; };
 		51B51D27227F4273007AA44B /* HotspotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotspotViewController.m; sourceTree = "<group>"; };
 		51B51D28227F4273007AA44B /* HotspotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotspotViewController.h; sourceTree = "<group>"; };
 		51B51D2F2281D7CA007AA44B /* News.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = News.m; sourceTree = "<group>"; };
@@ -165,8 +168,8 @@
 			isa = PBXGroup;
 			children = (
 				24ED0A18227B602E00F9814A /* UserInfoViewController.h */,
-				24ED0A1C227B602E00F9814A /* ProfileViewController.h */,
 				24ED0A1D227B602E00F9814A /* UserInfoViewController.m */,
+				24ED0A1C227B602E00F9814A /* ProfileViewController.h */,
 				24ED0A1E227B602E00F9814A /* ProfileViewController.m */,
 				24ED0A19227B602E00F9814A /* LogInPage */,
 				24ED0A1F227B602E00F9814A /* SignUpPage */,
@@ -275,8 +278,8 @@
 		51B51D26227F4273007AA44B /* Hotspot */ = {
 			isa = PBXGroup;
 			children = (
-				51B51D27227F4273007AA44B /* HotspotViewController.m */,
 				51B51D28227F4273007AA44B /* HotspotViewController.h */,
+				51B51D27227F4273007AA44B /* HotspotViewController.m */,
 			);
 			name = Hotspot;
 			path = YesterdayNews/ViewController/HomePage/Hotspot;
@@ -298,6 +301,8 @@
 				51B51D3C228298FB007AA44B /* SingleImageNews.m */,
 				51B51D402282996A007AA44B /* MultiImagesNews.h */,
 				51B51D3E22829960007AA44B /* MultiImagesNews.m */,
+				5180E9F7228997570093220B /* ImageCell.h */,
+				5180E9F8228997630093220B /* ImageCell.m */,
 			);
 			path = Layout;
 			sourceTree = "<group>";
@@ -458,6 +463,7 @@
 				51C3ACFB226B0D1600EA3FD9 /* Sources */,
 				51C3ACFC226B0D1600EA3FD9 /* Frameworks */,
 				51C3ACFD226B0D1600EA3FD9 /* Resources */,
+				7E8BF4F20733CFC5C40C1D3C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -603,6 +609,28 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		7E8BF4F20733CFC5C40C1D3C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YesterdayNews/Pods-YesterdayNews-resources.sh",
+				"${PODS_ROOT}/YBImageBrowser/YBImageBrowser/YBImageBrowser.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/YBImageBrowser.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YesterdayNews/Pods-YesterdayNews-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		863C2865902DD227B0917F39 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -677,6 +705,7 @@
 				51C3AD3A226B0EE700EA3FD9 /* MainPageViewController.m in Sources */,
 				51C3AD12226B0D1B00EA3FD9 /* main.m in Sources */,
 				51C3AD04226B0D1600EA3FD9 /* AppDelegate.m in Sources */,
+				5180E9F9228997630093220B /* ImageCell.m in Sources */,
 				24ED0A2C227B602E00F9814A /* UserTarBarViewController.m in Sources */,
 				51E0DD762282D602008F037D /* ViewController.m in Sources */,
 			);
