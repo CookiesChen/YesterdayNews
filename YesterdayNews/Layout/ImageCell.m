@@ -13,8 +13,6 @@ static const CGFloat MAXPIXEL = 4096.0;
 
 @interface ImageCell()
 
-@property (weak, nonatomic) UILabel *typeLabel;
-
 @end
 
 @implementation ImageCell

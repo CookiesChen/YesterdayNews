@@ -17,7 +17,7 @@
 #define WIDTH self.frame.size.width
 
 @interface MultiImagesNews() <UICollectionViewDelegate, UICollectionViewDataSource,
-                                YBImageBrowserDelegate, YBImageBrowserDataSource>
+                                YBImageBrowserDataSource>
 {
     NSInteger margin;
     CGFloat marginTop;
@@ -44,7 +44,7 @@
         self.dataArray = [[NSMutableArray alloc] initWithArray: @[
                                             @"https://hbimg.huabanimg.com/dbb108fc6f4643d1e728de78a685e7acedd5f03a12576f-U8hpJS_fw658"
                                             ,@"http://meisudci.oss-cn-beijing.aliyuncs.com/bn_thumb/MSBQ53640500096936.jpg?x-oss-process=style/bn_info_thumb"
-                                            ,@"https://hbimg.huabanimg.com/dbb108fc6f4643d1e728de78a685e7acedd5f03a12576f-U8hpJS_fw658"]];
+                                            ,@"http://meisudci.oss-cn-beijing.aliyuncs.com/bn_thumb/MSBQ67590700070838.jpg?x-oss-process=style/bn_info_thumb"]];
     }
     return self;
 }
@@ -75,7 +75,7 @@
 - (id<YBImageBrowserCellDataProtocol>)yb_imageBrowserView:(YBImageBrowserView *)imageBrowserView dataForCellAtIndex:(NSUInteger)index{
     YBImageBrowseCellData *data = [YBImageBrowseCellData new];
     data.url = [NSURL URLWithString: [self.dataArray objectAtIndex:index]];
-    //data.sourceObject = ;
+    data.sourceObject = [self sourceObjAtIdx:index];
     return data;
 }
 
@@ -94,10 +94,8 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     NSMutableArray *browserDataArr = [NSMutableArray array];
     [self.dataArray enumerateObjectsUsingBlock:^(NSString *_Nonnull urlStr, NSUInteger idx, BOOL * _Nonnull stop) {
-        
         YBImageBrowseCellData *data = [YBImageBrowseCellData new];
         data.url = [NSURL URLWithString:urlStr];
-        data.sourceObject = [self sourceObjAtIdx:idx];
         [browserDataArr addObject:data];
     }];
     
@@ -107,7 +105,7 @@
     [browser show];
 }
 
-# pragma tool
+# pragma TOOL
 - (id)sourceObjAtIdx:(NSInteger)idx {
     ImageCell *cell = (ImageCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0]];
     return cell ? cell.mainImageView : nil;
