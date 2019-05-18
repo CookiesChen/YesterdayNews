@@ -13,6 +13,7 @@
 #import "../../../Layout/MultiImagesNews.h"
 #import "../../../Model/News.h"
 #import "../../NewsDetail/NewsDetailViewController.h"
+#import "../../../Layout/SingleImageNews.h"
 #import <Colours.h>
 #import <ReactiveObjC.h>
 
@@ -132,11 +133,24 @@
     }
     [cell setBackgroundColor: [UIColor whiteColor]];
     
-    // 多图
-    [cell addSubview: [[MultiImagesNews alloc] initWithFrame: CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height)]];
-    
-    // 单图
-    //[cell addSubview: [[MultiImagesNews alloc] initWithFrame: CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height)]];
+//    NSInteger tag = random()%2;
+    NSInteger tag = 1;
+    NSLog(@"random: %ld", tag);
+    switch (tag) {
+        case 0:
+            // 多图
+            [cell addSubview: [[MultiImagesNews alloc] initWithFrame: CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height)]];
+            break;
+        case 1:
+            // 单图
+            [cell addSubview: [[SingleImageNews alloc] initWithFrame: CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height)]];
+            break;
+        default:
+            // 默认多图
+            [cell addSubview: [[MultiImagesNews alloc] initWithFrame: CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height)]];
+            break;
+    }
+    cell.tag = tag;
     return cell;
 }
 
@@ -148,14 +162,14 @@
 
 // Cell尺寸
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSInteger type = 0;
-    CGSize cellSize;
-    switch (type) {
+    UICollectionViewCell *selectCell = [self collectionView:_content cellForItemAtIndexPath:indexPath];
+    CGSize cellSize = CGSizeZero;
+    switch (selectCell.tag) {
         case 0:
             cellSize = CGSizeMake(WIDTH, 230);
             break;
         case 1:
-            cellSize = CGSizeMake(WIDTH, 230);
+            cellSize = CGSizeMake(WIDTH, 140);
     }
     return cellSize;
 }

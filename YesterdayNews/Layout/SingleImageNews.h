@@ -9,5 +9,10 @@
 #ifndef SingleImageNews_h
 #define SingleImageNews_h
 
+#include <UIKit/UIKit.h>
+
+@interface SingleImageNews : UIView
+
+@end
 
 #endif /* SingleImageNews_h */
