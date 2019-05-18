@@ -17,6 +17,7 @@
     [self setTime: [NSDate date]];
     [self setComments: [[NSMutableArray alloc] initWithArray:@[@"1", @"2"]]];
     [self setImages: [[NSMutableArray alloc] initWithArray:@[@"1", @"2", @"3"]]];
+    [self setTag:SingleImageNewsTag];
     return self;
 }
 

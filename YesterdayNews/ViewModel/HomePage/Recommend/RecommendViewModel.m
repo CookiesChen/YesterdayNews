@@ -27,10 +27,11 @@
     self.success = [RACSubject subject];
     self.fail = [RACSubject subject];
     self.news = [[NSMutableArray alloc] init];
-    [self.news addObject: [[News alloc] init]];
-    [self.news addObject: [[News alloc] init]];
-    [self.news addObject: [[News alloc] init]];
-    [self.news addObject: [[News alloc] init]];
+    for(int i = 0; i < 8; i++) {
+        News *news = [[News alloc] init];
+        news.tag = random()%2;
+        [self.news addObject:news];
+    }
 }
 
 - (void)refresh {
