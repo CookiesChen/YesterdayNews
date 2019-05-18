@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum : NSUInteger {
+    MultiImagesNewsTag,
+    SingleImageNewsTag,
+} NewsTag;
+
 @interface News : NSObject
 
 @property NSString *title;
@@ -15,5 +20,6 @@
 @property NSDate *time;
 @property NSMutableArray *comments;
 @property NSMutableArray *images;
+@property(nonatomic, assign) NewsTag tag;
 
 @end

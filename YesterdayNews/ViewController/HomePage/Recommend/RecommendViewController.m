@@ -113,7 +113,9 @@
 
 # pragma mark UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    //[self.navigationController pushViewController:[[NewsDetailViewController alloc]init] animated:YES];
+//    [self.navigationController pushViewController:[[NewsDetailViewController alloc]init] animated:YES];
+    UICollectionViewCell *selectCell = [collectionView cellForItemAtIndexPath:indexPath];
+    NSLog(@"click: %zd %zd %zd", indexPath.section, indexPath.row, selectCell.tag);
 }
 
 # pragma mark UICollectionViewDataDelegate
@@ -131,26 +133,27 @@
     for(UIView *view in cell.subviews){
         [view removeFromSuperview];
     }
-    [cell setBackgroundColor: [UIColor whiteColor]];
+    [cell setBackgroundColor:[UIColor whiteColor]];
     
-//    NSInteger tag = random()%2;
-    NSInteger tag = 1;
-    NSLog(@"random: %ld", tag);
-    switch (tag) {
-        case 0:
-            // 多图
-            [cell addSubview: [[MultiImagesNews alloc] initWithFrame: CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height)]];
-            break;
-        case 1:
-            // 单图
-            [cell addSubview: [[SingleImageNews alloc] initWithFrame: CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height)]];
-            break;
-        default:
-            // 默认多图
-            [cell addSubview: [[MultiImagesNews alloc] initWithFrame: CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height)]];
-            break;
+    News *news = [self.ViewModel.news objectAtIndex:indexPath.row];
+    NewsTag tag = [news tag];
+    if(cell.subviews.count == 0) {
+        NSLog(@"add sub view: item:%zd, tag:%zd", indexPath.row, cell.tag);
+        switch (tag) {
+            case 0:
+                // 多图
+                [cell addSubview: [[MultiImagesNews alloc] initWithFrame: CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height)]];
+                break;
+            case 1:
+                // 单图
+                [cell addSubview: [[SingleImageNews alloc] initWithFrame: CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height)]];
+                break;
+            default:
+                // 默认多图
+                [cell addSubview: [[MultiImagesNews alloc] initWithFrame: CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height)]];
+                break;
+        }
     }
-    cell.tag = tag;
     return cell;
 }
 
@@ -162,14 +165,19 @@
 
 // Cell尺寸
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *selectCell = [self collectionView:_content cellForItemAtIndexPath:indexPath];
     CGSize cellSize = CGSizeZero;
-    switch (selectCell.tag) {
+    News *news = [self.ViewModel.news objectAtIndex:indexPath.row];
+    NewsTag tag = [news tag];
+    switch (tag) {
         case 0:
             cellSize = CGSizeMake(WIDTH, 230);
             break;
         case 1:
             cellSize = CGSizeMake(WIDTH, 140);
+            break;
+        default:
+            cellSize = CGSizeMake(WIDTH, 300);
+            break;
     }
     return cellSize;
 }
@@ -181,10 +189,15 @@
     CGFloat contentOffsetY = self.content.contentOffset.y;
     CGFloat bottomOffset = self.content.contentSize.height - contentOffsetY;
     if(bottomOffset <= height){
-        [self.ViewModel.news addObject: [[News alloc] init]];
-        [self.ViewModel.news addObject: [[News alloc] init]];
-        [self.ViewModel.news addObject: [[News alloc] init]];
-        [self.ViewModel.news addObject: [[News alloc] init]];
+        for (int i = 0; i < 4; i++) {
+            News *news = [[News alloc] init];
+            news.tag = random()%2;
+            [self.ViewModel.news addObject:news];
+        }
+//        [self.ViewModel.news addObject: [[News alloc] init]];
+//        [self.ViewModel.news addObject: [[News alloc] init]];
+//        [self.ViewModel.news addObject: [[News alloc] init]];
+//        [self.ViewModel.news addObject: [[News alloc] init]];
         [UIView transitionWithView:self.content duration:0.1f options:UIViewAnimationOptionTransitionCrossDissolve animations:^(void) {
             [self.content reloadData];
         } completion:nil];
