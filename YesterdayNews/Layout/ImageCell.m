@@ -18,8 +18,7 @@ static const CGFloat MAXPIXEL = 4096.0;
 @implementation ImageCell
 
 #pragma mark - life cycle
-
-- (instancetype)initWithFrame:(CGRect)frame{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if(self){
         [self setupView];

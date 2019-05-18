@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UserInfoViewController : UINavigationController
+@interface UserInfoViewController : UIViewController
 
-- (instancetype)init;
+- (void)hideLoginPageAnimation;
+- (void)showLoginPageAnimation;
+- (void)showUserInfoAnimation;
 
 @end

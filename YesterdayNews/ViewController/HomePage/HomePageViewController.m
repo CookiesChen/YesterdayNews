@@ -39,8 +39,7 @@
 
 @implementation HomePageViewController
 
-
-/* -- progma mark - life cycle -- */
+# pragma mark life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -48,9 +47,7 @@
     [self bindViewModel];
 }
 
-
-/* -- progma mark - private methods -- */
-
+# pragma mark private methods
 //初始化
 - (instancetype)initWithFrame:(CGRect)frame {
     self.frame = frame;
@@ -89,8 +86,7 @@
     
 }
 
-
-/* -- progma mark - UICollectionViewDelegate -- */
+# pragma mark UICollectionViewDelegate
 // 标签数量
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return _tabs.count;
@@ -135,8 +131,7 @@
     return 0;
 }
 
-
-/* -- progma mark - getters and setters -- */
+# pragma mark getters and setters
 - (PageViewController *)pageVC {
     if(_pageVC == nil){
         _pageVC = [[PageViewController alloc] initWithFrame:CGRectMake(0, self.margin_top+self.tab_height, WIDTH, HEIGHT-self.tab_height-self.margin_top)];

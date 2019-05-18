@@ -68,11 +68,11 @@
 }
 
 # pragma YBImageBrowserDataSource
-- (NSUInteger)yb_numberOfCellForImageBrowserView:(YBImageBrowserView *)imageBrowserView{
+- (NSUInteger)yb_numberOfCellForImageBrowserView:(YBImageBrowserView *)imageBrowserView {
     return self.dataArray.count;
 }
 
-- (id<YBImageBrowserCellDataProtocol>)yb_imageBrowserView:(YBImageBrowserView *)imageBrowserView dataForCellAtIndex:(NSUInteger)index{
+- (id<YBImageBrowserCellDataProtocol>)yb_imageBrowserView:(YBImageBrowserView *)imageBrowserView dataForCellAtIndex:(NSUInteger)index {
     YBImageBrowseCellData *data = [YBImageBrowseCellData new];
     data.url = [NSURL URLWithString: [self.dataArray objectAtIndex:index]];
     data.sourceObject = [self sourceObjAtIdx:index];
@@ -80,7 +80,7 @@
 }
 
 # pragma UICollectionViewDataDelegate
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.dataArray.count;
 }
 
@@ -113,7 +113,7 @@
 
 # pragma getter and setter
 - (UILabel *)title {
-    if(_time == nil){
+    if(_time == nil) {
         _title = [[UILabel alloc] initWithFrame:CGRectMake(margin, marginTop, WIDTH-2*margin, 100)];
         [_title setText: @"打工熬到脱水！“星马影帝”笑言港姐女友靓汤补身"];
         [_title setFont: [UIFont systemFontOfSize: 20]];

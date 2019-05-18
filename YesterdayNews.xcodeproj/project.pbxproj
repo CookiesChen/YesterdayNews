@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		24ED0A27227B602E00F9814A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED0A1A227B602E00F9814A /* LoginViewController.m */; };
 		24ED0A28227B602E00F9814A /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED0A1D227B602E00F9814A /* UserInfoViewController.m */; };
-		24ED0A29227B602E00F9814A /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED0A1E227B602E00F9814A /* ProfileViewController.m */; };
 		24ED0A2A227B602E00F9814A /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED0A20227B602E00F9814A /* SignupViewController.m */; };
 		24ED0A2B227B602E00F9814A /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED0A23227B602E00F9814A /* ListViewController.m */; };
 		24ED0A2C227B602E00F9814A /* UserTarBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED0A26227B602E00F9814A /* UserTarBarViewController.m */; };
@@ -37,6 +36,7 @@
 		51C3AD27226B0D1B00EA3FD9 /* YesterdayNewsUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C3AD26226B0D1B00EA3FD9 /* YesterdayNewsUITests.m */; };
 		51C3AD3A226B0EE700EA3FD9 /* MainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C3AD39226B0EE700EA3FD9 /* MainPageViewController.m */; };
 		51C3AD40226B140A00EA3FD9 /* HomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51C3AD3F226B140A00EA3FD9 /* HomePageViewController.m */; };
+		51D3C4B6228EF8F100197E89 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 51D3C4B5228EF8F100197E89 /* User.m */; };
 		51E0DD762282D602008F037D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E0DD752282D602008F037D /* ViewController.m */; };
 		7CB4A9D9D37BBADE1282A7BB /* libPods-YesterdayNewsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07AA0FE3601FE1262409EB2B /* libPods-YesterdayNewsTests.a */; };
 		E79A7E9E2273F34300FB5F9D /* INotification.m in Sources */ = {isa = PBXBuildFile; fileRef = E79A7E9D2273F34300FB5F9D /* INotification.m */; };
@@ -66,9 +66,7 @@
 		24ED0A18227B602E00F9814A /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoViewController.h; sourceTree = "<group>"; };
 		24ED0A1A227B602E00F9814A /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		24ED0A1B227B602E00F9814A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		24ED0A1C227B602E00F9814A /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		24ED0A1D227B602E00F9814A /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoViewController.m; sourceTree = "<group>"; };
-		24ED0A1E227B602E00F9814A /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		24ED0A20227B602E00F9814A /* SignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupViewController.m; sourceTree = "<group>"; };
 		24ED0A21227B602E00F9814A /* SignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupViewController.h; sourceTree = "<group>"; };
 		24ED0A23227B602E00F9814A /* ListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
@@ -121,6 +119,8 @@
 		51C3AD3B226B0F2C00EA3FD9 /* MainPageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainPageViewController.h; sourceTree = "<group>"; };
 		51C3AD3E226B13F400EA3FD9 /* HomePageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePageViewController.h; sourceTree = "<group>"; };
 		51C3AD3F226B140A00EA3FD9 /* HomePageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomePageViewController.m; sourceTree = "<group>"; };
+		51D3C4B4228EF8E600197E89 /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		51D3C4B5228EF8F100197E89 /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		51E0DD742282D57C008F037D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		51E0DD752282D602008F037D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		7FEEE29897871650AE6FB86C /* Pods-YesterdayNews.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YesterdayNews.release.xcconfig"; path = "Target Support Files/Pods-YesterdayNews/Pods-YesterdayNews.release.xcconfig"; sourceTree = "<group>"; };
@@ -169,8 +169,6 @@
 			children = (
 				24ED0A18227B602E00F9814A /* UserInfoViewController.h */,
 				24ED0A1D227B602E00F9814A /* UserInfoViewController.m */,
-				24ED0A1C227B602E00F9814A /* ProfileViewController.h */,
-				24ED0A1E227B602E00F9814A /* ProfileViewController.m */,
 				24ED0A19227B602E00F9814A /* LogInPage */,
 				24ED0A1F227B602E00F9814A /* SignUpPage */,
 				24ED0A22227B602E00F9814A /* UserTarBar */,
@@ -181,8 +179,8 @@
 		24ED0A19227B602E00F9814A /* LogInPage */ = {
 			isa = PBXGroup;
 			children = (
-				24ED0A1A227B602E00F9814A /* LoginViewController.m */,
 				24ED0A1B227B602E00F9814A /* LoginViewController.h */,
+				24ED0A1A227B602E00F9814A /* LoginViewController.m */,
 			);
 			path = LogInPage;
 			sourceTree = "<group>";
@@ -190,8 +188,8 @@
 		24ED0A1F227B602E00F9814A /* SignUpPage */ = {
 			isa = PBXGroup;
 			children = (
-				24ED0A20227B602E00F9814A /* SignupViewController.m */,
 				24ED0A21227B602E00F9814A /* SignupViewController.h */,
+				24ED0A20227B602E00F9814A /* SignupViewController.m */,
 			);
 			path = SignUpPage;
 			sourceTree = "<group>";
@@ -199,8 +197,8 @@
 		24ED0A22227B602E00F9814A /* UserTarBar */ = {
 			isa = PBXGroup;
 			children = (
-				24ED0A23227B602E00F9814A /* ListViewController.m */,
 				24ED0A24227B602E00F9814A /* UserTarBarViewController.h */,
+				24ED0A23227B602E00F9814A /* ListViewController.m */,
 				24ED0A25227B602E00F9814A /* ListViewController.h */,
 				24ED0A26227B602E00F9814A /* UserTarBarViewController.m */,
 			);
@@ -404,10 +402,20 @@
 		51C3AD36226B0D5C00EA3FD9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				51D3C4B3228EF8DA00197E89 /* User */,
 				51B51D312281D7D5007AA44B /* News.h */,
 				51B51D2F2281D7CA007AA44B /* News.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		51D3C4B3228EF8DA00197E89 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				51D3C4B4228EF8E600197E89 /* User.h */,
+				51D3C4B5228EF8F100197E89 /* User.m */,
+			);
+			path = User;
 			sourceTree = "<group>";
 		};
 		58AE3DD52C84B8BCD37DBE09 /* Pods */ = {
@@ -682,13 +690,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51D3C4B6228EF8F100197E89 /* User.m in Sources */,
 				5144FADC226B581000101E22 /* UserInfoViewModel.m in Sources */,
 				5144FAE9226B779800101E22 /* RecommendViewController.m in Sources */,
 				24ED0A27227B602E00F9814A /* LoginViewController.m in Sources */,
 				51B51D29227F4273007AA44B /* HotspotViewController.m in Sources */,
 				51B51D452282B397007AA44B /* NewsDetailViewController.m in Sources */,
 				5144FADA226B57FD00101E22 /* HomePageViewModel.m in Sources */,
-				24ED0A29227B602E00F9814A /* ProfileViewController.m in Sources */,
 				5144FAE5226B74C500101E22 /* PageViewController.m in Sources */,
 				51B51D362281FAF8007AA44B /* TimeUtils.m in Sources */,
 				24ED0A2A227B602E00F9814A /* SignupViewController.m in Sources */,

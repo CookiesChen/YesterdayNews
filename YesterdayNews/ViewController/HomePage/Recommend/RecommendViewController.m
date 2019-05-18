@@ -36,7 +36,7 @@
 
 @implementation RecommendViewController
 
-/* -- progma mark - life cycle -- */
+# pragma mark life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -44,7 +44,7 @@
     [self bindViewModel];
 }
 
-/* -- progma mark - private methods -- */
+# pragma mark private methods
 - (void)setupView {
     [self.view setFrame: self.frame];
     [self.view addSubview: self.content];
@@ -110,13 +110,13 @@
     }
 }
 
-/* -- progma mark - UICollectionViewDelegate -- */
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+# pragma mark UICollectionViewDelegate
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     //[self.navigationController pushViewController:[[NewsDetailViewController alloc]init] animated:YES];
 }
 
-/* -- progma mark - UICollectionViewDataDelegate -- */
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+# pragma mark UICollectionViewDataDelegate
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
 
@@ -140,14 +140,14 @@
     return cell;
 }
 
-/* -- progma mark - UICollectionViewDelegateFlowLayout -- */
+# pragma mark UICollectionViewDelegateFlowLayout
 // 下边距
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     return self.margin_bottom;
 }
 
 // Cell尺寸
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger type = 0;
     CGSize cellSize;
     switch (type) {
@@ -160,9 +160,9 @@
     return cellSize;
 }
 
-/* -- progma mark - UIScrollViewDelegate -- */
+# pragma mark UIScrollViewDelegate
 // 滚动加载
-- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset{
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
     CGFloat height = self.content.frame.size.height;
     CGFloat contentOffsetY = self.content.contentOffset.y;
     CGFloat bottomOffset = self.content.contentSize.height - contentOffsetY;
@@ -177,7 +177,7 @@
     }
 }
 
-/* -- progma mark - getters and setters -- */
+# pragma mark getters and setters
 - (UICollectionView* )content {
     if(_content == nil){
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];

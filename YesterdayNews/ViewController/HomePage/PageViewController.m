@@ -27,8 +27,7 @@
 
 @implementation PageViewController
 
-
-/* -- progma mark - life cycle -- */
+# pragma mark life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -36,7 +35,7 @@
     [self bindViewModel];
 }
 
-/* -- progma mark - private methods -- */
+# pragma mark private methods
 - (void)setupView {
     [self.view setFrame:self.frame];
     [self setIndex: 0];
@@ -64,7 +63,7 @@
     _current_index = -1;
 }
 
-- (void) setIndex:(NSInteger) index{
+- (void) setIndex:(NSInteger) index {
     if(self.current_index != index){
         NSInteger direction;
         if(self.current_index < index){
@@ -78,8 +77,7 @@
     }
 }
 
-/* -- progma mark - UIPageViewControllerDataSource -- */
-
+# pragma mark UIPageViewControllerDataSource
 // 获取前一页
 - (nullable UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
     NSUInteger index = [_pages indexOfObject: viewController];
@@ -100,8 +98,7 @@
     }
 }
 
-/* -- progma mark - getters and setters -- */
-
+# pragma mark getters and setters
 - (RecommendViewController *)recommendVC {
     if(_recommendVC == nil){
         _recommendVC = [[RecommendViewController alloc] initWithFrame:self.view.frame];
@@ -117,7 +114,7 @@
     return _hotspotVC;
 }
 
-- (NSArray *)pages{
+- (NSArray *)pages {
     if(_pages == nil){
         _pages = @[self.recommendVC, self.hotspotVC];
     }
