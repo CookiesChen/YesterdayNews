@@ -10,6 +10,7 @@ target 'YesterdayNews' do
   pod 'ReactiveObjC', '~> 3.1.0'
   pod 'SDWebImage', '~> 5.0'
   pod 'YBImageBrowser'
+  pod 'AFNetworking', '~> 3.0'
   
   target 'YesterdayNewsTests' do
     inherit! :search_paths

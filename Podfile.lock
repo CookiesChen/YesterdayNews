@@ -1,4 +1,19 @@
 PODS:
+  - AFNetworking (3.2.1):
+    - AFNetworking/NSURLSession (= 3.2.1)
+    - AFNetworking/Reachability (= 3.2.1)
+    - AFNetworking/Security (= 3.2.1)
+    - AFNetworking/Serialization (= 3.2.1)
+    - AFNetworking/UIKit (= 3.2.1)
+  - AFNetworking/NSURLSession (3.2.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.2.1)
+  - AFNetworking/Security (3.2.1)
+  - AFNetworking/Serialization (3.2.1)
+  - AFNetworking/UIKit (3.2.1):
+    - AFNetworking/NSURLSession
   - Colours (5.13.0):
     - Colours/ObjC (= 5.13.0)
   - Colours/ObjC (5.13.0)
@@ -14,6 +29,7 @@ PODS:
   - YYImage/Core (1.0.4)
 
 DEPENDENCIES:
+  - AFNetworking (~> 3.0)
   - Colours
   - ReactiveObjC (~> 3.1.0)
   - SDWebImage (~> 5.0)
@@ -21,6 +37,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - AFNetworking
     - Colours
     - ReactiveObjC
     - SDWebImage
@@ -28,12 +45,13 @@ SPEC REPOS:
     - YYImage
 
 SPEC CHECKSUMS:
+  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   Colours: f24220c38f13deac88612667e9b4a7fb96b871d4
   ReactiveObjC: 2a38ea15335de4119d8b17caf1db1484f61db902
   SDWebImage: 27dd2c9ea07a2252f94557c9fbb6105ee94b74c9
   YBImageBrowser: 26bb62ae7ba7fef423085d431637d16fb58a6cbd
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
 
-PODFILE CHECKSUM: 1aec40c8444dc119767f72a5b7824d1cbc81692a
+PODFILE CHECKSUM: 31c62d5f67965142fa06760f26f153532478089f
 
 COCOAPODS: 1.6.1

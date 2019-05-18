@@ -198,9 +198,9 @@
 			isa = PBXGroup;
 			children = (
 				24ED0A24227B602E00F9814A /* UserTarBarViewController.h */,
-				24ED0A23227B602E00F9814A /* ListViewController.m */,
-				24ED0A25227B602E00F9814A /* ListViewController.h */,
 				24ED0A26227B602E00F9814A /* UserTarBarViewController.m */,
+				24ED0A25227B602E00F9814A /* ListViewController.h */,
+				24ED0A23227B602E00F9814A /* ListViewController.m */,
 			);
 			path = UserTarBar;
 			sourceTree = "<group>";

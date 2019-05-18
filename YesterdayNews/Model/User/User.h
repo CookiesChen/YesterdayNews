@@ -13,10 +13,9 @@
 
 @interface User : NSObject
 
-@property(nonatomic, strong) NSString *username;
-@property(nonatomic, strong) NSString *password;
-
 + (User *)getInstance;
+- (void)setUsername:(NSString *)username;
+- (NSString *)getUsername;
 
 @end
 

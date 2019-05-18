@@ -8,19 +8,43 @@
 
 #import "User.h"
 
-static User *user = nil;
 @interface User()
+
+@property(nonatomic, strong)NSString *username;
 
 @end
 
+static User *user = nil;
 @implementation User
 
 + (User *)getInstance {
     static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        user = [[User alloc] init];
+    dispatch_once(&onceToken, ^ {
+        if(user == nil) {
+            user = [[User alloc] init];
+        }
     });
     return user;
+}
+
+- (id)init {
+    self = [super init];
+    if(self) {
+        _username = [NSString alloc];
+    }
+    return self;
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    return self;
+}
+
+- (void)setUsername:(NSString *)username {
+    _username = username;
+}
+
+- (NSString *)getUsername {
+    return _username;
 }
 
 @end

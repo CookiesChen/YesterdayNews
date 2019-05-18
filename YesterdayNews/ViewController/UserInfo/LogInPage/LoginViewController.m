@@ -8,13 +8,17 @@
 
 #import "LoginViewController.h"
 #import "../UserInfoViewController.h"
+#import "../../../Model/User/User.h"
+#import <Colours.h>
+#import <AFNetworking.h>
+
 #define ZXColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 @interface LoginViewController ()
 
 @property(nonatomic, strong) UIButton *loginButton;
 @property(nonatomic, strong) UILabel *loginTitleLabel;
-@property(nonatomic, strong) UITextField *emailInput;
+@property(nonatomic, strong) UITextField *usernameInput;
 @property(nonatomic, strong) UITextField *passwordInput;
 
 @end
@@ -31,8 +35,8 @@
     
     // label
     [self.view addSubview: self.loginTitleLabel];
-    // email
-    [self.view addSubview:self.emailInput];
+    // username
+    [self.view addSubview:self.usernameInput];
     // password
     [self.view addSubview:self.passwordInput];
     // login button
@@ -40,8 +44,30 @@
 }
 
 - (void) LoginButtonClick:(id)sender {
-    [(UserInfoViewController *)self.parentViewController hideLoginPageAnimation];
-    [(UserInfoViewController*)self.parentViewController showUserInfoAnimation];
+    NSString *username = self.usernameInput.text;
+    NSString *password = self.passwordInput.text;
+    NSString *url = @"http://localhost:3000/user/login";
+    NSDictionary *parameters = @{@"username": username,
+                                 @"password": password};
+    AFHTTPSessionManager *manage = [AFHTTPSessionManager manager];
+    // 设置请求体为JSON
+    manage.requestSerializer = [AFJSONRequestSerializer serializer];
+    // 设置响应体为JSON
+    manage.responseSerializer = [AFJSONResponseSerializer serializer];
+    [manage POST:url parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        User *user = [User getInstance];
+        [user setUsername:username];
+        NSLog(@"[login] success");
+        [(UserInfoViewController *)self.parentViewController hideLoginPageAnimation];
+        [(UserInfoViewController*)self.parentViewController showUserInfoAnimation];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        id response = [NSJSONSerialization JSONObjectWithData:error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] options:0 error:nil];
+        // TODO
+        // 弹出提示框 用户名或密码错误
+        NSLog(@"%@", response[@"message"]);
+    }];
 }
 
 # pragma getter and setter
@@ -56,18 +82,23 @@
     return _loginTitleLabel;
 }
 
-- (UITextField *)emailInput {
-    if(_emailInput == nil){
-        _emailInput = [[UITextField alloc] initWithFrame:CGRectMake(50, 160, self.view.frame.size.width - 100, 35)];
-        _emailInput.borderStyle = UITextBorderStyleRoundedRect;
-        _emailInput.font = [UIFont systemFontOfSize:14];
-        _emailInput.layer.cornerRadius = 17.5;
-        _emailInput.layer.masksToBounds = YES;
-        [_emailInput.layer setBorderWidth:1];
-        [_emailInput.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
-        _emailInput.placeholder = @"    邮箱";
+- (UITextField *)usernameInput {
+    if(_usernameInput == nil){
+        _usernameInput = [[UITextField alloc] initWithFrame:CGRectMake(50, 160, self.view.frame.size.width - 100, 35)];
+        _usernameInput.borderStyle = UITextBorderStyleRoundedRect;
+        _usernameInput.font = [UIFont systemFontOfSize:14];
+        _usernameInput.layer.cornerRadius = 17.5;
+        _usernameInput.layer.masksToBounds = YES;
+        [_usernameInput.layer setBorderWidth:1];
+        [_usernameInput.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
+        NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+        style.alignment = NSTextAlignmentCenter;
+        NSAttributedString *attri = [[NSAttributedString alloc] initWithString:@"用户名" attributes:@{NSForegroundColorAttributeName:[UIColor black50PercentColor], NSFontAttributeName:[UIFont systemFontOfSize:14], NSParagraphStyleAttributeName:style}];
+        [_usernameInput setAttributedPlaceholder: attri];
+        [_usernameInput setAttributedPlaceholder: attri];
+        [_usernameInput setTextAlignment: NSTextAlignmentCenter];
     }
-    return _emailInput;
+    return _usernameInput;
 }
 
 - (UITextField *)passwordInput {
@@ -79,7 +110,11 @@
         _passwordInput.layer.masksToBounds = YES;
         [_passwordInput.layer setBorderWidth:1];
         [_passwordInput.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
-        _passwordInput.placeholder = @"    密码";
+        NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+        style.alignment = NSTextAlignmentCenter;
+        NSAttributedString *attri = [[NSAttributedString alloc] initWithString:@"密码" attributes:@{NSForegroundColorAttributeName:[UIColor black50PercentColor], NSFontAttributeName:[UIFont systemFontOfSize:14], NSParagraphStyleAttributeName:style}];
+        [_passwordInput setAttributedPlaceholder: attri];
+        [_passwordInput setTextAlignment: NSTextAlignmentCenter];
     }
     return _passwordInput;
 }
@@ -87,10 +122,11 @@
 - (UIButton *)loginButton {
     if(_loginButton == nil){
         _loginButton = [[UIButton alloc] initWithFrame:CGRectMake(50, 280, self.view.frame.size.width - 100, 35)];
-        [_loginButton setTitle:@"秘技----一键登录" forState:UIControlStateNormal];
-        _loginButton.titleLabel.font = [UIFont systemFontOfSize:14];
-        _loginButton.backgroundColor = ZXColorFromRGB(0xf38181);
-        _loginButton.layer.cornerRadius = 17.5;
+        [_loginButton setTitle:@"登录" forState:UIControlStateNormal];
+        [_loginButton.titleLabel setFont:[UIFont systemFontOfSize:14]];
+        [_loginButton setBackgroundColor: [UIColor infoBlueColor]];
+        
+        [_loginButton.layer setCornerRadius: 17.5];
         [_loginButton addTarget:self action:@selector(LoginButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _loginButton;

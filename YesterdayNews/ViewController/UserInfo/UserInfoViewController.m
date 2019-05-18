@@ -8,11 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import <ReactiveObjC.h>
+#import <Colours.h>
 #import "UserInfoViewController.h"
 #import "UserTarBar/UserTarBarViewController.h"
 #import "LogInPage/LoginViewController.h"
 #import "SignUpPage/SignupViewController.h"
 #import "../../ViewModel/UserInfo/UserInfoViewModel.h"
+#import "../../Model/User/User.h"
+
 #define ICON_SIZE 22
 #define ICON_LABEL_SIZE 12
 #define NAME_SIZE 24
@@ -181,10 +184,9 @@
     });
     [self.view addSubview:self.part3];
     // close button
-    UIButton *closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.part3.frame.size.width-150, 10, 150, 30)];
-    [closeBtn setTitle:@"close" forState:UIControlStateNormal];
-    closeBtn.titleLabel.font = [UIFont systemFontOfSize:18];
-    [closeBtn setTitleColor:[UIColor grayColor]forState:UIControlStateNormal];
+    UIButton *closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.part3.frame.size.width-50, 10, 30, 30)];
+    [closeBtn setBackgroundImage:[UIImage imageNamed:@"icon_close"] forState:UIControlStateNormal];
+    [closeBtn setBackgroundImage:[UIImage imageNamed:@"icon_close_sel"] forState:UIControlStateSelected];
     [closeBtn addTarget:self action:@selector(closeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.part3 addSubview:closeBtn];
     
@@ -204,7 +206,7 @@
     // switch buttons
     UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"登录",@"注册"]];
     segmentedControl.frame = CGRectMake(self.part3.frame.size.width/2 - 75, self.part3.frame.size.height - 200, 150, 35);
-    segmentedControl.tintColor = ZXColorFromRGB(0xf38181);
+    segmentedControl.tintColor = [UIColor infoBlueColor];
     segmentedControl.selectedSegmentIndex = 0;
     [segmentedControl addTarget:self action:@selector(indexDidChangeForSegmentedControl:) forControlEvents:UIControlEventValueChanged];
     [self.part3 addSubview:segmentedControl];
