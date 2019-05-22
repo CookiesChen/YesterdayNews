@@ -56,7 +56,7 @@
     [self addSubview: self.title];
     marginTop += self.title.frame.size.height + 10;
 
-    CGFloat padding = 5, cellLength = (WIDTH - padding * 2) / 3;
+    CGFloat padding = 5, cellLength = (WIDTH - 2 * padding - 2 * margin) / 3;
     [self.collectionView setFrame: CGRectMake(0, marginTop, WIDTH, cellLength)];
     [self addSubview: self.collectionView];
     
@@ -86,6 +86,7 @@
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     ImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+    
     cell.data = self.dataArray[indexPath.row];
     return cell;
 }
@@ -161,7 +162,7 @@
 
 - (UICollectionView *)collectionView {
     if(_collectionView == nil){
-        CGFloat padding = 5, cellLength = (WIDTH - padding * 2 - 2 * margin) / 3;
+        CGFloat padding = 5, cellLength = (WIDTH - 2 * padding - 2 * margin) / 3;
         UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
         layout.itemSize = CGSizeMake(cellLength, cellLength);
         layout.sectionInset = UIEdgeInsetsMake(margin, margin, margin, margin);

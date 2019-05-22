@@ -113,9 +113,9 @@
 
 # pragma mark UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-//    [self.navigationController pushViewController:[[NewsDetailViewController alloc]init] animated:YES];
+    [self.navigationController pushViewController:[[NewsDetailViewController alloc]init] animated:YES];
     UICollectionViewCell *selectCell = [collectionView cellForItemAtIndexPath:indexPath];
-    NSLog(@"click: %zd %zd %zd", indexPath.section, indexPath.row, selectCell.tag);
+    // NSLog(@"click: %zd %zd %zd", indexPath.section, indexPath.row, selectCell.tag);
 }
 
 # pragma mark UICollectionViewDataDelegate
@@ -138,7 +138,7 @@
     News *news = [self.ViewModel.news objectAtIndex:indexPath.row];
     NewsTag tag = [news tag];
     if(cell.subviews.count == 0) {
-        NSLog(@"add sub view: item:%zd, tag:%zd", indexPath.row, cell.tag);
+        // NSLog(@"add sub view: item:%zd, tag:%zd", indexPath.row, cell.tag);
         switch (tag) {
             case 0:
                 // 多图
@@ -209,7 +209,7 @@
     if(_content == nil){
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         [layout setScrollDirection: UICollectionViewScrollDirectionVertical];
-        [layout setItemSize:CGSizeMake(WIDTH, 100)];
+        [layout setItemSize: CGSizeMake(WIDTH, 0)];
         
         _content = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT) collectionViewLayout:layout];
         [_content setBackgroundColor: [UIColor colorFromHexString:@"#efeff4"]];
