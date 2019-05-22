@@ -14,7 +14,7 @@
 #import "LogInPage/LoginViewController.h"
 #import "SignUpPage/SignupViewController.h"
 #import "../../ViewModel/UserInfo/UserInfoViewModel.h"
-#import "../../Model/User/User.h"
+#import "ProfileViewController.h"
 
 #define ICON_SIZE 22
 #define ICON_LABEL_SIZE 12
@@ -59,8 +59,10 @@
 
 @property(nonatomic, strong) LoginViewController *loginVC;
 @property(nonatomic, strong) SignupViewController *signupVC;
+@property (strong, nonatomic) ProfileViewController *profileVC;
 
 @property (strong, nonatomic) UserInfoViewModel *viewModel;
+
 
 @end
 
@@ -73,11 +75,6 @@
     [self bindViewModel];
     [self initData];
     [self setupView];
-    
-    //  异步加载图片
-    NSOperationQueue *operationQueue = [[NSOperationQueue alloc] init];
-    NSInvocationOperation *op = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(downloadImage) object:nil];
-    [operationQueue addOperation:op];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -99,40 +96,6 @@
         view;
     });
     [self.view addSubview:self.part1];
-    
-    // background
-    self.backgroundImg = ({
-        UIImageView *backgroundImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 320)];
-        backgroundImg.contentMode = UIViewContentModeScaleAspectFill;
-        backgroundImg;
-    });
-    [self.part1 addSubview:self.backgroundImg];
-    // 毛玻璃
-    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
-    UIVisualEffectView *effectview = [[UIVisualEffectView alloc] initWithEffect:blur];
-    effectview.frame = CGRectMake(0, 0, self.backgroundImg.frame.size.width, self.backgroundImg.frame.size.height);
-    [self.backgroundImg addSubview:effectview];
-    // head
-    [self.part1 addSubview:self.userHeadImg];
-    // user name
-    [self.part1 addSubview:self.userNameLabel];
-    // user sign
-    [self.part1 addSubview:self.userSignLabel];
-    // other labels
-    UILabel *label_following = [self createDataTitleLabelWithFrame:CGRectMake(30, 280, 100, 30) text:@"关注" color:[UIColor lightGrayColor]];
-    UILabel *label_likes = [self createDataTitleLabelWithFrame:CGRectMake(self.view.frame.size.width/2 - 50, 280, 100, 30) text:@"获赞" color:[UIColor lightGrayColor]];
-    UILabel *label_followers = [self createDataTitleLabelWithFrame:CGRectMake(self.view.frame.size.width - 130, 280, 100, 30) text:@"粉丝" color:[UIColor lightGrayColor]];
-    [self.part1 addSubview:label_following];
-    [self.part1 addSubview:label_followers];
-    [self.part1 addSubview:label_likes];
-    
-    // data labels
-    self.followingNumLabel = [self createDataLabelWithFrame:CGRectMake(label_following.frame.origin.x, label_following.frame.origin.y - 25, 100, 30) color:[UIColor whiteColor]];
-    self.likesNumLabel = [self createDataLabelWithFrame:CGRectMake(label_likes.frame.origin.x, label_likes.frame.origin.y - 25, 100, 30) color:[UIColor whiteColor]];
-    self.follersNumLabel = [self createDataLabelWithFrame:CGRectMake(label_followers.frame.origin.x, label_followers.frame.origin.y - 25, 100, 30) color:[UIColor whiteColor]];
-    [self.part1 addSubview:self.followingNumLabel];
-    [self.part1 addSubview:self.likesNumLabel];
-    [self.part1 addSubview:self.follersNumLabel];
     self.part1.alpha = 0;
     
     // login Button
@@ -221,25 +184,6 @@
     self.viewModel = [[UserInfoViewModel alloc] init];
 }
 
-- (void)downloadImage {
-    NSURL *imageURL = [NSURL URLWithString:@"https://hbimg.huabanimg.com/954d812b554d7a23dda1b59c0f807446798aefa839a47-H6Z5G4_fw658"];
-    NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-    UIImage *image = [UIImage imageWithData:imageData];
-    [self performSelectorOnMainThread:@selector(updateUI:) withObject:image waitUntilDone:YES];
-}
-
-- (void)updateUI:(UIImage*)image {
-    self.backgroundImg.image = image;
-    self.userHeadImg.image = image;
-    
-    // set information
-    self.userNameLabel.text = @"BurningFish";
-    self.userSignLabel.text = @"Suprise mother fucker";
-    self.followingNumLabel.text = @"10";
-    self.follersNumLabel.text = @"66";
-    self.likesNumLabel.text = @"233";
-}
-
 #pragma UI setting
 // 创建Label（“关注数”, “点赞数” ...）
 -(UILabel *)createDataTitleLabelWithFrame:(CGRect)frame text:(NSString *)text color:(UIColor *)color {
@@ -299,6 +243,23 @@
             break;
     }
 }
+
+#pragma user login
+- (void)loginWithUser:(User*) user {
+    // create vc
+    self.profileVC = [[ProfileViewController alloc] init];
+    [self addChildViewController:self.profileVC];
+    self.profileVC.view.frame = CGRectMake(0, 0, self.part1.frame.size.width, 320);
+    [self.part1 addSubview:self.profileVC.view];
+    [self.profileVC didMoveToParentViewController:self];
+    
+    self.profileVC.username = [user getUsername];
+    [self.profileVC setUIData];
+    
+    [self hideLoginPageAnimation];
+    [self showUserInfoAnimation];
+}
+
 
 #pragma Animation
 - (void)showUserInfoAnimation {
@@ -444,7 +405,7 @@
         _userSignLabel.textAlignment = NSTextAlignmentCenter;
         _userSignLabel.font = [UIFont systemFontOfSize:SIGN_SIZE];
     }
-    return _userNameLabel;
+    return _userSignLabel;
 }
 
 - (UIButton *)loginButton {
