@@ -60,8 +60,9 @@
         User *user = [User getInstance];
         [user setUsername:username];
         NSLog(@"[login] success");
-        [(UserInfoViewController *)self.parentViewController hideLoginPageAnimation];
-        [(UserInfoViewController*)self.parentViewController showUserInfoAnimation];
+        [(UserInfoViewController *)self.parentViewController loginWithUser:user];
+        //[(UserInfoViewController *)self.parentViewController hideLoginPageAnimation];
+        //[(UserInfoViewController*)self.parentViewController showUserInfoAnimation];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         id response = [NSJSONSerialization JSONObjectWithData:error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] options:0 error:nil];
         // TODO

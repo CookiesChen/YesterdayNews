@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "../../Model/User/User.h"
 
 @interface UserInfoViewController : UIViewController
 
 - (void)hideLoginPageAnimation;
 - (void)showLoginPageAnimation;
 - (void)showUserInfoAnimation;
+- (void)loginWithUser:(User*) user;
 
 @end
