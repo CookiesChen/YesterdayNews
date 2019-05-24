@@ -23,6 +23,7 @@
 		5144FAEC226C31AD00101E22 /* HotspotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5144FAEB226C31AD00101E22 /* HotspotViewController.m */; };
 		517F4FB9227ACA6100FE65B3 /* RecommendViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 517F4FB8227ACA6100FE65B3 /* RecommendViewModel.m */; };
 		5180E9F9228997630093220B /* ImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5180E9F8228997630093220B /* ImageCell.m */; };
+		518171F92297795A003DB421 /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 518171F82297795A003DB421 /* ContentViewController.m */; };
 		51B51D29227F4273007AA44B /* HotspotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51B51D27227F4273007AA44B /* HotspotViewController.m */; };
 		51B51D302281D7CA007AA44B /* News.m in Sources */ = {isa = PBXBuildFile; fileRef = 51B51D2F2281D7CA007AA44B /* News.m */; };
 		51B51D362281FAF8007AA44B /* TimeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 51B51D352281FAF8007AA44B /* TimeUtils.m */; };
@@ -93,6 +94,8 @@
 		517F4FBA227ACA7100FE65B3 /* RecommendViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecommendViewModel.h; sourceTree = "<group>"; };
 		5180E9F7228997570093220B /* ImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageCell.h; sourceTree = "<group>"; };
 		5180E9F8228997630093220B /* ImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageCell.m; sourceTree = "<group>"; };
+		518171F82297795A003DB421 /* ContentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
+		518171FA2297796C003DB421 /* ContentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
 		51B51D27227F4273007AA44B /* HotspotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotspotViewController.m; sourceTree = "<group>"; };
 		51B51D28227F4273007AA44B /* HotspotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotspotViewController.h; sourceTree = "<group>"; };
 		51B51D2F2281D7CA007AA44B /* News.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = News.m; sourceTree = "<group>"; };
@@ -260,6 +263,15 @@
 			path = Recommend;
 			sourceTree = "<group>";
 		};
+		518171F3229778D7003DB421 /* ContentViewController */ = {
+			isa = PBXGroup;
+			children = (
+				518171FA2297796C003DB421 /* ContentViewController.h */,
+				518171F82297795A003DB421 /* ContentViewController.m */,
+			);
+			path = ContentViewController;
+			sourceTree = "<group>";
+		};
 		51B329692277328200696FB5 /* Recommend */ = {
 			isa = PBXGroup;
 			children = (
@@ -315,6 +327,7 @@
 			children = (
 				51B51D432282B384007AA44B /* NewsDetailViewController.h */,
 				51B51D442282B397007AA44B /* NewsDetailViewController.m */,
+				518171F3229778D7003DB421 /* ContentViewController */,
 			);
 			path = NewsDetail;
 			sourceTree = "<group>";
@@ -710,6 +723,7 @@
 				24ED0A28227B602E00F9814A /* UserInfoViewController.m in Sources */,
 				51B51D302281D7CA007AA44B /* News.m in Sources */,
 				5144FAEC226C31AD00101E22 /* HotspotViewController.m in Sources */,
+				518171F92297795A003DB421 /* ContentViewController.m in Sources */,
 				51B51D3D228298FB007AA44B /* SingleImageNews.m in Sources */,
 				E79A7E9E2273F34300FB5F9D /* INotification.m in Sources */,
 				51C3AD40226B140A00EA3FD9 /* HomePageViewController.m in Sources */,
