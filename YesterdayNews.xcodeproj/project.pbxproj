@@ -13,6 +13,7 @@
 		24ED0A2B227B602E00F9814A /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED0A23227B602E00F9814A /* ListViewController.m */; };
 		24ED0A2C227B602E00F9814A /* UserTarBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED0A26227B602E00F9814A /* UserTarBarViewController.m */; };
 		24ED0A7B229014F600F9814A /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED0A7A229014F600F9814A /* ProfileViewController.m */; };
+		24ED0A7F2296FE8A00F9814A /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED0A7E2296FE8A00F9814A /* SettingViewController.m */; };
 		24ED755E226DFB3F00894C0E /* fontello.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 24ED755D226DFB3F00894C0E /* fontello.ttf */; };
 		48683DE9C36519E3B3F73368 /* libPods-YesterdayNews.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E45E69A9B4FF88D7B55EC24E /* libPods-YesterdayNews.a */; };
 		5144FADA226B57FD00101E22 /* HomePageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5144FAD9226B57FD00101E22 /* HomePageViewModel.m */; };
@@ -76,6 +77,8 @@
 		24ED0A26227B602E00F9814A /* UserTarBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTarBarViewController.m; sourceTree = "<group>"; };
 		24ED0A79229014F600F9814A /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		24ED0A7A229014F600F9814A /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		24ED0A7D2296FE8A00F9814A /* SettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		24ED0A7E2296FE8A00F9814A /* SettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		24ED755D226DFB3F00894C0E /* fontello.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fontello.ttf; sourceTree = "<group>"; };
 		5144FAD6226B57C100101E22 /* HomePageViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePageViewModel.h; sourceTree = "<group>"; };
 		5144FAD7226B57CF00101E22 /* UserInfoViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoViewModel.h; sourceTree = "<group>"; };
@@ -170,6 +173,7 @@
 		24ED0A17227B602E00F9814A /* UserInfo */ = {
 			isa = PBXGroup;
 			children = (
+				24ED0A7C2296FDD400F9814A /* SettingPage */,
 				24ED0A18227B602E00F9814A /* UserInfoViewController.h */,
 				24ED0A1D227B602E00F9814A /* UserInfoViewController.m */,
 				24ED0A19227B602E00F9814A /* LogInPage */,
@@ -208,6 +212,15 @@
 				24ED0A23227B602E00F9814A /* ListViewController.m */,
 			);
 			path = UserTarBar;
+			sourceTree = "<group>";
+		};
+		24ED0A7C2296FDD400F9814A /* SettingPage */ = {
+			isa = PBXGroup;
+			children = (
+				24ED0A7D2296FE8A00F9814A /* SettingViewController.h */,
+				24ED0A7E2296FE8A00F9814A /* SettingViewController.m */,
+			);
+			path = SettingPage;
 			sourceTree = "<group>";
 		};
 		24ED755C226DFB3F00894C0E /* fonts */ = {
@@ -698,6 +711,7 @@
 				51D3C4B6228EF8F100197E89 /* User.m in Sources */,
 				5144FADC226B581000101E22 /* UserInfoViewModel.m in Sources */,
 				5144FAE9226B779800101E22 /* RecommendViewController.m in Sources */,
+				24ED0A7F2296FE8A00F9814A /* SettingViewController.m in Sources */,
 				24ED0A27227B602E00F9814A /* LoginViewController.m in Sources */,
 				51B51D29227F4273007AA44B /* HotspotViewController.m in Sources */,
 				51B51D452282B397007AA44B /* NewsDetailViewController.m in Sources */,
