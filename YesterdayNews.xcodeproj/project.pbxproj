@@ -899,6 +899,7 @@
 			baseConfigurationReference = 8E8ADFFE286784EE7AD6AE06 /* Pods-YesterdayNews.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = YesterdayNews/YesterdayNews.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B768GGLAKW;
@@ -918,6 +919,7 @@
 			baseConfigurationReference = 7FEEE29897871650AE6FB86C /* Pods-YesterdayNews.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = YesterdayNews/YesterdayNews.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B768GGLAKW;
