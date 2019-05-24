@@ -33,7 +33,7 @@
         _title_label.textColor = [UIColor blackColor];
         _title_label.textAlignment = NSTextAlignmentCenter;
         _title_label.font = [UIFont systemFontOfSize:20];
-        _title_label.text = [NSString stringWithFormat:@"This is a fucking %@ page", self.pageTitle];
+        _title_label.text = [NSString stringWithFormat:@"This is a %@ page", self.pageTitle];
     }
     return _title_label;
 }

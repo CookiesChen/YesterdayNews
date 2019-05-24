@@ -15,6 +15,7 @@
 #import "SignUpPage/SignupViewController.h"
 #import "../../ViewModel/UserInfo/UserInfoViewModel.h"
 #import "ProfileViewController.h"
+#import "SettingPage/SettingViewController.h"
 
 #define ICON_SIZE 22
 #define ICON_LABEL_SIZE 12
@@ -101,20 +102,24 @@
     // login Button
     [self.view addSubview:self.loginButton];
     
+    
+    // table view
+    self.tableView = ({
+        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 300, self.view.frame.size.width, self.view.frame.size.height - 330) style:UITableViewStyleGrouped];
+        tableView.delegate = self;
+        tableView.dataSource = self;
+        tableView;
+    });
+    //[self.part2 addSubview:self.tableView];
+    [self.view addSubview:self.tableView];
+    
+    
     // -------------------------------------------------part 2
     self.part2 = ({
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 300, self.view.frame.size.width, 100)];
         view;
     });
     [self.view addSubview:self.part2];
-    // table view
-    self.tableView = ({
-        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 330) style:UITableViewStyleGrouped];
-        tableView.delegate = self;
-        tableView.dataSource = self;
-        tableView;
-    });
-    [self.part2 addSubview:self.tableView];
     // icon buttons
     // 段落属性，设置行距
     NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
@@ -127,16 +132,18 @@
         icon.tag = i + ICON_TAG;
         [self.part2 addSubview:icon];
     }
-    // ------------------------------------------------------------
+    
     
     // -------------------------------------------------black
+    /*
     self.blackBlock = ({
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
         view.backgroundColor = [UIColor blackColor];
         view.alpha = 0;
         view;
     });
-    [self.view addSubview:self.blackBlock];
+     */
+    //[self.view addSubview:self.blackBlock];
     // ------------------------------------------------------------
     
     // -------------------------------------------------part 3
@@ -216,12 +223,14 @@
     [str0 addAttribute:(NSString*)NSParagraphStyleAttributeName value:paraStyle range:[btn.titleLabel.text rangeOfString:btn.titleLabel.text]];
     [btn setAttributedTitle:str0 forState:UIControlStateNormal];
     btn.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
+    
     [[btn rac_signalForControlEvents: UIControlEventTouchUpInside] subscribeNext:^(UIButton *x) {
         UserTarBarViewController *controller = [[UserTarBarViewController alloc] init];
         [controller setCurrentPage:x.tag - ICON_TAG];
         controller.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:controller animated:YES];
     }];
+    
     return btn;
 }
 
@@ -266,6 +275,7 @@
     [UIView animateWithDuration:1.0 animations:^{
         self.part1.alpha = 100;
         self.loginButton.alpha = 0;
+        self.tableView.transform = CGAffineTransformTranslate(self.part1.transform, 0, 70);
         self.part2.transform = CGAffineTransformTranslate(self.part1.transform, 0, 70);
     } completion:^(BOOL finished) {
         [self.loginButton removeFromSuperview];
@@ -338,9 +348,10 @@
     }
     
     if (indexPath.section == 0) {
-        cell.userInteractionEnabled = NO;
+        //cell.userInteractionEnabled = NO;
     }
     else {
+        //cell.userInteractionEnabled = YES;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         NSMutableArray *items = self.tableItems[indexPath.section - 1];
         cell.textLabel.text = items[indexPath.row];
@@ -352,7 +363,12 @@
 #pragma mark UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    // TODO: fuck
+    if(indexPath.section == 2 && indexPath.row == 1) {
+        SettingViewController *controller = [[SettingViewController alloc] init];
+        controller.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:controller animated:YES];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
