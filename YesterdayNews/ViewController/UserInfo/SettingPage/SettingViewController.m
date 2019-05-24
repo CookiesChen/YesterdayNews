@@ -107,6 +107,11 @@ typedef struct SettingItem {
         else if(item.type == NAVIGATE) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
+        else if(item.type == LOGOUT) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+            cell.textLabel.textColor = [UIColor redColor];
+            cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        }
         
     }
     
