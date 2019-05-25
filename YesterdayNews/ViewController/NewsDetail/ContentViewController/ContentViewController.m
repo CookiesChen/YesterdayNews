@@ -10,19 +10,23 @@
 #import <WebKit/WebKit.h>
 #import <Colours.h>
 #import <ReactiveObjC.h>
+#import "CommentCell.h"
 
 #define WIDTH self.frame.size.width
 #define HEIGHT self.frame.size.height
 
-@interface ContentViewController() <WKNavigationDelegate>
+@interface ContentViewController() <WKNavigationDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 {
     CGFloat margin;
     CGFloat marginTop;
+    CGFloat commentMarginTop;
 }
 
 @property(nonatomic) CGRect frame;
 
-@property(nonatomic, strong) UIScrollView *content;
+@property(nonatomic, strong) UICollectionView *content;
+@property(nonatomic, strong) NSString *identifier;
+
 @property(nonatomic, strong) UILabel *newsTitle;
 @property(nonatomic, strong) UIView *authorBar;
 @property(nonatomic, strong) UIImageView *authorHeadImg;
@@ -30,7 +34,7 @@
 @property(nonatomic, strong) UILabel *authorInfo;
 @property(nonatomic, strong) UIButton *followButton;
 @property(nonatomic, strong) WKWebView *webView;
-
+@property(nonatomic, strong) UIView *testView;
 @end
 
 @implementation ContentViewController
@@ -56,6 +60,7 @@
 - (void)initialize {
     margin = 20.0f;
     marginTop = 20.0f;
+    self.identifier = @"reuseCell";
 }
 
 // ui布局
@@ -75,8 +80,10 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
     if([keyPath isEqualToString:@"contentSize"]) {
         CGFloat height = self.webView.scrollView.contentSize.height;
-        [self.webView setFrame:CGRectMake(margin, marginTop, WIDTH-2*margin, height)];
-        [self.content setContentSize:CGSizeMake(WIDTH, marginTop+height)];
+        CGRect newFrame = self.webView.frame;
+        newFrame.size.height = height;
+        [self.webView setFrame:newFrame];
+//        [self.content setContentSize:CGSizeMake(WIDTH, marginTop+height)];
         
         // 注入js调整图片大小
         NSString *js = @"function imgAutoFit(){\
@@ -94,41 +101,60 @@
         [self.webView evaluateJavaScript:js completionHandler:nil];
         [self.webView evaluateJavaScript:@"imgAutoFit()" completionHandler:nil];
         [self.webView sizeToFit];
+        
+//        [self.commentView.view setFrame:CGRectMake(self.webView.frame.origin.x, self.webView.frame.origin.y + self.webView.frame.size.height, WIDTH-2*margin, 1000)];
+//        [self.content setContentSize:CGSizeMake(WIDTH, marginTop+height+1000)];
     }
 }
 
 # pragma mark getters and setters
-- (UIScrollView *)content {
+- (UICollectionView *)content {
     if(_content == nil){
-        _content = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT)];
-        [_content setBounces:NO];
+        // UIContentView
+        self.identifier = @"reuseCell";
+        UICollectionViewFlowLayout *fl = [[UICollectionViewFlowLayout alloc] init];
+        // 垂直布局
+        CGRect comment_frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        fl.scrollDirection = UICollectionViewScrollDirectionVertical;
         
-        marginTop = 20.0f;
-        [_content addSubview:self.newsTitle];
-        marginTop += self.newsTitle.frame.size.height + 20;
-        [_content addSubview:self.authorBar];
-        marginTop += self.authorBar.frame.size.height + 20;
-        [_content addSubview:self.webView];
+        _content = [[UICollectionView alloc] initWithFrame:comment_frame collectionViewLayout:fl];
+        [_content registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:self.identifier];
+        [_content setBackgroundColor:[UIColor whiteColor]];
+        _content.dataSource = self;
+        _content.delegate = self;
+        
+        // UIScrollView
+//        _content = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT)];
+//        [_content setBounces:NO];
+//
+//        marginTop = 20.0f;
+//        [_content addSubview:self.newsTitle];
+//        marginTop += self.newsTitle.frame.size.height + 20;
+//        [_content addSubview:self.authorBar];
+//        marginTop += self.authorBar.frame.size.height + 20;
+//        [_content addSubview:self.webView];
+//
+////        [_content addSubview: self.commentView.view];
     }
     return _content;
 }
 
 - (UILabel *)newsTitle {
     if(_newsTitle == nil) {
-        _newsTitle = [[UILabel alloc] initWithFrame:CGRectMake(margin, marginTop, WIDTH-margin, 400)];
+        _newsTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 400)];
         [_newsTitle setText:@"这款国剧正以风暴速度席卷朋友圈，年度王者终于来了！"];
         _newsTitle.numberOfLines = 0;
         [_newsTitle setFont:[UIFont systemFontOfSize:23]];
         [_newsTitle setTextAlignment:NSTextAlignmentLeft];
         [_newsTitle sizeToFit];
-        [_newsTitle setFrame:CGRectMake(margin, marginTop, _newsTitle.frame.size.width, _newsTitle.frame.size.height)];
+        [_newsTitle setFrame:CGRectMake(margin, 0, _newsTitle.frame.size.width-margin, _newsTitle.frame.size.height)];
     }
     return _newsTitle;
 }
 
 - (UIView *)authorBar {
     if(_authorBar == nil) {
-        _authorBar = [[UIView alloc] initWithFrame:CGRectMake(margin, marginTop, WIDTH-2*margin, 40)];
+        _authorBar = [[UIView alloc] initWithFrame:CGRectMake(margin, 0, WIDTH-2*margin, 40)];
         
         [_authorBar addSubview:self.authorHeadImg];
         [_authorBar addSubview:self.authorName];
@@ -194,8 +220,104 @@
         [_webView.scrollView setScrollEnabled: NO];
         // 监听webview, 实现高度自适应
         [_webView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
+        // 更改UICollectionViewCell高度
+        
+//        [self.content.collectionViewLayout invalidateLayout];
+//        [self.content reloadData];
+//        UICollectionViewCell *webview_cell = [self.content cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:2]];
+//        NSLog(@"[webview cell size2] %@", NSStringFromCGRect(webview_cell.frame));
+//        [webview_cell sizeThatFits:_webView.frame.size];
+//        NSLog(@"[webview cell size3] %@", NSStringFromCGRect(webview_cell.frame));
+        
     }
     return _webView;
+}
+
+
+- (UIView *)testView {
+    if(_testView == nil) {
+        _testView = [[UIView alloc]initWithFrame:CGRectMake(margin, 2000, WIDTH-2*margin, 50)];
+        [_testView setBackgroundColor:[UIColor blueColor]];
+    }
+    return _testView;
+}
+
+- (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    UICollectionViewCell * cell  = [collectionView dequeueReusableCellWithReuseIdentifier:self.identifier forIndexPath:indexPath];
+    [cell setBackgroundColor:[UIColor whiteColor]];
+//    NSLog(@"cellforitematindexpath %zd %zd", indexPath.section, indexPath.row);
+    for(UIView *view in cell.subviews){
+        [view removeFromSuperview];
+    }
+    switch (indexPath.section) {
+        case 0:
+            [cell addSubview:self.newsTitle];
+            break;
+        case 1:
+            [cell addSubview:self.authorBar];
+            break;
+        case 2:
+            [cell addSubview:self.webView];
+            break;
+        case 3:
+            [cell addSubview:[[CommentCell alloc] initWithFrame:CGRectMake(margin, 0, cell.frame.size.width-2*margin, cell.frame.size.height)]];
+//            CommentCell *commentCell = (CommentCell *)[cell.subviews objectAtIndex:0];
+//            [commentCell.imageView setImage:[UIImage imageNamed:@"headImg"]];
+            break;
+    }
+    
+    return cell;
+}
+
+- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return section==3?10:1;
+}
+
+// sections 数目
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 4;
+}
+
+// section内下间距
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
+    return 20;
+}
+
+// section内横间距
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return 20;
+}
+
+// 单个cell尺寸
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    CGSize cell_size = CGSizeZero;
+    switch (indexPath.section) {
+        case 0:
+            cell_size = CGSizeMake(self.view.frame.size.width, self.newsTitle.frame.size.height + marginTop);
+            break;
+        case 1:
+            cell_size = CGSizeMake(self.view.frame.size.width, self.authorBar.frame.size.height + marginTop);
+            break;
+        case 2:
+            // todo: cell_size 对于webview异步更新尚未完成
+//            cell_size = CGSizeMake(self.view.frame.size.width, self.webView.frame.size.height + marginTop);
+            cell_size = CGSizeMake(self.view.frame.size.width, 2700);
+            break;
+        case 3:
+            cell_size = CGSizeMake(self.view.frame.size.width, 140);
+            break;
+        default:
+            break;
+    }
+    return cell_size;
+}
+
+
+# pragma mark -UICollectionViewDelegate
+
+// UICollectionView-item点击事件
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"[select item] %zd %zd", indexPath.section, indexPath.item);
 }
 
 
