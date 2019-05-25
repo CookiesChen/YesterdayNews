@@ -11,6 +11,8 @@
 #import <Colours.h>
 #import <ReactiveObjC.h>
 #import "CommentCell.h"
+#import "../../../ViewModel/NewsDetail/CommentsViewModel.h"
+#import "../../../Model/Comment/Comment.h"
 
 #define WIDTH self.frame.size.width
 #define HEIGHT self.frame.size.height
@@ -20,6 +22,7 @@
     CGFloat margin;
     CGFloat marginTop;
     CGFloat commentMarginTop;
+    CGFloat webViewHeight;
 }
 
 @property(nonatomic) CGRect frame;
@@ -35,6 +38,8 @@
 @property(nonatomic, strong) UIButton *followButton;
 @property(nonatomic, strong) WKWebView *webView;
 @property(nonatomic, strong) UIView *testView;
+
+@property(nonatomic, strong) CommentsViewModel *commentsViewModel;
 @end
 
 @implementation ContentViewController
@@ -61,6 +66,7 @@
     margin = 20.0f;
     marginTop = 20.0f;
     self.identifier = @"reuseCell";
+    webViewHeight = 742.0f;
 }
 
 // ui布局
@@ -69,11 +75,12 @@
     [self.view setFrame: self.frame];
     
     [self.view addSubview:self.content];
+//    [self.content reloadData];
 }
 
 // viewmodel绑定
 - (void)bindViewModel {
-    
+    self.commentsViewModel = [[CommentsViewModel alloc] init];
 }
 
 # pragma KVO
@@ -102,8 +109,10 @@
         [self.webView evaluateJavaScript:@"imgAutoFit()" completionHandler:nil];
         [self.webView sizeToFit];
         
-//        [self.commentView.view setFrame:CGRectMake(self.webView.frame.origin.x, self.webView.frame.origin.y + self.webView.frame.size.height, WIDTH-2*margin, 1000)];
-//        [self.content setContentSize:CGSizeMake(WIDTH, marginTop+height+1000)];
+        if(_webView.frame.size.height != webViewHeight) {
+            webViewHeight = _webView.frame.size.height;
+            [self.content reloadData];
+        }
     }
 }
 
@@ -122,19 +131,6 @@
         [_content setBackgroundColor:[UIColor whiteColor]];
         _content.dataSource = self;
         _content.delegate = self;
-        
-        // UIScrollView
-//        _content = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT)];
-//        [_content setBounces:NO];
-//
-//        marginTop = 20.0f;
-//        [_content addSubview:self.newsTitle];
-//        marginTop += self.newsTitle.frame.size.height + 20;
-//        [_content addSubview:self.authorBar];
-//        marginTop += self.authorBar.frame.size.height + 20;
-//        [_content addSubview:self.webView];
-//
-////        [_content addSubview: self.commentView.view];
     }
     return _content;
 }
@@ -220,15 +216,6 @@
         [_webView.scrollView setScrollEnabled: NO];
         // 监听webview, 实现高度自适应
         [_webView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
-        // 更改UICollectionViewCell高度
-        
-//        [self.content.collectionViewLayout invalidateLayout];
-//        [self.content reloadData];
-//        UICollectionViewCell *webview_cell = [self.content cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:2]];
-//        NSLog(@"[webview cell size2] %@", NSStringFromCGRect(webview_cell.frame));
-//        [webview_cell sizeThatFits:_webView.frame.size];
-//        NSLog(@"[webview cell size3] %@", NSStringFromCGRect(webview_cell.frame));
-        
     }
     return _webView;
 }
@@ -245,10 +232,10 @@
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     UICollectionViewCell * cell  = [collectionView dequeueReusableCellWithReuseIdentifier:self.identifier forIndexPath:indexPath];
     [cell setBackgroundColor:[UIColor whiteColor]];
-//    NSLog(@"cellforitematindexpath %zd %zd", indexPath.section, indexPath.row);
     for(UIView *view in cell.subviews){
         [view removeFromSuperview];
     }
+    
     switch (indexPath.section) {
         case 0:
             [cell addSubview:self.newsTitle];
@@ -260,12 +247,15 @@
             [cell addSubview:self.webView];
             break;
         case 3:
-            [cell addSubview:[[CommentCell alloc] initWithFrame:CGRectMake(margin, 0, cell.frame.size.width-2*margin, cell.frame.size.height)]];
-//            CommentCell *commentCell = (CommentCell *)[cell.subviews objectAtIndex:0];
-//            [commentCell.imageView setImage:[UIImage imageNamed:@"headImg"]];
+            
+            [cell addSubview:[[CommentCell alloc] initWithFrame:CGRectMake(margin, 0, cell.frame.size.width-2*margin, 0)]];
+//            CGRect cell_frame = cell.frame;
+//            cell_frame.size.height = [cell.subviews objectAtIndex:0].frame.size.height;
+//            [cell setFrame:cell_frame];
+//            NSLog(@"cell_frame: %@", NSStringFromCGRect(cell_frame));
+//            [cell setFrame:CGRectMake(margin, 0, cell.frame.size.width-2*margin, 100)];
             break;
     }
-    
     return cell;
 }
 
@@ -280,7 +270,7 @@
 
 // section内下间距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
-    return 20;
+    return 10;
 }
 
 // section内横间距
@@ -290,6 +280,7 @@
 
 // 单个cell尺寸
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+//    UICollectionViewCell * cell  = [collectionView dequeueReusableCellWithReuseIdentifier:self.identifier forIndexPath:indexPath];
     CGSize cell_size = CGSizeZero;
     switch (indexPath.section) {
         case 0:
@@ -299,12 +290,15 @@
             cell_size = CGSizeMake(self.view.frame.size.width, self.authorBar.frame.size.height + marginTop);
             break;
         case 2:
-            // todo: cell_size 对于webview异步更新尚未完成
-//            cell_size = CGSizeMake(self.view.frame.size.width, self.webView.frame.size.height + marginTop);
-            cell_size = CGSizeMake(self.view.frame.size.width, 2700);
+            cell_size = CGSizeMake(self.view.frame.size.width, webViewHeight + 2*marginTop);
             break;
         case 3:
-            cell_size = CGSizeMake(self.view.frame.size.width, 140);
+//            NSLog(@"cc:%zd, %@", indexPath.row, NSStringFromCGRect([cell.subviews objectAtIndex:0].frame));
+//            NSLog(@"cc:%zd, %fl", indexPath.row, [cell.subviews objectAtIndex:0].frame.size.height);
+//            cell_size = CGSizeMake(self.view.frame.size.width, [cell.subviews objectAtIndex:0].frame.size.height);
+            NSLog(@"check : %@", [_commentsViewModel.comments objectAtIndex:0]);
+            cell_size = CGSizeMake(self.view.frame.size.width, 250);
+
             break;
         default:
             break;

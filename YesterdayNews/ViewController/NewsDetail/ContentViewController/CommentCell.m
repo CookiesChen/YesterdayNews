@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CommentCell.h"
+#import <Colours.h>
 
 @interface CommentCell()
 {
@@ -49,6 +50,10 @@
     // 调整位置
     [self fitLocation];
     
+    CGRect cell_frame = self.frame;
+    cell_frame.size.height = self.comment_content.frame.origin.y + self.comment_content.frame.size.height;
+    [self setFrame:cell_frame];
+    NSLog(@"cell_frame(in): %@", NSStringFromCGRect(self.frame));
 }
 
 - (void)loadSubView{
@@ -81,7 +86,7 @@
     if(_user_name == nil) {
         _user_name = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 0)];
         [_user_name setText:@"中大小邋遢"];
-        [_user_name setTextColor:[UIColor blueColor]];
+        [_user_name setTextColor:[UIColor pastelBlueColor]];
         [_comment_content setFont: [UIFont systemFontOfSize: 18]];
         [_comment_content setLineBreakMode: NSLineBreakByTruncatingTail];
         [_comment_content setNumberOfLines: 1];
@@ -110,10 +115,10 @@
 - (UILabel *)comment_content {
     if(_comment_content == nil) {
         _comment_content = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 0)];
-        [_comment_content setText:@"去年有资格和勇士较量胜负的唯一球队，火箭。今年到目前为止最接近能打败勇士的还是火箭。"];
+        [_comment_content setText:@"去年有资格和勇士较量胜负的唯一球队，火箭。今年到目前为止最接近能打败勇士的还是火箭。去年有资格和勇士较量胜负的唯一球队，火箭。今年到目前为止最接近能打败勇士的还是火箭。去年有资格和勇士较量胜负的唯一球队，火箭。今年到目前为止最接近能打败勇士的还是火箭。"];
         [_comment_content setFont: [UIFont systemFontOfSize: 20]];
         [_comment_content setLineBreakMode: NSLineBreakByTruncatingTail];
-        [_comment_content setNumberOfLines: 3];
+        [_comment_content setNumberOfLines: 0];
         [_comment_content sizeToFit];
     }
     return _comment_content;
