@@ -42,6 +42,7 @@
 		51D3C4B6228EF8F100197E89 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 51D3C4B5228EF8F100197E89 /* User.m */; };
 		51E0DD762282D602008F037D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E0DD752282D602008F037D /* ViewController.m */; };
 		7CB4A9D9D37BBADE1282A7BB /* libPods-YesterdayNewsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07AA0FE3601FE1262409EB2B /* libPods-YesterdayNewsTests.a */; };
+		A0E50E6F2297DA3500268D7E /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A0E50E6E2297DA3500268D7E /* CommentCell.m */; };
 		E79A7E9E2273F34300FB5F9D /* INotification.m in Sources */ = {isa = PBXBuildFile; fileRef = E79A7E9D2273F34300FB5F9D /* INotification.m */; };
 		FAD94154CCF45B7284193A6E /* libPods-YesterdayNewsUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F0E4A0C7DDF17D008A78D0E /* libPods-YesterdayNewsUITests.a */; };
 /* End PBXBuildFile section */
@@ -134,6 +135,8 @@
 		51E0DD752282D602008F037D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		7FEEE29897871650AE6FB86C /* Pods-YesterdayNews.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YesterdayNews.release.xcconfig"; path = "Target Support Files/Pods-YesterdayNews/Pods-YesterdayNews.release.xcconfig"; sourceTree = "<group>"; };
 		8E8ADFFE286784EE7AD6AE06 /* Pods-YesterdayNews.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YesterdayNews.debug.xcconfig"; path = "Target Support Files/Pods-YesterdayNews/Pods-YesterdayNews.debug.xcconfig"; sourceTree = "<group>"; };
+		A0E50E6D2297DA2900268D7E /* CommentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentCell.h; sourceTree = "<group>"; };
+		A0E50E6E2297DA3500268D7E /* CommentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentCell.m; sourceTree = "<group>"; };
 		A6121034484CFC8C4251811E /* Pods-YesterdayNewsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YesterdayNewsTests.debug.xcconfig"; path = "Target Support Files/Pods-YesterdayNewsTests/Pods-YesterdayNewsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C40C061FF41A21E77B65E621 /* Pods-YesterdayNewsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YesterdayNewsTests.release.xcconfig"; path = "Target Support Files/Pods-YesterdayNewsTests/Pods-YesterdayNewsTests.release.xcconfig"; sourceTree = "<group>"; };
 		D2278CB1DAE72FEFB9926061 /* Pods-YesterdayNewsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YesterdayNewsUITests.debug.xcconfig"; path = "Target Support Files/Pods-YesterdayNewsUITests/Pods-YesterdayNewsUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -281,6 +284,8 @@
 			children = (
 				518171FA2297796C003DB421 /* ContentViewController.h */,
 				518171F82297795A003DB421 /* ContentViewController.m */,
+				A0E50E6D2297DA2900268D7E /* CommentCell.h */,
+				A0E50E6E2297DA3500268D7E /* CommentCell.m */,
 			);
 			path = ContentViewController;
 			sourceTree = "<group>";
@@ -735,6 +740,7 @@
 				24ED0A2B227B602E00F9814A /* ListViewController.m in Sources */,
 				51B51D3F22829960007AA44B /* MultiImagesNews.m in Sources */,
 				24ED0A28227B602E00F9814A /* UserInfoViewController.m in Sources */,
+				A0E50E6F2297DA3500268D7E /* CommentCell.m in Sources */,
 				51B51D302281D7CA007AA44B /* News.m in Sources */,
 				5144FAEC226C31AD00101E22 /* HotspotViewController.m in Sources */,
 				518171F92297795A003DB421 /* ContentViewController.m in Sources */,
