@@ -48,7 +48,7 @@
     [self loadSubView];
     // 调整位置
     [self fitLocation];
-
+    
 }
 
 - (void)loadSubView{
@@ -134,4 +134,5 @@
 
 
 @end
+
 
