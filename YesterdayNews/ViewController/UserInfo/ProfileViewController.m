@@ -63,7 +63,7 @@
         self.userHeadImg.image = cachedImg;
     }
     // set information
-    self.userNameLabel.text = @"BurningFish";
+    self.userNameLabel.text = @"UserName";
     self.userSignLabel.text = @"Suprise mother fucker";
     self.followingNumLabel.text = @"10";
     self.follersNumLabel.text = @"66";
