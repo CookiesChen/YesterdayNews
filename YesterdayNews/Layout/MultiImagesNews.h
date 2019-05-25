@@ -6,9 +6,12 @@
 //  Copyright © 2019 Cookieschen. All rights reserved.
 //
 
-#include <UIKit/UIKit.h>
+#import <UIKit/UIKit.h>
+#import "../Model/News.h"
 
 @interface MultiImagesNews : UIView
+
+- (instancetype)initWithFrame:(CGRect)frame andNews:(News *)news;
 
 @end
 

@@ -9,9 +9,12 @@
 #ifndef SingleImageNews_h
 #define SingleImageNews_h
 
-#include <UIKit/UIKit.h>
+#import <UIKit/UIKit.h>
+#import "../Model/News.h"
 
 @interface SingleImageNews : UIView
+
+- (instancetype)initWithFrame:(CGRect)frame andNews:(News *)news;
 
 @end
 

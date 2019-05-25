@@ -10,6 +10,7 @@
 
 #import "../Utils/TimeUtils/TimeUtils.h"
 #import "SingleImageNews.h"
+#import "../Model/User/User.h"
 #import <Colours.h>
 #import <ReactiveObjC.h>
 #import <YBImageBrowser.h>
@@ -26,6 +27,7 @@ YBImageBrowserDataSource>
     NSString *identifier;
 }
 
+@property(nonatomic, strong) News *news;
 @property(nonatomic, strong) UILabel *title;
 @property(nonatomic, strong) UICollectionView *collectionView;
 @property(nonatomic, strong) UILabel *author;
@@ -38,7 +40,8 @@ YBImageBrowserDataSource>
 
 @implementation SingleImageNews
 
-- (instancetype)initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame andNews:(News *)news{
+    self.news = news;
     self = [super initWithFrame: frame];
     if(self){
         margin = 10;
@@ -78,31 +81,31 @@ YBImageBrowserDataSource>
 
 # pragma YBImageBrowserDataSource
 - (NSUInteger)yb_numberOfCellForImageBrowserView:(YBImageBrowserView *)imageBrowserView {
-    return self.dataArray.count;
+    return 1;
 }
 
 - (id<YBImageBrowserCellDataProtocol>)yb_imageBrowserView:(YBImageBrowserView *)imageBrowserView dataForCellAtIndex:(NSUInteger)index {
     YBImageBrowseCellData *data = [YBImageBrowseCellData new];
-    data.url = [NSURL URLWithString: [self.dataArray objectAtIndex:index]];
+    data.url = [NSURL URLWithString: [self.self.news.images objectAtIndex:index]];
     data.sourceObject = [self sourceObjAtIdx:index];
     return data;
 }
 
 # pragma UICollectionViewDataDelegate
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.dataArray.count;
+    return self.news.images.count;
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     ImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
-    cell.data = self.dataArray[indexPath.row];
+    cell.data = self.self.news.images[indexPath.row];
     return cell;
 }
 
 # pragma UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     NSMutableArray *browserDataArr = [NSMutableArray array];
-    [self.dataArray enumerateObjectsUsingBlock:^(NSString *_Nonnull urlStr, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.self.news.images enumerateObjectsUsingBlock:^(NSString *_Nonnull urlStr, NSUInteger idx, BOOL * _Nonnull stop) {
         YBImageBrowseCellData *data = [YBImageBrowseCellData new];
         data.url = [NSURL URLWithString:urlStr];
         [browserDataArr addObject:data];
@@ -124,7 +127,7 @@ YBImageBrowserDataSource>
 - (UILabel *)title {
     if(_time == nil) {
         _title = [[UILabel alloc] initWithFrame:CGRectMake(margin, marginTop, (WIDTH-2*margin)*2/3, 20)];
-        [_title setText: @"2017年会计专业就业前景如何？内资企业和外资企业，怎么选？"];
+        [_title setText: self.news.title];
         [_title setFont: [UIFont systemFontOfSize: 20]];
         [_title setLineBreakMode: NSLineBreakByTruncatingTail];
         [_title setNumberOfLines: 3];
@@ -136,7 +139,7 @@ YBImageBrowserDataSource>
 - (UILabel *)author {
     if(_author == nil){
         _author = [[UILabel alloc] initWithFrame:CGRectMake(margin, marginTop, WIDTH, 25)];
-        [_author setText: @"泡脚凤爪俱乐部"];
+        [_author setText: self.news.author];
         [_author setFont: [UIFont systemFontOfSize: 15]];
         [_author setTextColor: [UIColor black25PercentColor]];
         [_author sizeToFit];
@@ -148,7 +151,7 @@ YBImageBrowserDataSource>
     if(_comment == nil){
         _comment = [[UILabel alloc] initWithFrame:CGRectMake(margin, marginTop, WIDTH, 25)];
         _comment = [[UILabel alloc] initWithFrame:CGRectMake(margin+self.author.frame.size.width+10, marginTop, WIDTH, 25)];
-        [_comment setText: @"58评论"];
+        [_comment setText: [self.news.comments stringByAppendingString:@"评论"]];
         [_comment setFont: [UIFont systemFontOfSize: 15]];
         [_comment setTextColor: [UIColor black25PercentColor]];
         [_comment sizeToFit];
@@ -159,7 +162,7 @@ YBImageBrowserDataSource>
 - (UILabel *)time {
     if(_time == nil){
         _time = [[UILabel alloc] initWithFrame:CGRectMake(WIDTH-margin, marginTop, WIDTH, 25)];
-        [_time setText: [TimeUtils getTimeDifference:[NSDate dateWithTimeIntervalSinceNow: -3*60*60]]];
+        [_time setText: [TimeUtils getTimeDifference:self.news.time]];
         [_time setFont: [UIFont systemFontOfSize: 15]];
         [_time setTextColor: [UIColor black25PercentColor]];
         [_time sizeToFit];

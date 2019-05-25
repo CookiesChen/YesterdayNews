@@ -18,7 +18,7 @@ typedef enum : NSUInteger {
 @property NSString *title;
 @property NSString *author;
 @property NSDate *time;
-@property NSMutableArray *comments;
+@property NSString *comments;
 @property NSMutableArray *images;
 @property(nonatomic, assign) NewsTag tag;
 

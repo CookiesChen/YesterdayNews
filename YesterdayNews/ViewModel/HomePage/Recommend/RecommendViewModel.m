@@ -8,6 +8,7 @@
 
 #import "RecommendViewModel.h"
 #import "../../../Model/News.h"
+#import <AFNetworking.h>
 
 @interface RecommendViewModel()
 
@@ -27,11 +28,52 @@
     self.success = [RACSubject subject];
     self.fail = [RACSubject subject];
     self.news = [[NSMutableArray alloc] init];
-    for(int i = 0; i < 8; i++) {
-        News *news = [[News alloc] init];
-        news.tag = random()%2;
-        [self.news addObject:news];
-    }
+}
+
+- (void)refreshData {
+    NSString *url = @"http://localhost:3000/news/list/offset=0&&count=10";
+    AFHTTPSessionManager *manage = [AFHTTPSessionManager manager];
+    // 设置请求体为JSON
+    manage.requestSerializer = [AFJSONRequestSerializer serializer];
+    // 设置响应体为JSON
+    manage.responseSerializer = [AFJSONResponseSerializer serializer];
+    [manage GET:url parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSMutableArray *result = [[NSMutableArray alloc] init];
+        NSArray *newData = responseObject[@"data"];
+        for(int i = 0; i < [newData count]; i++){
+            News *news = [[News alloc] init];
+            [news setTitle: newData[i][@"title"]];
+            [news setAuthor: newData[i][@"author"]];
+            [news setComments: [[NSString alloc] initWithFormat:@"%@", newData[i][@"comments"]]];
+            NSTimeInterval interval = [newData[i][@"time"] longLongValue];
+            [news setTime: [NSDate dateWithTimeIntervalSince1970: interval]];
+            //NSArray *imgs = newData[i][@"image_infos"];
+            NSData *jsonString = [newData[i][@"image_infos"] dataUsingEncoding:NSUTF8StringEncoding];
+            NSArray *dic = [NSJSONSerialization JSONObjectWithData:jsonString
+                                                                options:NSJSONReadingMutableContainers
+                                                                  error:nil];
+            news.images = [[NSMutableArray alloc] init];
+            for(int j = 0; j < [dic count]; j++){
+                NSString *prefix = dic[j][@"url_prefix"];
+                NSString *url = dic[j][@"web_uri"];
+                [ news.images addObject: [prefix stringByAppendingString:url]];
+            }
+            if([news.images count] >= 3){
+                news.tag = random()%2;
+            } else {
+                news.tag = 1;
+            }
+            [result addObject: news];
+        }
+        [result addObjectsFromArray: self.news];
+        self.news = result;
+        [self.success sendNext:@"success"];
+        NSLog(@"[get news] success");
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"[get news] fail");
+    }];
 }
 
 - (void)refresh {

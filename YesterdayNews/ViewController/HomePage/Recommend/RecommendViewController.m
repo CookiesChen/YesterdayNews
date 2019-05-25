@@ -66,7 +66,7 @@
         //切换回主线程更新UI
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             [self.refreshControl endRefreshing];
-            // reload Data
+            [self.content reloadData];
         }];
     }];
     
@@ -78,6 +78,8 @@
             // catch error
         }];
     }];
+    
+    [self.ViewModel refreshData];
 }
 
 // 初始化
@@ -142,11 +144,11 @@
         switch (tag) {
             case 0:
                 // 多图
-                [cell addSubview: [[MultiImagesNews alloc] initWithFrame: CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height)]];
+                [cell addSubview: [[MultiImagesNews alloc] initWithFrame: CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height) andNews:self.ViewModel.news[indexPath.row]]];
                 break;
             case 1:
                 // 单图
-                [cell addSubview: [[SingleImageNews alloc] initWithFrame: CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height)]];
+                [cell addSubview: [[SingleImageNews alloc] initWithFrame: CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height) andNews:self.ViewModel.news[indexPath.row]]];
                 break;
             default:
                 // 默认多图
