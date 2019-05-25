@@ -18,6 +18,7 @@
 @property(nonatomic, strong) UIView *separator_line1;
 @property(nonatomic, strong) UIView *button_group;
 @property(nonatomic, strong) UIView *separator_line2;
+@property(nonatomic, strong) UIView *red_line;  // 颜色指示器
 @property(nonatomic, strong) NSArray<NSString *> *titleArr;
 
 @property(nonatomic, strong) ListViewController *collectionVC;
@@ -61,6 +62,7 @@
     [self addButtons];
     [self.view addSubview: self.pageVC.view];
     [self addChildViewController: self.pageVC];
+    [self.button_group addSubview:self.red_line];
 }
 
 // viewmodel绑定
@@ -82,12 +84,18 @@
     for (int i = 0; i < self.titleArr.count; i++) {
         UIButton *btn = (UIButton *)[self.view viewWithTag:BUTTON_TAG + i];
         [btn setSelected:NO];
-        btn.subviews[1].hidden = YES;
     }
     
     UIButton *btn = (UIButton *)[self.view viewWithTag:BUTTON_TAG + self.current_index];
     [btn setSelected:YES];
-    btn.subviews[1].hidden = NO;
+    CGRect frame = CGRectMake(btn.frame.origin.x + 20, btn.frame.origin.y + 32, btn.frame.size.width - 40, 2);
+    [self moveRedLine:frame];
+}
+
+- (void)moveRedLine:(CGRect)frame {
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.red_line setFrame:frame];
+    }];
 }
 
 - (void) changeToCurrentIndexPage:(NSInteger) direction {
@@ -135,11 +143,10 @@
                 //UIButton *btn = (UIButton *)[[sender superview]viewWithTag:BUTTON_TAG + i];
                 UIButton *btn = (UIButton *)[self.view viewWithTag:BUTTON_TAG + i];
                 [btn setSelected:NO];
-                btn.subviews[1].hidden = YES;
             }
-            //UIButton *button = (UIButton *)sender;
             [x setSelected:YES];
-            x.subviews[1].hidden = NO;
+            CGRect frame = CGRectMake(x.frame.origin.x + 20, x.frame.origin.y + 32, x.frame.size.width - 40, 2);
+            [self moveRedLine:frame];
             
             // pageViewController
             NSInteger index = x.tag - BUTTON_TAG;
@@ -161,10 +168,12 @@
         
         [self.button_group addSubview:btn];
         
+        /*
         UIView *line = [[UIView alloc] initWithFrame:CGRectMake(20, 32, btnWidth - 40, 2)];
         line.backgroundColor = [UIColor redColor];
         line.hidden = YES;
         [btn addSubview:line];
+         */
     }
 }
 
@@ -211,6 +220,15 @@
         [_separator_line2 setBackgroundColor:[UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0]];
     }
     return _separator_line2;
+}
+
+- (UIView *)red_line {
+    int btnWidth = self.view.frame.size.width / self.titleArr.count;
+    if(_red_line == nil){
+        _red_line = [[UIView alloc] initWithFrame:CGRectMake(20, 37, btnWidth - 40, 2)];
+        [_red_line setBackgroundColor:[UIColor redColor]];
+    }
+    return _red_line;
 }
 
 

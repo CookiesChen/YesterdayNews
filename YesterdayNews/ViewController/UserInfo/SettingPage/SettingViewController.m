@@ -7,13 +7,19 @@
 //
 
 #import "SettingViewController.h"
+#import "SubSettingViewController/EditInformationViewController.h"
+#import "SubSettingViewController/PrivateSettingViewController.h"
 
 typedef enum ItemType {
-    NAVIGATE,           // 点击跳转
-    BUTTON,             // 开关按钮
-    TEXT,               // 右侧文字
-    NORMAL,             // 啥也没有
-    LOGOUT              // 退出登录
+    Edit,
+    Private,
+    Notification,
+    NightMode,
+    ClearCache,
+    TextSize,
+    Advert,
+    About,
+    Logout,
 } ItemType;
 
 typedef struct SettingItem {
@@ -43,23 +49,23 @@ typedef struct SettingItem {
 
 - (void)initData {
     //self.tableItems = [@[@[@"编辑资料",@"账号和隐私设置"], @[@"夜间模式", @"清理缓存", @"字体大小", @"推送通知"], @[@"广告设置"], @[@"关于"], @[@"退出登录"]] mutableCopy];
-    SettingItem i0 = {@"编辑资料", NAVIGATE};
+    SettingItem i0 = {@"编辑资料", Edit};
     NSValue *v0 = [NSValue valueWithBytes:&i0 objCType:@encode(struct SettingItem)];
-    SettingItem i1 = {@"账号和隐私设置", NAVIGATE};
+    SettingItem i1 = {@"账号和隐私设置", Private};
     NSValue *v1 = [NSValue valueWithBytes:&i1 objCType:@encode(struct SettingItem)];
-    SettingItem i2 = {@"夜间模式", BUTTON};
+    SettingItem i2 = {@"夜间模式", NightMode};
     NSValue *v2 = [NSValue valueWithBytes:&i2 objCType:@encode(struct SettingItem)];
-    SettingItem i3 = {@"清理缓存", TEXT};
+    SettingItem i3 = {@"清理缓存", ClearCache};
     NSValue *v3 = [NSValue valueWithBytes:&i3 objCType:@encode(struct SettingItem)];
-    SettingItem i4 = {@"字体大小", TEXT};
+    SettingItem i4 = {@"字体大小", TextSize};
     NSValue *v4 = [NSValue valueWithBytes:&i4 objCType:@encode(struct SettingItem)];
-    SettingItem i5 = {@"推送通知", BUTTON};
+    SettingItem i5 = {@"推送通知", Notification};
     NSValue *v5 = [NSValue valueWithBytes:&i5 objCType:@encode(struct SettingItem)];
-    SettingItem i6 = {@"广告设置", NAVIGATE};
+    SettingItem i6 = {@"广告设置", Advert};
     NSValue *v6 = [NSValue valueWithBytes:&i6 objCType:@encode(struct SettingItem)];
-    SettingItem i7 = {@"关于", NAVIGATE};
+    SettingItem i7 = {@"关于", About};
     NSValue *v7 = [NSValue valueWithBytes:&i7 objCType:@encode(struct SettingItem)];
-    SettingItem i8 = {@"退出登录", LOGOUT};
+    SettingItem i8 = {@"退出登录", Logout};
     NSValue *v8 = [NSValue valueWithBytes:&i8 objCType:@encode(struct SettingItem)];
     self.tableItems = [@[@[v0, v1], @[v2, v3, v4, v5], @[v6], @[v7], @[v8]] mutableCopy];
 }
@@ -76,6 +82,10 @@ typedef struct SettingItem {
         _tableView.dataSource = self;
     }
     return _tableView;
+}
+
+- (void)userLogout {
+    
 }
 
 #pragma mark UITableViewDataSource
@@ -98,16 +108,19 @@ typedef struct SettingItem {
     
     if (nil == cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellID];
-        if(item.type == BUTTON) {
+        if(item.type == NightMode || item.type == Notification) {
             UISwitch *switchview = [[UISwitch alloc] initWithFrame:CGRectZero];
             [switchview addTarget:self action:@selector(updateSwitch:) forControlEvents:UIControlEventValueChanged];
             cell.accessoryView = switchview;
             //[switchview release];
         }
-        else if(item.type == NAVIGATE) {
+        else if(item.type == Edit || item.type == Private || item.type == Advert || item.type == About) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
-        else if(item.type == LOGOUT) {
+        else if(item.type == TextSize || item.type == ClearCache) {
+            cell.detailTextLabel.text = @"test";
+        }
+        else if(item.type == Logout) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
             cell.textLabel.textColor = [UIColor redColor];
             cell.textLabel.textAlignment = NSTextAlignmentCenter;
@@ -127,8 +140,23 @@ typedef struct SettingItem {
 #pragma mark UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // TODO: fuck
-    
+    NSMutableArray *items = self.tableItems[indexPath.section];
+    NSValue *value = items[indexPath.row];
+    SettingItem item;
+    [value getValue:&item];
+    if(item.type == Edit) {
+        EditInformationViewController *controller = [[EditInformationViewController alloc] init];
+        controller.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+    else if(item.type == Private) {
+        PrivateSettingViewController *controller = [[PrivateSettingViewController alloc] init];
+        controller.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+    else if(item.type == Logout) {
+        [self userLogout];
+    }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
@@ -137,7 +165,7 @@ typedef struct SettingItem {
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 20;
+    return 15;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
