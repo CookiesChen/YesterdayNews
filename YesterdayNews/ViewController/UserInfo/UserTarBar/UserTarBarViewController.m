@@ -38,9 +38,10 @@
     
 }
 
-- (instancetype)init {
+- (instancetype)initWithViewModel: (UserInfoViewModel*)viewModel {
     self = [super init];
     if(self){
+        self.viewModel = viewModel;
         [self initialize];
     }
     return self;
@@ -67,11 +68,11 @@
 
 // viewmodel绑定
 - (void)bindViewModel {
-    /*
-    [RACObserve(self, current_index) subscribeNext:^(NSNumber*  _Nullable x) {
-        [self.pageVC setIndex: [x integerValue]];
-    }];
-    */
+    [self.viewModel loadCommentNews];
+    [self.viewModel loadCollectionNews];
+    [self.viewModel loadLikeNews];
+    [self.viewModel loadHistoryNews];
+    [self.viewModel loadRecommendNews];
 }
 
 - (void)setCurrentPage:(NSInteger) index {
@@ -167,13 +168,6 @@
         }];
         
         [self.button_group addSubview:btn];
-        
-        /*
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(20, 32, btnWidth - 40, 2)];
-        line.backgroundColor = [UIColor redColor];
-        line.hidden = YES;
-        [btn addSubview:line];
-         */
     }
 }
 
@@ -191,13 +185,9 @@
 
 - (UIButton *)back_button {
     if(_back_button == nil) {
-        _back_button = [[UIButton alloc] initWithFrame:CGRectMake(50, 50, 30, 30)];
-        [_back_button setTitle:@"<" forState:UIControlStateNormal];
-        _back_button.titleLabel.font = [UIFont systemFontOfSize:20];
-        NSMutableAttributedString *str0 = [[NSMutableAttributedString alloc] initWithString:_back_button.titleLabel.text];
-        [str0 addAttribute:(NSString*)NSForegroundColorAttributeName value:[UIColor blackColor] range:[_back_button.titleLabel.text rangeOfString:((UIButton *)_back_button).titleLabel.text]];
-        [_back_button setAttributedTitle:str0 forState:UIControlStateNormal];
+        _back_button = [[UIButton alloc] initWithFrame:CGRectMake(30, 50, 20, 20)];
         _back_button.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
+        [_back_button setBackgroundImage:[UIImage imageNamed:@"button_back"] forState:normal];
         [[_back_button rac_signalForControlEvents: UIControlEventTouchUpInside] subscribeNext:^(UIButton *x) {
             [self.navigationController popViewControllerAnimated:YES];
         }];
@@ -279,40 +269,50 @@
 
 - (ListViewController *)collectionVC {
     if(_collectionVC == nil){
-        _collectionVC = [[ListViewController alloc] init];
+        _collectionVC = [[ListViewController alloc] initWithFrame];
         _collectionVC.pageTitle = @"收藏";
+        _collectionVC.viewModel = self.viewModel;
+        _collectionVC.newsList = self.viewModel.collectionNews;
     }
     return _collectionVC;
 }
 
 - (ListViewController *)commentVC {
     if(_commentVC == nil){
-        _commentVC = [[ListViewController alloc] init];
+        _commentVC = [[ListViewController alloc] initWithFrame];
         _commentVC.pageTitle = @"评论";
+        _commentVC.viewModel = self.viewModel;
+        _commentVC.newsList = self.viewModel.commentNews;
     }
     return _commentVC;
 }
 
 - (ListViewController *)likeVC {
     if(_likeVC == nil){
-        _likeVC = [[ListViewController alloc] init];
+        _likeVC = [[ListViewController alloc] initWithFrame];
         _likeVC.pageTitle = @"点赞";
+        _likeVC.viewModel = self.viewModel;
+        _likeVC.newsList = self.viewModel.likeNews;
     }
     return _likeVC;
 }
 
 - (ListViewController *)historyVC {
     if(_historyVC == nil){
-        _historyVC = [[ListViewController alloc] init];
+        _historyVC = [[ListViewController alloc] initWithFrame];
         _historyVC.pageTitle = @"历史";
+        _historyVC.viewModel = self.viewModel;
+        _historyVC.newsList = self.viewModel.historyNews;
     }
     return _historyVC;
 }
 
 - (ListViewController *)recommendVC {
     if(_recommendVC == nil){
-        _recommendVC = [[ListViewController alloc] init];
+        _recommendVC = [[ListViewController alloc] initWithFrame];
         _recommendVC.pageTitle = @"推送";
+        _recommendVC.viewModel = self.viewModel;
+        _recommendVC.newsList = self.viewModel.recommendNews;
     }
     return _recommendVC;
 }

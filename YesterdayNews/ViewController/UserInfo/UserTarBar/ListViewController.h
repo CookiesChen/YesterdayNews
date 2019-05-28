@@ -7,12 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "../../../ViewModel/UserInfo/UserInfoViewModel.h"
+#import "../../../Model/News.h"
+#import "NewsTableViewCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ListViewController : UIViewController
 
+@property (strong, nonatomic) UserInfoViewModel *viewModel;
+
 @property(nonatomic) NSString *pageTitle;
+@property(nonatomic, strong) NSMutableArray* newsList;
+
+- (instancetype)initWithFrame;
 
 @end
 

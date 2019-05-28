@@ -231,9 +231,10 @@
     btn.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
     
     [[btn rac_signalForControlEvents: UIControlEventTouchUpInside] subscribeNext:^(UIButton *x) {
-        UserTarBarViewController *controller = [[UserTarBarViewController alloc] init];
+        UserTarBarViewController *controller = [[UserTarBarViewController alloc] initWithViewModel:self.viewModel];
         [controller setCurrentPage:x.tag - ICON_TAG];
         controller.hidesBottomBarWhenPushed = YES;
+        //controller.viewModel = self.viewModel;
         [self.navigationController pushViewController:controller animated:YES];
     }];
     

@@ -85,10 +85,16 @@ typedef struct SettingItem {
 }
 
 - (void)userLogout {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确认退出" message:@"确认退出当前账号吗？" preferredStyle:UIAlertControllerStyleAlert];
+    _okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *_Nonnull action) {
+        [self.viewModel userLogout];
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
+    _cancelAction =[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     
-    [self.viewModel userLogout];
-    [self.navigationController popViewControllerAnimated:YES];
-    
+    [alert addAction:_okAction];
+    [alert addAction:_cancelAction];
+    [self presentViewController:alert animated:true completion:nil];
 }
 
 #pragma mark UITableViewDataSource

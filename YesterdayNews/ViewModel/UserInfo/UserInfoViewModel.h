@@ -13,9 +13,22 @@
 
 @property(nonatomic, strong) RACSubject *login;
 @property(nonatomic, strong) RACSubject *logout;
+@property(nonatomic, strong) RACSubject *reload;
 //@property(nonatomic, strong) User *currentUser;
+
+@property(nonatomic, strong) NSMutableArray* collectionNews;
+@property(nonatomic, strong) NSMutableArray* commentNews;
+@property(nonatomic, strong) NSMutableArray* likeNews;
+@property(nonatomic, strong) NSMutableArray* historyNews;
+@property(nonatomic, strong) NSMutableArray* recommendNews;
 
 - (void)userLogin;
 - (void)userLogout;
+- (void)loadCollectionNews;
+- (void)loadCommentNews;
+- (void)loadLikeNews;
+- (void)loadHistoryNews;
+- (void)loadRecommendNews;
+- (void)loadNewsTo: (NSMutableArray*)list withURL: (NSString*)url;
 
 @end
