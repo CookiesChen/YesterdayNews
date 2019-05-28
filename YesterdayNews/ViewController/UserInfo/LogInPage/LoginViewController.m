@@ -11,6 +11,7 @@
 #import "../../../Model/User/User.h"
 #import <Colours.h>
 #import <AFNetworking.h>
+#import "YBImageBrowserTipView.h"
 
 #define ZXColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
@@ -46,6 +47,12 @@
 - (void) LoginButtonClick:(id)sender {
     NSString *username = self.usernameInput.text;
     NSString *password = self.passwordInput.text;
+    
+    if([username isEqualToString:@""] || [password isEqualToString:@""]) {
+        [[UIApplication sharedApplication].keyWindow yb_showForkTipView:@"信息不完整"];
+        return;
+    }
+    
     NSString *url = @"http://localhost:3000/user/login";
     NSDictionary *parameters = @{@"username": username,
                                  @"password": password};
@@ -60,14 +67,12 @@
         User *user = [User getInstance];
         [user setUsername:username];
         NSLog(@"[login] success");
+        [[UIApplication sharedApplication].keyWindow yb_showHookTipView:[NSString stringWithFormat:@"欢迎回来, %@", username]];
         [((UserInfoViewController *)self.parentViewController).viewModel userLogin];
-        //[(UserInfoViewController *)self.parentViewController loginWithUser:user];
-        //[(UserInfoViewController *)self.parentViewController hideLoginPageAnimation];
-        //[(UserInfoViewController*)self.parentViewController showUserInfoAnimation];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         id response = [NSJSONSerialization JSONObjectWithData:error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] options:0 error:nil];
-        // TODO
         // 弹出提示框 用户名或密码错误
+        [[UIApplication sharedApplication].keyWindow yb_showForkTipView:@"用户名或密码错误"];
         NSLog(@"%@", response[@"message"]);
     }];
 }
