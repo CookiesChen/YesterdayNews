@@ -86,6 +86,9 @@ typedef struct SettingItem {
 
 - (void)userLogout {
     
+    [self.viewModel userLogout];
+    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 #pragma mark UITableViewDataSource

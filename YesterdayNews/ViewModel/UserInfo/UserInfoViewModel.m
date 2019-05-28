@@ -25,7 +25,18 @@
 
 - (void)initialize
 {
-    
+    self.login = [RACSubject subject];
+    self.logout = [RACSubject subject];
+}
+
+- (void)userLogin {
+    [self.login sendNext:@"success"];
+    NSLog(@"[user login] success");
+}
+
+- (void)userLogout {
+    [self.logout sendNext:@"success"];
+    NSLog(@"[user logout] success");
 }
 
 @end

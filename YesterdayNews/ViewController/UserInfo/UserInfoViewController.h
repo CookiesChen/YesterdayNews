@@ -8,12 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "../../Model/User/User.h"
+#import "../../ViewModel/UserInfo/UserInfoViewModel.h"
 
 @interface UserInfoViewController : UIViewController
+
+@property (strong, nonatomic) UserInfoViewModel *viewModel;
 
 - (void)hideLoginPageAnimation;
 - (void)showLoginPageAnimation;
 - (void)showUserInfoAnimation;
-- (void)loginWithUser:(User*) user;
+- (void)hideUserInfoAnimation;
+//- (void)loginWithUser:(User*) user;
 
 @end

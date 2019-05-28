@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "../../../ViewModel/UserInfo/UserInfoViewModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SettingViewController : UIViewController
+
+@property (strong, nonatomic) UserInfoViewModel *viewModel;
 
 @end
 

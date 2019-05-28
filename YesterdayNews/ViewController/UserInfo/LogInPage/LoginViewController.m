@@ -60,7 +60,8 @@
         User *user = [User getInstance];
         [user setUsername:username];
         NSLog(@"[login] success");
-        [(UserInfoViewController *)self.parentViewController loginWithUser:user];
+        [((UserInfoViewController *)self.parentViewController).viewModel userLogin];
+        //[(UserInfoViewController *)self.parentViewController loginWithUser:user];
         //[(UserInfoViewController *)self.parentViewController hideLoginPageAnimation];
         //[(UserInfoViewController*)self.parentViewController showUserInfoAnimation];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
