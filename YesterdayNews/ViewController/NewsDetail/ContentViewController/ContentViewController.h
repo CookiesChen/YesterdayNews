@@ -14,7 +14,7 @@
 @interface ContentViewController : UIViewController
 
 - (instancetype)initWithFrame:(CGRect)frame;
-
+@property(nonatomic, assign) CGFloat height;
 @end
 
 #endif /* ContentViewController_h */
