@@ -11,11 +11,13 @@
 
 @interface NewsCacheDB : NSObject
 
-+ (BOOL)addNewsWithID:(NSString *)newsID Title:(NSString *)title Author:(NSString *)author Time:(NSNumber *)time Comments:(NSInteger)comments Images:(NSString *)images;
++ (BOOL)addNewsWithID:(NSString *)newsID Title:(NSString *)title Author:(NSString *)author Time:(NSString *)time Comments:(int)comments Images:(NSString *)images;
 
 + (BOOL)clearCacheDB;
 
 + (NSMutableArray *)retrieveNewsWithOffset:(NSInteger)offset Count:(NSInteger)count;
+
++ (int)countCache;
 
 @end
 
