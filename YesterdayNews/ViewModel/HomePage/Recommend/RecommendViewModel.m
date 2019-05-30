@@ -9,6 +9,7 @@
 #import "RecommendViewModel.h"
 #import "../../../Model/News.h"
 #import <AFNetworking.h>
+#import "../../../Utils/NewsCacheUtils/NewsCache.h"
 
 @interface RecommendViewModel()
 
@@ -31,6 +32,11 @@
 }
 
 - (void)refreshData {
+
+// Sample code for invoking NewsCache
+//    NSMutableArray *result = [[NSMutableArray alloc] init];
+//    result = [NewsCache retrieveNewsWithOffset:0 Count:10];
+
     NSString *url = @"http://localhost:3000/news/list/offset=0&&count=10";
     AFHTTPSessionManager *manage = [AFHTTPSessionManager manager];
     // 设置请求体为JSON
@@ -38,7 +44,7 @@
     // 设置响应体为JSON
     manage.responseSerializer = [AFJSONResponseSerializer serializer];
     [manage GET:url parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
-        
+
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSMutableArray *result = [[NSMutableArray alloc] init];
         NSArray *newData = responseObject[@"data"];
