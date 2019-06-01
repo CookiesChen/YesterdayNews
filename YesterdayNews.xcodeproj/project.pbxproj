@@ -17,6 +17,7 @@
 		24ED0A832298329000F9814A /* EditInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED0A822298329000F9814A /* EditInformationViewController.m */; };
 		24ED0A86229832A600F9814A /* PrivateSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED0A85229832A600F9814A /* PrivateSettingViewController.m */; };
 		24ED0A89229D7CC900F9814A /* NewsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED0A88229D7CC900F9814A /* NewsTableViewCell.m */; };
+		24ED0A8C22A12C0400F9814A /* BottomBounceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED0A8B22A12C0400F9814A /* BottomBounceView.m */; };
 		24ED755E226DFB3F00894C0E /* fontello.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 24ED755D226DFB3F00894C0E /* fontello.ttf */; };
 		48683DE9C36519E3B3F73368 /* libPods-YesterdayNews.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E45E69A9B4FF88D7B55EC24E /* libPods-YesterdayNews.a */; };
 		5144FADA226B57FD00101E22 /* HomePageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5144FAD9226B57FD00101E22 /* HomePageViewModel.m */; };
@@ -92,6 +93,8 @@
 		24ED0A85229832A600F9814A /* PrivateSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrivateSettingViewController.m; sourceTree = "<group>"; };
 		24ED0A87229D7CC800F9814A /* NewsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewsTableViewCell.h; sourceTree = "<group>"; };
 		24ED0A88229D7CC900F9814A /* NewsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewsTableViewCell.m; sourceTree = "<group>"; };
+		24ED0A8A22A12C0400F9814A /* BottomBounceView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BottomBounceView.h; sourceTree = "<group>"; };
+		24ED0A8B22A12C0400F9814A /* BottomBounceView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BottomBounceView.m; sourceTree = "<group>"; };
 		24ED755D226DFB3F00894C0E /* fontello.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fontello.ttf; sourceTree = "<group>"; };
 		5144FAD6226B57C100101E22 /* HomePageViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePageViewModel.h; sourceTree = "<group>"; };
 		5144FAD7226B57CF00101E22 /* UserInfoViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoViewModel.h; sourceTree = "<group>"; };
@@ -365,6 +368,8 @@
 				51B51D3E22829960007AA44B /* MultiImagesNews.m */,
 				5180E9F7228997570093220B /* ImageCell.h */,
 				5180E9F8228997630093220B /* ImageCell.m */,
+				24ED0A8A22A12C0400F9814A /* BottomBounceView.h */,
+				24ED0A8B22A12C0400F9814A /* BottomBounceView.m */,
 			);
 			path = Layout;
 			sourceTree = "<group>";
@@ -808,6 +813,7 @@
 				24ED0A86229832A600F9814A /* PrivateSettingViewController.m in Sources */,
 				5180E9F9228997630093220B /* ImageCell.m in Sources */,
 				24ED0A2C227B602E00F9814A /* UserTarBarViewController.m in Sources */,
+				24ED0A8C22A12C0400F9814A /* BottomBounceView.m in Sources */,
 				51E0DD762282D602008F037D /* ViewController.m in Sources */,
 				24ED0A832298329000F9814A /* EditInformationViewController.m in Sources */,
 			);

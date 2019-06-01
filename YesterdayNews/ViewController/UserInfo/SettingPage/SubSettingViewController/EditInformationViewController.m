@@ -7,6 +7,7 @@
 //
 
 #import "EditInformationViewController.h"
+#import "../../../../Layout/BottomBounceView.h"
 
 @interface EditInformationViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -47,7 +48,13 @@
 }
 
 - (void)editUsername {
-    
+    BottomBounceView *bbv = [[BottomBounceView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    [bbv.ok addTarget:self action:@selector(changeUsername) forControlEvents:UIControlEventTouchUpInside];
+    [bbv showInView:self.view];
+}
+
+- (void)changeUsername {
+   
 }
 
 - (void)editDiscription {
