@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "CommentCell.h"
 #import <Colours.h>
+#import "../../../Utils/TimeUtils/TimeUtils.h"
+
 
 @interface CommentCell()
 {
@@ -34,15 +36,13 @@
 }
 
 - (void)initialize{
+    // 初始化
     user_icon_width = 48;
     user_icon_height = 48;
     thumb_up_icon_height = 20;
     thumb_up_icon_width = 20;
     space = 5;
-}
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
+    
     // 设置背景色
     [self setBackgroundColor:[UIColor whiteColor]];
     // 添加子view
@@ -50,13 +50,21 @@
     // 调整位置
     [self fitLocation];
     
-    CGRect cell_frame = self.frame;
-    cell_frame.size.height = self.comment_content.frame.origin.y + self.comment_content.frame.size.height;
-    [self setFrame:cell_frame];
-    NSLog(@"cell_frame(in): %@", NSStringFromCGRect(self.frame));
+//    CGRect cell_frame = self.frame;
+//    cell_frame.size.height = self.comment_content.frame.origin.y + self.comment_content.frame.size.height;
+//    [self setFrame:cell_frame];
+//    NSLog(@"cell_frame(in): %@", NSStringFromCGRect(self.frame));
 }
 
-- (void)loadSubView{
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    NSLog(@"layoutSubViews:CommentCell");
+    [self updateViewByComment: self.comment];
+}
+
+
+- (void)loadSubView
+{
     [self addSubview: self.imageView];
     [self addSubview: self.user_icon];
     [self addSubview: self.user_name];
@@ -65,7 +73,10 @@
     [self addSubview: self.comment_content];
 }
 
-- (void)fitLocation {
+- (void)fitLocation
+{
+    [self.user_name sizeToFit];
+    [self.thumb_up_count sizeToFit];
     [self.user_icon setCenter:CGPointMake(user_icon_width/2, user_icon_height/2)];
     [self.user_name setCenter:CGPointMake(user_icon_width + space + self.user_name.frame.size.width/2, self.user_name.frame.size.height/2)];
     [self.thumb_up_count setCenter:CGPointMake(self.frame.size.width - self.thumb_up_count.frame.size.width/2, self.thumb_up_count.frame.size.height/2)];
@@ -85,7 +96,7 @@
 - (UILabel *)user_name {
     if(_user_name == nil) {
         _user_name = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 0)];
-        [_user_name setText:@"中大小邋遢"];
+        [_user_name setText:@"匿名用户"];
         [_user_name setTextColor:[UIColor pastelBlueColor]];
         [_comment_content setFont: [UIFont systemFontOfSize: 18]];
         [_comment_content setLineBreakMode: NSLineBreakByTruncatingTail];
@@ -106,7 +117,7 @@
 - (UILabel *)thumb_up_count {
     if(_thumb_up_count == nil) {
         _thumb_up_count = [[UILabel alloc] initWithFrame:CGRectZero];
-        [_thumb_up_count setText:@"58"];
+        [_thumb_up_count setText:@"点赞数"];
         [_thumb_up_count sizeToFit];
     }
     return _thumb_up_count;
@@ -115,7 +126,7 @@
 - (UILabel *)comment_content {
     if(_comment_content == nil) {
         _comment_content = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 0)];
-        [_comment_content setText:@"去年有资格和勇士较量胜负的唯一球队，火箭。今年到目前为止最接近能打败勇士的还是火箭。去年有资格和勇士较量胜负的唯一球队，火箭。今年到目前为止最接近能打败勇士的还是火箭。去年有资格和勇士较量胜负的唯一球队，火箭。今年到目前为止最接近能打败勇士的还是火箭。"];
+        [_comment_content setText:@"这里是评论内容"];
         [_comment_content setFont: [UIFont systemFontOfSize: 20]];
         [_comment_content setLineBreakMode: NSLineBreakByTruncatingTail];
         [_comment_content setNumberOfLines: 0];
@@ -135,8 +146,17 @@
     return _imageView;
 }
 
-
-
+- (void)updateViewByComment: (Comment *)comment
+{
+    [self setComment: comment];
+    [self.user_name setText: self.comment.UserName];
+    [self.user_name sizeToFit];
+    [self.user_icon setImage: [UIImage imageNamed: self.comment.UserIcon]];
+    [self.thumb_up_count setText: self.comment.ThumbUpCount];
+    [self.comment_content setText: self.comment.CommentContent];
+    [self.comment_time setText: [TimeUtils getTimeDifference:self.comment.CommentTime]];
+    [self fitLocation];
+}
 
 @end
 

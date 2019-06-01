@@ -229,6 +229,8 @@
     return _testView;
 }
 
+# pragma mark -UICollectionViewDataSource
+
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     UICollectionViewCell * cell  = [collectionView dequeueReusableCellWithReuseIdentifier:self.identifier forIndexPath:indexPath];
     [cell setBackgroundColor:[UIColor whiteColor]];
@@ -247,8 +249,9 @@
             [cell addSubview:self.webView];
             break;
         case 3:
-            
             [cell addSubview:[[CommentCell alloc] initWithFrame:CGRectMake(margin, 0, cell.frame.size.width-2*margin, 0)]];
+            CommentCell* cell_view = cell.subviews[0];
+            cell_view.comment = self.commentsViewModel.comments[indexPath.item];
 //            CGRect cell_frame = cell.frame;
 //            cell_frame.size.height = [cell.subviews objectAtIndex:0].frame.size.height;
 //            [cell setFrame:cell_frame];
@@ -256,11 +259,12 @@
 //            [cell setFrame:CGRectMake(margin, 0, cell.frame.size.width-2*margin, 100)];
             break;
     }
+    
     return cell;
 }
 
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return section==3?10:1;
+    return section==3?self.commentsViewModel.comments.count:1;
 }
 
 // sections 数目
@@ -311,7 +315,13 @@
 
 // UICollectionView-item点击事件
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
     NSLog(@"[select item] %zd %zd", indexPath.section, indexPath.item);
+    Comment *selectComment = self.commentsViewModel.comments[indexPath.item];
+    selectComment.ThumbUpCount = @"59";
+    CommentCell *cellView = (CommentCell *)cell.subviews[0];
+//    cellView.comment = selectComment;
+    [cellView updateViewByComment: selectComment];
 }
 
 
