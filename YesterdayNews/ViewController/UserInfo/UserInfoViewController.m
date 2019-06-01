@@ -13,7 +13,6 @@
 #import "UserTarBar/UserTarBarViewController.h"
 #import "LogInPage/LoginViewController.h"
 #import "SignUpPage/SignupViewController.h"
-#import "../../ViewModel/UserInfo/UserInfoViewModel.h"
 #import "ProfileViewController.h"
 #import "SettingPage/SettingViewController.h"
 
@@ -62,7 +61,7 @@
 @property(nonatomic, strong) SignupViewController *signupVC;
 @property (strong, nonatomic) ProfileViewController *profileVC;
 
-@property (strong, nonatomic) UserInfoViewModel *viewModel;
+//@property (strong, nonatomic) UserInfoViewModel *viewModel;
 
 
 @end
@@ -133,20 +132,6 @@
         [self.part2 addSubview:icon];
     }
     
-    
-    // -------------------------------------------------black
-    /*
-    self.blackBlock = ({
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-        view.backgroundColor = [UIColor blackColor];
-        view.alpha = 0;
-        view;
-    });
-     */
-    //[self.view addSubview:self.blackBlock];
-    // ------------------------------------------------------------
-    
-    // -------------------------------------------------part 3
     self.part3 = ({
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 50, self.view.frame.size.width, self.view.frame.size.height-50)];
         view.backgroundColor = [UIColor whiteColor];
@@ -189,6 +174,27 @@
 
 - (void)bindViewModel {
     self.viewModel = [[UserInfoViewModel alloc] init];
+    
+    [self.viewModel.login subscribeNext:^(id  _Nullable x) {
+        User *user = [User getInstance];
+        // create vc
+        self.profileVC = [[ProfileViewController alloc] init];
+        [self addChildViewController:self.profileVC];
+        self.profileVC.view.frame = CGRectMake(0, 0, self.part1.frame.size.width, 320);
+        [self.part1 addSubview:self.profileVC.view];
+        [self.profileVC didMoveToParentViewController:self];
+        
+        self.profileVC.username = [user getUsername];
+        [self.profileVC setUIData];
+        
+        [self hideLoginPageAnimation];
+        [self showUserInfoAnimation];
+    }];
+    
+    [self.viewModel.logout subscribeNext:^(id  _Nullable x) {
+        // remove vc
+        [self hideUserInfoAnimation];
+    }];
 }
 
 #pragma UI setting
@@ -225,9 +231,10 @@
     btn.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
     
     [[btn rac_signalForControlEvents: UIControlEventTouchUpInside] subscribeNext:^(UIButton *x) {
-        UserTarBarViewController *controller = [[UserTarBarViewController alloc] init];
+        UserTarBarViewController *controller = [[UserTarBarViewController alloc] initWithViewModel:self.viewModel];
         [controller setCurrentPage:x.tag - ICON_TAG];
         controller.hidesBottomBarWhenPushed = YES;
+        //controller.viewModel = self.viewModel;
         [self.navigationController pushViewController:controller animated:YES];
     }];
     
@@ -253,22 +260,6 @@
     }
 }
 
-#pragma user login
-- (void)loginWithUser:(User*) user {
-    // create vc
-    self.profileVC = [[ProfileViewController alloc] init];
-    [self addChildViewController:self.profileVC];
-    self.profileVC.view.frame = CGRectMake(0, 0, self.part1.frame.size.width, 320);
-    [self.part1 addSubview:self.profileVC.view];
-    [self.profileVC didMoveToParentViewController:self];
-    
-    self.profileVC.username = [user getUsername];
-    [self.profileVC setUIData];
-    
-    [self hideLoginPageAnimation];
-    [self showUserInfoAnimation];
-}
-
 
 #pragma Animation
 - (void)showUserInfoAnimation {
@@ -278,7 +269,21 @@
         self.tableView.transform = CGAffineTransformTranslate(self.part1.transform, 0, 70);
         self.part2.transform = CGAffineTransformTranslate(self.part1.transform, 0, 70);
     } completion:^(BOOL finished) {
-        [self.loginButton removeFromSuperview];
+        //[self.loginButton removeFromSuperview];
+    }];
+}
+
+- (void)hideUserInfoAnimation {
+    //[self.view addSubview:self.loginButton];
+    [UIView animateWithDuration:1.0 animations:^{
+        self.part1.alpha = 0;
+        self.loginButton.alpha = 100;
+        self.tableView.transform = CGAffineTransformTranslate(self.part1.transform, 0, 0);
+        self.part2.transform = CGAffineTransformTranslate(self.part1.transform, 0, 0);
+    } completion:^(BOOL finished) {
+        [self.profileVC willMoveToParentViewController:nil];
+        [self.profileVC removeFromParentViewController];
+        [self.profileVC.view removeFromSuperview];
     }];
 }
 
@@ -367,8 +372,10 @@
     if(indexPath.section == 2 && indexPath.row == 1) {
         SettingViewController *controller = [[SettingViewController alloc] init];
         controller.hidesBottomBarWhenPushed = YES;
+        controller.viewModel = self.viewModel;
         [self.navigationController pushViewController:controller animated:YES];
     }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

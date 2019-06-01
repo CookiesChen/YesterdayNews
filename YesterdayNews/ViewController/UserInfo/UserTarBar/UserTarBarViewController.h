@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "../../../ViewModel/UserInfo/UserInfoViewModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UserTarBarViewController : UIViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
+
+@property (strong, nonatomic) UserInfoViewModel *viewModel;
 // page view controller
 @property(nonnull, nonatomic) UIPageViewController *pageVC;
 // 当前index
@@ -19,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) NSArray *pages;
 // 切换page, button, current_index
 - (void)setCurrentPage:(NSInteger) index;
+
+- (instancetype)initWithViewModel: (UserInfoViewModel*)viewModel;
 
 @end
 

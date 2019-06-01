@@ -18,6 +18,7 @@
 @property(nonatomic, strong) UIView *separator_line1;
 @property(nonatomic, strong) UIView *button_group;
 @property(nonatomic, strong) UIView *separator_line2;
+@property(nonatomic, strong) UIView *red_line;  // 颜色指示器
 @property(nonatomic, strong) NSArray<NSString *> *titleArr;
 
 @property(nonatomic, strong) ListViewController *collectionVC;
@@ -37,9 +38,10 @@
     
 }
 
-- (instancetype)init {
+- (instancetype)initWithViewModel: (UserInfoViewModel*)viewModel {
     self = [super init];
     if(self){
+        self.viewModel = viewModel;
         [self initialize];
     }
     return self;
@@ -61,15 +63,16 @@
     [self addButtons];
     [self.view addSubview: self.pageVC.view];
     [self addChildViewController: self.pageVC];
+    [self.button_group addSubview:self.red_line];
 }
 
 // viewmodel绑定
 - (void)bindViewModel {
-    /*
-    [RACObserve(self, current_index) subscribeNext:^(NSNumber*  _Nullable x) {
-        [self.pageVC setIndex: [x integerValue]];
-    }];
-    */
+    [self.viewModel loadCommentNews];
+    [self.viewModel loadCollectionNews];
+    [self.viewModel loadLikeNews];
+    [self.viewModel loadHistoryNews];
+    [self.viewModel loadRecommendNews];
 }
 
 - (void)setCurrentPage:(NSInteger) index {
@@ -82,12 +85,18 @@
     for (int i = 0; i < self.titleArr.count; i++) {
         UIButton *btn = (UIButton *)[self.view viewWithTag:BUTTON_TAG + i];
         [btn setSelected:NO];
-        btn.subviews[1].hidden = YES;
     }
     
     UIButton *btn = (UIButton *)[self.view viewWithTag:BUTTON_TAG + self.current_index];
     [btn setSelected:YES];
-    btn.subviews[1].hidden = NO;
+    CGRect frame = CGRectMake(btn.frame.origin.x + 20, btn.frame.origin.y + 32, btn.frame.size.width - 40, 2);
+    [self moveRedLine:frame];
+}
+
+- (void)moveRedLine:(CGRect)frame {
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.red_line setFrame:frame];
+    }];
 }
 
 - (void) changeToCurrentIndexPage:(NSInteger) direction {
@@ -135,11 +144,10 @@
                 //UIButton *btn = (UIButton *)[[sender superview]viewWithTag:BUTTON_TAG + i];
                 UIButton *btn = (UIButton *)[self.view viewWithTag:BUTTON_TAG + i];
                 [btn setSelected:NO];
-                btn.subviews[1].hidden = YES;
             }
-            //UIButton *button = (UIButton *)sender;
             [x setSelected:YES];
-            x.subviews[1].hidden = NO;
+            CGRect frame = CGRectMake(x.frame.origin.x + 20, x.frame.origin.y + 32, x.frame.size.width - 40, 2);
+            [self moveRedLine:frame];
             
             // pageViewController
             NSInteger index = x.tag - BUTTON_TAG;
@@ -160,11 +168,6 @@
         }];
         
         [self.button_group addSubview:btn];
-        
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(20, 32, btnWidth - 40, 2)];
-        line.backgroundColor = [UIColor redColor];
-        line.hidden = YES;
-        [btn addSubview:line];
     }
 }
 
@@ -182,13 +185,9 @@
 
 - (UIButton *)back_button {
     if(_back_button == nil) {
-        _back_button = [[UIButton alloc] initWithFrame:CGRectMake(50, 50, 30, 30)];
-        [_back_button setTitle:@"<" forState:UIControlStateNormal];
-        _back_button.titleLabel.font = [UIFont systemFontOfSize:20];
-        NSMutableAttributedString *str0 = [[NSMutableAttributedString alloc] initWithString:_back_button.titleLabel.text];
-        [str0 addAttribute:(NSString*)NSForegroundColorAttributeName value:[UIColor blackColor] range:[_back_button.titleLabel.text rangeOfString:((UIButton *)_back_button).titleLabel.text]];
-        [_back_button setAttributedTitle:str0 forState:UIControlStateNormal];
+        _back_button = [[UIButton alloc] initWithFrame:CGRectMake(30, 50, 20, 20)];
         _back_button.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
+        [_back_button setBackgroundImage:[UIImage imageNamed:@"button_back"] forState:normal];
         [[_back_button rac_signalForControlEvents: UIControlEventTouchUpInside] subscribeNext:^(UIButton *x) {
             [self.navigationController popViewControllerAnimated:YES];
         }];
@@ -211,6 +210,15 @@
         [_separator_line2 setBackgroundColor:[UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0]];
     }
     return _separator_line2;
+}
+
+- (UIView *)red_line {
+    int btnWidth = self.view.frame.size.width / self.titleArr.count;
+    if(_red_line == nil){
+        _red_line = [[UIView alloc] initWithFrame:CGRectMake(20, 37, btnWidth - 40, 2)];
+        [_red_line setBackgroundColor:[UIColor redColor]];
+    }
+    return _red_line;
 }
 
 
@@ -261,40 +269,50 @@
 
 - (ListViewController *)collectionVC {
     if(_collectionVC == nil){
-        _collectionVC = [[ListViewController alloc] init];
+        _collectionVC = [[ListViewController alloc] initWithFrame];
         _collectionVC.pageTitle = @"收藏";
+        _collectionVC.viewModel = self.viewModel;
+        _collectionVC.newsList = self.viewModel.collectionNews;
     }
     return _collectionVC;
 }
 
 - (ListViewController *)commentVC {
     if(_commentVC == nil){
-        _commentVC = [[ListViewController alloc] init];
+        _commentVC = [[ListViewController alloc] initWithFrame];
         _commentVC.pageTitle = @"评论";
+        _commentVC.viewModel = self.viewModel;
+        _commentVC.newsList = self.viewModel.commentNews;
     }
     return _commentVC;
 }
 
 - (ListViewController *)likeVC {
     if(_likeVC == nil){
-        _likeVC = [[ListViewController alloc] init];
+        _likeVC = [[ListViewController alloc] initWithFrame];
         _likeVC.pageTitle = @"点赞";
+        _likeVC.viewModel = self.viewModel;
+        _likeVC.newsList = self.viewModel.likeNews;
     }
     return _likeVC;
 }
 
 - (ListViewController *)historyVC {
     if(_historyVC == nil){
-        _historyVC = [[ListViewController alloc] init];
+        _historyVC = [[ListViewController alloc] initWithFrame];
         _historyVC.pageTitle = @"历史";
+        _historyVC.viewModel = self.viewModel;
+        _historyVC.newsList = self.viewModel.historyNews;
     }
     return _historyVC;
 }
 
 - (ListViewController *)recommendVC {
     if(_recommendVC == nil){
-        _recommendVC = [[ListViewController alloc] init];
+        _recommendVC = [[ListViewController alloc] initWithFrame];
         _recommendVC.pageTitle = @"推送";
+        _recommendVC.viewModel = self.viewModel;
+        _recommendVC.newsList = self.viewModel.recommendNews;
     }
     return _recommendVC;
 }

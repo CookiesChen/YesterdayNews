@@ -64,7 +64,7 @@
     }
     // set information
     self.userNameLabel.text = @"UserName";
-    self.userSignLabel.text = @"Suprise mother fucker";
+    self.userSignLabel.text = @"练习时长两年半的个人练习生";
     self.followingNumLabel.text = @"10";
     self.follersNumLabel.text = @"66";
     self.likesNumLabel.text = @"233";

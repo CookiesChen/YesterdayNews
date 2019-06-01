@@ -14,6 +14,10 @@
 		24ED0A2C227B602E00F9814A /* UserTarBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED0A26227B602E00F9814A /* UserTarBarViewController.m */; };
 		24ED0A7B229014F600F9814A /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED0A7A229014F600F9814A /* ProfileViewController.m */; };
 		24ED0A7F2296FE8A00F9814A /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED0A7E2296FE8A00F9814A /* SettingViewController.m */; };
+		24ED0A832298329000F9814A /* EditInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED0A822298329000F9814A /* EditInformationViewController.m */; };
+		24ED0A86229832A600F9814A /* PrivateSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED0A85229832A600F9814A /* PrivateSettingViewController.m */; };
+		24ED0A89229D7CC900F9814A /* NewsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED0A88229D7CC900F9814A /* NewsTableViewCell.m */; };
+		24ED0A8C22A12C0400F9814A /* BottomBounceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED0A8B22A12C0400F9814A /* BottomBounceView.m */; };
 		24ED755E226DFB3F00894C0E /* fontello.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 24ED755D226DFB3F00894C0E /* fontello.ttf */; };
 		48683DE9C36519E3B3F73368 /* libPods-YesterdayNews.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E45E69A9B4FF88D7B55EC24E /* libPods-YesterdayNews.a */; };
 		5144FADA226B57FD00101E22 /* HomePageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5144FAD9226B57FD00101E22 /* HomePageViewModel.m */; };
@@ -87,6 +91,14 @@
 		24ED0A7A229014F600F9814A /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		24ED0A7D2296FE8A00F9814A /* SettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		24ED0A7E2296FE8A00F9814A /* SettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		24ED0A812298329000F9814A /* EditInformationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditInformationViewController.h; sourceTree = "<group>"; };
+		24ED0A822298329000F9814A /* EditInformationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditInformationViewController.m; sourceTree = "<group>"; };
+		24ED0A84229832A600F9814A /* PrivateSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrivateSettingViewController.h; sourceTree = "<group>"; };
+		24ED0A85229832A600F9814A /* PrivateSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrivateSettingViewController.m; sourceTree = "<group>"; };
+		24ED0A87229D7CC800F9814A /* NewsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewsTableViewCell.h; sourceTree = "<group>"; };
+		24ED0A88229D7CC900F9814A /* NewsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewsTableViewCell.m; sourceTree = "<group>"; };
+		24ED0A8A22A12C0400F9814A /* BottomBounceView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BottomBounceView.h; sourceTree = "<group>"; };
+		24ED0A8B22A12C0400F9814A /* BottomBounceView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BottomBounceView.m; sourceTree = "<group>"; };
 		24ED755D226DFB3F00894C0E /* fontello.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fontello.ttf; sourceTree = "<group>"; };
 		5144FAD6226B57C100101E22 /* HomePageViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePageViewModel.h; sourceTree = "<group>"; };
 		5144FAD7226B57CF00101E22 /* UserInfoViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoViewModel.h; sourceTree = "<group>"; };
@@ -234,6 +246,8 @@
 				24ED0A26227B602E00F9814A /* UserTarBarViewController.m */,
 				24ED0A25227B602E00F9814A /* ListViewController.h */,
 				24ED0A23227B602E00F9814A /* ListViewController.m */,
+				24ED0A87229D7CC800F9814A /* NewsTableViewCell.h */,
+				24ED0A88229D7CC900F9814A /* NewsTableViewCell.m */,
 			);
 			path = UserTarBar;
 			sourceTree = "<group>";
@@ -241,10 +255,22 @@
 		24ED0A7C2296FDD400F9814A /* SettingPage */ = {
 			isa = PBXGroup;
 			children = (
+				24ED0A802298327100F9814A /* SubSettingViewController */,
 				24ED0A7D2296FE8A00F9814A /* SettingViewController.h */,
 				24ED0A7E2296FE8A00F9814A /* SettingViewController.m */,
 			);
 			path = SettingPage;
+			sourceTree = "<group>";
+		};
+		24ED0A802298327100F9814A /* SubSettingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				24ED0A812298329000F9814A /* EditInformationViewController.h */,
+				24ED0A822298329000F9814A /* EditInformationViewController.m */,
+				24ED0A84229832A600F9814A /* PrivateSettingViewController.h */,
+				24ED0A85229832A600F9814A /* PrivateSettingViewController.m */,
+			);
+			path = SubSettingViewController;
 			sourceTree = "<group>";
 		};
 		24ED755C226DFB3F00894C0E /* fonts */ = {
@@ -354,6 +380,8 @@
 				51B51D3E22829960007AA44B /* MultiImagesNews.m */,
 				5180E9F7228997570093220B /* ImageCell.h */,
 				5180E9F8228997630093220B /* ImageCell.m */,
+				24ED0A8A22A12C0400F9814A /* BottomBounceView.h */,
+				24ED0A8B22A12C0400F9814A /* BottomBounceView.m */,
 			);
 			path = Layout;
 			sourceTree = "<group>";
@@ -802,6 +830,7 @@
 				24ED0A7F2296FE8A00F9814A /* SettingViewController.m in Sources */,
 				24ED0A27227B602E00F9814A /* LoginViewController.m in Sources */,
 				51B51D29227F4273007AA44B /* HotspotViewController.m in Sources */,
+				24ED0A89229D7CC900F9814A /* NewsTableViewCell.m in Sources */,
 				51B51D452282B397007AA44B /* NewsDetailViewController.m in Sources */,
 				B55AE2D8229D379A00E7CD5F /* NewsCache.m in Sources */,
 				5144FADA226B57FD00101E22 /* HomePageViewModel.m in Sources */,
@@ -829,9 +858,12 @@
 				51C3AD3A226B0EE700EA3FD9 /* MainPageViewController.m in Sources */,
 				51C3AD12226B0D1B00EA3FD9 /* main.m in Sources */,
 				51C3AD04226B0D1600EA3FD9 /* AppDelegate.m in Sources */,
+				24ED0A86229832A600F9814A /* PrivateSettingViewController.m in Sources */,
 				5180E9F9228997630093220B /* ImageCell.m in Sources */,
 				24ED0A2C227B602E00F9814A /* UserTarBarViewController.m in Sources */,
+				24ED0A8C22A12C0400F9814A /* BottomBounceView.m in Sources */,
 				51E0DD762282D602008F037D /* ViewController.m in Sources */,
+				24ED0A832298329000F9814A /* EditInformationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

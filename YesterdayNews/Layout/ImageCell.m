@@ -30,6 +30,8 @@ static const CGFloat MAXPIXEL = 4096.0;
     [self setBackgroundColor:[UIColor whiteColor]];
     self.mainImageView = [[UIImageView alloc] init];
     [self.mainImageView setFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    self.mainImageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.mainImageView.clipsToBounds = YES;
     [self addSubview: self.mainImageView];
 }
 
