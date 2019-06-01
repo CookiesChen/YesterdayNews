@@ -24,6 +24,7 @@ YBImageBrowserDataSource>
 {
     NSInteger margin;
     CGFloat marginTop;
+    CGFloat padding;
     NSString *identifier;
 }
 
@@ -46,6 +47,7 @@ YBImageBrowserDataSource>
     if(self){
         margin = 10;
         marginTop = 10;
+        padding = 10;
         identifier = @"imageCell";
         self.dataArray = [[NSMutableArray alloc] initWithArray: @[@"http://p3-tt.bytecdn.cn/large/19f90001d3b34601fcce"]];
     }
@@ -67,12 +69,14 @@ YBImageBrowserDataSource>
     [super layoutSubviews];
     [self setBackgroundColor: [UIColor whiteColor]];
     
-    [self addSubview: self.title];
     
-    CGFloat padding = 10, cellLength = (WIDTH - padding - 2*margin) / 3;
-    [self.collectionView setFrame: CGRectMake(margin + self.title.frame.size.width + padding, marginTop, cellLength, cellLength*2/3)];
+    CGFloat cellLength = (WIDTH - padding - 2*margin) / 3;
+    
+    [self.collectionView setFrame: CGRectMake(WIDTH - margin - cellLength, marginTop, cellLength, cellLength*2/3)];
+    //[self.collectionView setFrame: CGRectMake(margin + self.title.frame.size.width + padding, marginTop, cellLength, cellLength*2/3)];
     [self addSubview: self.collectionView];
     
+    [self addSubview: self.title];
     marginTop += self.collectionView.frame.size.height + 10;
     [self addSubview: self.author];
     [self addSubview: self.comment];
@@ -126,7 +130,8 @@ YBImageBrowserDataSource>
 # pragma getter and setter
 - (UILabel *)title {
     if(_time == nil) {
-        _title = [[UILabel alloc] initWithFrame:CGRectMake(margin, marginTop, (WIDTH-2*margin)*2/3, 20)];
+        // _title = [[UILabel alloc] initWithFrame:CGRectMake(margin, marginTop, (WIDTH-2*margin)*2/3, 0)];
+        _title = [[UILabel alloc] initWithFrame:CGRectMake(margin, marginTop, WIDTH - 2*margin - self.collectionView.frame.size.width - padding, 0)];
         [_title setText: self.news.title];
         [_title setFont: [UIFont systemFontOfSize: 20]];
         [_title setLineBreakMode: NSLineBreakByTruncatingTail];
