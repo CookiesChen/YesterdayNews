@@ -71,6 +71,7 @@
     [self addSubview: self.thumb_up_icon];
     [self addSubview: self.thumb_up_count];
     [self addSubview: self.comment_content];
+    [self addSubview: self.comment_time];
 }
 
 - (void)fitLocation
@@ -83,6 +84,8 @@
     [self.thumb_up_icon setCenter:CGPointMake(self.thumb_up_count.frame.origin.x - self.thumb_up_count.frame.size.width/2 - space, self.thumb_up_icon.frame.size.height/2)];
     [self.comment_content setFrame:CGRectMake(self.user_icon.frame.size.width + space, self.thumb_up_icon.frame.size.height, self.frame.size.width - self.user_icon.frame.size.width - space, 0)];
     [self.comment_content sizeToFit];
+    [self.comment_time setFrame:CGRectMake(self.user_icon.frame.size.width + space, self.thumb_up_icon.frame.size.height + self.comment_content.frame.size.height + space, (self.frame.size.width - self.user_icon.frame.size.width) / 2, 0)];
+    [self.comment_time sizeToFit];
 }
 
 - (UIImageView *)user_icon {
@@ -144,6 +147,18 @@
         [_imageView setCenter:CGPointMake(leftMargin + image_width/2, self.frame.size.height/2)];
     }
     return _imageView;
+}
+
+- (UILabel *)comment_time {
+    if(_comment_time == nil) {
+        _comment_time = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 20)];
+        [_comment_time setText:@"评论时间"];
+        [_comment_time setFont:[UIFont systemFontOfSize: 15]];
+        [_comment_time setLineBreakMode: NSLineBreakByTruncatingTail];
+        [_comment_time setNumberOfLines: 0];
+        [_comment_time sizeToFit];
+    }
+    return _comment_time;
 }
 
 - (void)updateViewByComment: (Comment *)comment
