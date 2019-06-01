@@ -9,11 +9,11 @@
 #import "RecommendViewController.h"
 #import "../../../Utils/Notification/INotification.h"
 #import "../../../Utils/TimeUtils/TimeUtils.h"
-#import "../../../ViewModel/HomePage/Recommend/RecommendViewModel.h"
 #import "../../../Layout/MultiImagesNews.h"
 #import "../../../Model/News.h"
 #import "../../NewsDetail/NewsDetailViewController.h"
 #import "../../../Layout/SingleImageNews.h"
+#import "../../../Utils/ManagerUtils/ViewModelManager.h"
 #import <Colours.h>
 #import <ReactiveObjC.h>
 
@@ -53,7 +53,7 @@
 }
 
 - (void)bindViewModel {
-    self.ViewModel = [[RecommendViewModel alloc] init];
+    self.ViewModel = [[ViewModelManager getManager] getViewModel:@"RecommendViewModel"];
     
     // 刷新控制
     [[self.refreshControl rac_signalForControlEvents:UIControlEventValueChanged] subscribeNext:^(__kindof UIControl * _Nullable x) {
