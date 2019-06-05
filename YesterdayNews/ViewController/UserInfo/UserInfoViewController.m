@@ -15,6 +15,7 @@
 #import "SignUpPage/SignupViewController.h"
 #import "ProfileViewController.h"
 #import "SettingPage/SettingViewController.h"
+#import "../../Utils/ManagerUtils/ViewModelManager.h"
 
 #define ICON_SIZE 22
 #define ICON_LABEL_SIZE 12
@@ -43,7 +44,7 @@
 @property(nonatomic, strong) UILabel *follersNumLabel;
 @property(nonatomic, strong) UITableView *tableView;
 
-@property(nonatomic, strong) UIButton *loginButton;
+@property(nonatomic, strong) UIButton *toLoginButton;
 @property(nonatomic, strong) UIButton *loginButton2;
 @property(nonatomic, strong) UIButton *collecionIcon;
 @property(nonatomic, strong) UIButton *commentIcon;
@@ -61,7 +62,7 @@
 @property(nonatomic, strong) SignupViewController *signupVC;
 @property (strong, nonatomic) ProfileViewController *profileVC;
 
-//@property (strong, nonatomic) UserInfoViewModel *viewModel;
+@property (strong, nonatomic) UserInfoViewModel *viewModel;
 
 
 @end
@@ -99,7 +100,7 @@
     self.part1.alpha = 0;
     
     // login Button
-    [self.view addSubview:self.loginButton];
+    [self.view addSubview:self.toLoginButton];
     
     
     // table view
@@ -173,19 +174,15 @@
 }
 
 - (void)bindViewModel {
-    self.viewModel = [[UserInfoViewModel alloc] init];
+    self.viewModel = [[ViewModelManager getManager] getViewModel:@"UserInfoViewModel"];
     
     [self.viewModel.login subscribeNext:^(id  _Nullable x) {
-        User *user = [User getInstance];
         // create vc
         self.profileVC = [[ProfileViewController alloc] init];
         [self addChildViewController:self.profileVC];
         self.profileVC.view.frame = CGRectMake(0, 0, self.part1.frame.size.width, 320);
         [self.part1 addSubview:self.profileVC.view];
         [self.profileVC didMoveToParentViewController:self];
-        
-        self.profileVC.username = [user getUsername];
-        [self.profileVC setUIData];
         
         [self hideLoginPageAnimation];
         [self showUserInfoAnimation];
@@ -265,19 +262,19 @@
 - (void)showUserInfoAnimation {
     [UIView animateWithDuration:1.0 animations:^{
         self.part1.alpha = 100;
-        self.loginButton.alpha = 0;
+        self.toLoginButton.alpha = 0;
         self.tableView.transform = CGAffineTransformTranslate(self.part1.transform, 0, 70);
         self.part2.transform = CGAffineTransformTranslate(self.part1.transform, 0, 70);
     } completion:^(BOOL finished) {
-        //[self.loginButton removeFromSuperview];
+        //[self.toLoginButton removeFromSuperview];
     }];
 }
 
 - (void)hideUserInfoAnimation {
-    //[self.view addSubview:self.loginButton];
+    //[self.view addSubview:self.toLoginButton];
     [UIView animateWithDuration:1.0 animations:^{
         self.part1.alpha = 0;
-        self.loginButton.alpha = 100;
+        self.toLoginButton.alpha = 100;
         self.tableView.transform = CGAffineTransformTranslate(self.part1.transform, 0, 0);
         self.part2.transform = CGAffineTransformTranslate(self.part1.transform, 0, 0);
     } completion:^(BOOL finished) {
@@ -431,16 +428,16 @@
     return _userSignLabel;
 }
 
-- (UIButton *)loginButton {
-    if(_loginButton == nil) {
-        _loginButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 - 55, 110, 110, 110)];
-        [_loginButton setTitle:@"Login" forState:UIControlStateNormal];
-        _loginButton.titleLabel.font = [UIFont systemFontOfSize:NAME_SIZE];
-        _loginButton.backgroundColor = ZXColorFromRGB(0xf38181);
-        _loginButton.layer.cornerRadius = 55;
-        [_loginButton addTarget:self action:@selector(LoginButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+- (UIButton *)toLoginButton {
+    if(_toLoginButton == nil) {
+        _toLoginButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 - 55, 110, 110, 110)];
+        [_toLoginButton setTitle:@"Login" forState:UIControlStateNormal];
+        _toLoginButton.titleLabel.font = [UIFont systemFontOfSize:NAME_SIZE];
+        _toLoginButton.backgroundColor = ZXColorFromRGB(0xf38181);
+        _toLoginButton.layer.cornerRadius = 55;
+        [_toLoginButton addTarget:self action:@selector(LoginButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
-    return _loginButton;
+    return _toLoginButton;
 }
 
 // Part 3

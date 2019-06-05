@@ -12,8 +12,6 @@
 
 @interface UserInfoViewController : UIViewController
 
-@property (strong, nonatomic) UserInfoViewModel *viewModel;
-
 - (void)hideLoginPageAnimation;
 - (void)showLoginPageAnimation;
 - (void)showUserInfoAnimation;

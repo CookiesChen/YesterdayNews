@@ -10,7 +10,9 @@
 #define ViewModelManager_h
 
 #import <Foundation/Foundation.h>
+#import "../../ViewModel/UserInfo/UserInfoViewModel.h"
 #import "../../ViewModel/HomePage/Recommend/RecommendViewModel.h"
+#import "../../ViewModel/UserInfo/ProfileViewModel/ProfileViewModel.h"
 
 @interface ViewModelManager : NSObject
 

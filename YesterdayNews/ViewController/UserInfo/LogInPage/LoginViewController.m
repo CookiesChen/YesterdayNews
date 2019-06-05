@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "../UserInfoViewController.h"
 #import "../../../Model/User/User.h"
+#import "../../../Utils/ManagerUtils/ViewModelManager.h"
 #import <Colours.h>
 #import <AFNetworking.h>
 #import "YBImageBrowserTipView.h"
@@ -68,7 +69,7 @@
         [user setUsername:username];
         NSLog(@"[login] success");
         [[UIApplication sharedApplication].keyWindow yb_showHookTipView:[NSString stringWithFormat:@"欢迎回来, %@", username]];
-        [((UserInfoViewController *)self.parentViewController).viewModel userLogin];
+        [[[ViewModelManager getManager] getViewModel:@"UserInfoViewModel"] userLogin];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         id response = [NSJSONSerialization JSONObjectWithData:error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] options:0 error:nil];
         // 弹出提示框 用户名或密码错误

@@ -53,7 +53,7 @@
             [news setTitle: newData[i][@"title"]];
             [news setAuthor: newData[i][@"author"]];
             [news setComments: [[NSString alloc] initWithFormat:@"%@", newData[i][@"comments"]]];
-            NSTimeInterval interval = [newData[i][@"time"] longLongValue];
+            NSTimeInterval interval = [newData[i][@"time"] longLongValue]/1000;
             [news setTime: [NSDate dateWithTimeIntervalSince1970: interval]];
             //NSArray *imgs = newData[i][@"image_infos"];
             NSData *jsonString = [newData[i][@"image_infos"] dataUsingEncoding:NSUTF8StringEncoding];

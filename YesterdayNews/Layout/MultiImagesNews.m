@@ -23,6 +23,7 @@
     CGFloat marginTop;
     NSString *identifier;
 }
+
 @property(nonatomic, strong) News *news;
 @property(nonatomic, strong) UILabel *title;
 @property(nonatomic, strong) UICollectionView *collectionView;

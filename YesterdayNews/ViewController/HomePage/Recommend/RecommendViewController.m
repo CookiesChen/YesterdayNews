@@ -115,6 +115,7 @@
 
 # pragma mark UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
     [self.navigationController pushViewController:[[NewsDetailViewController alloc]init] animated:YES];
     UICollectionViewCell *selectCell = [collectionView cellForItemAtIndexPath:indexPath];
     // NSLog(@"click: %zd %zd %zd", indexPath.section, indexPath.row, selectCell.tag);
