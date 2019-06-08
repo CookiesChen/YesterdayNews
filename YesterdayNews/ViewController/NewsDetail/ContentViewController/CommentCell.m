@@ -19,7 +19,7 @@
     CGFloat thumb_up_icon_height;
     CGFloat thumb_up_icon_width;
     CGFloat space;
-    
+    CGFloat marginBottom;
 };
 
 
@@ -42,6 +42,7 @@
     thumb_up_icon_height = 20;
     thumb_up_icon_width = 20;
     space = 5;
+    marginBottom = 20;
     
     // 设置背景色
     [self setBackgroundColor:[UIColor whiteColor]];
@@ -49,23 +50,18 @@
     [self loadSubView];
     // 调整位置
     [self fitLocation];
-    
-//    CGRect cell_frame = self.frame;
-//    cell_frame.size.height = self.comment_content.frame.origin.y + self.comment_content.frame.size.height;
-//    [self setFrame:cell_frame];
-//    NSLog(@"cell_frame(in): %@", NSStringFromCGRect(self.frame));
+    // 适配cell尺寸
+    [self fitCellFrame];
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    NSLog(@"layoutSubViews:CommentCell");
     [self updateViewByComment: self.comment];
 }
 
 
 - (void)loadSubView
 {
-    [self addSubview: self.imageView];
     [self addSubview: self.user_icon];
     [self addSubview: self.user_name];
     [self addSubview: self.thumb_up_icon];
@@ -82,10 +78,17 @@
     [self.user_name setCenter:CGPointMake(user_icon_width + space + self.user_name.frame.size.width/2, self.user_name.frame.size.height/2)];
     [self.thumb_up_count setCenter:CGPointMake(self.frame.size.width - self.thumb_up_count.frame.size.width/2, self.thumb_up_count.frame.size.height/2)];
     [self.thumb_up_icon setCenter:CGPointMake(self.thumb_up_count.frame.origin.x - self.thumb_up_count.frame.size.width/2 - space, self.thumb_up_icon.frame.size.height/2)];
-    [self.comment_content setFrame:CGRectMake(self.user_icon.frame.size.width + space, self.thumb_up_icon.frame.size.height, self.frame.size.width - self.user_icon.frame.size.width - space, 0)];
+    [self.comment_content setFrame:CGRectMake(self.user_icon.frame.size.width + space, self.thumb_up_icon.frame.origin.y + self.thumb_up_icon.frame.size.height + space, self.frame.size.width - self.user_icon.frame.size.width, 0)];
     [self.comment_content sizeToFit];
-    [self.comment_time setFrame:CGRectMake(self.user_icon.frame.size.width + space, self.thumb_up_icon.frame.size.height + self.comment_content.frame.size.height + space, (self.frame.size.width - self.user_icon.frame.size.width) / 2, 0)];
+    [self.comment_time setFrame:CGRectMake(self.user_icon.frame.size.width + space, self.comment_content.frame.origin.y + self.comment_content.frame.size.height + space, (self.frame.size.width - self.user_icon.frame.size.width) / 2, 0)];
     [self.comment_time sizeToFit];
+}
+
+- (void)fitCellFrame
+{
+    CGRect cell_frame = self.frame;
+    cell_frame.size.height = self.comment_time.frame.origin.y + self.comment_time.frame.size.height + marginBottom;
+    [self setFrame:cell_frame];
 }
 
 - (UIImageView *)user_icon {
@@ -138,17 +141,6 @@
     return _comment_content;
 }
 
-- (UIImageView *)imageView {
-    if(_imageView == nil) {
-        // 居中显示 Cell
-        self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.frame.size.width, 0, 80, 80)];
-        CGFloat image_width = _imageView.frame.size.width;
-        CGFloat leftMargin = (self.frame.size.width - image_width) / 2;
-        [_imageView setCenter:CGPointMake(leftMargin + image_width/2, self.frame.size.height/2)];
-    }
-    return _imageView;
-}
-
 - (UILabel *)comment_time {
     if(_comment_time == nil) {
         _comment_time = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 20)];
@@ -171,6 +163,7 @@
     [self.comment_content setText: self.comment.CommentContent];
     [self.comment_time setText: [TimeUtils getTimeDifference:self.comment.CommentTime]];
     [self fitLocation];
+    [self fitCellFrame];
 }
 
 @end

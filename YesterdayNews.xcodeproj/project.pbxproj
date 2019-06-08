@@ -49,6 +49,9 @@
 		51DDC83122A25BF10008B24C /* ProfileViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DDC83022A25BF10008B24C /* ProfileViewModel.m */; };
 		51E0DD762282D602008F037D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E0DD752282D602008F037D /* ViewController.m */; };
 		7CB4A9D9D37BBADE1282A7BB /* libPods-YesterdayNewsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07AA0FE3601FE1262409EB2B /* libPods-YesterdayNewsTests.a */; };
+		A0420BD022AB545E000B5E3B /* NewsTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A0420BCF22AB545E000B5E3B /* NewsTitleCell.m */; };
+		A0420BD322AB5DA2000B5E3B /* AuthorBarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A0420BD222AB5DA2000B5E3B /* AuthorBarCell.m */; };
+		A0420BD722AB697D000B5E3B /* WebViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A0420BD622AB697D000B5E3B /* WebViewCell.m */; };
 		A0E50E6F2297DA3500268D7E /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A0E50E6E2297DA3500268D7E /* CommentCell.m */; };
 		A0E50E7B22993E9500268D7E /* CommentsViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A0E50E7A22993E9500268D7E /* CommentsViewModel.m */; };
 		A0E50E7F22993FC800268D7E /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = A0E50E7E22993FC800268D7E /* Comment.m */; };
@@ -161,6 +164,12 @@
 		51E0DD752282D602008F037D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		7FEEE29897871650AE6FB86C /* Pods-YesterdayNews.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YesterdayNews.release.xcconfig"; path = "Target Support Files/Pods-YesterdayNews/Pods-YesterdayNews.release.xcconfig"; sourceTree = "<group>"; };
 		8E8ADFFE286784EE7AD6AE06 /* Pods-YesterdayNews.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YesterdayNews.debug.xcconfig"; path = "Target Support Files/Pods-YesterdayNews/Pods-YesterdayNews.debug.xcconfig"; sourceTree = "<group>"; };
+		A0420BCE22AB523A000B5E3B /* NewsTitleCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewsTitleCell.h; sourceTree = "<group>"; };
+		A0420BCF22AB545E000B5E3B /* NewsTitleCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewsTitleCell.m; sourceTree = "<group>"; };
+		A0420BD222AB5DA2000B5E3B /* AuthorBarCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthorBarCell.m; sourceTree = "<group>"; };
+		A0420BD422AB5EDB000B5E3B /* AuthorBarCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthorBarCell.h; sourceTree = "<group>"; };
+		A0420BD522AB6970000B5E3B /* WebViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebViewCell.h; sourceTree = "<group>"; };
+		A0420BD622AB697D000B5E3B /* WebViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebViewCell.m; sourceTree = "<group>"; };
 		A0E50E6D2297DA2900268D7E /* CommentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentCell.h; sourceTree = "<group>"; };
 		A0E50E6E2297DA3500268D7E /* CommentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentCell.m; sourceTree = "<group>"; };
 		A0E50E7922993E8400268D7E /* CommentsViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentsViewModel.h; sourceTree = "<group>"; };
@@ -337,6 +346,12 @@
 				518171F82297795A003DB421 /* ContentViewController.m */,
 				A0E50E6D2297DA2900268D7E /* CommentCell.h */,
 				A0E50E6E2297DA3500268D7E /* CommentCell.m */,
+				A0420BCE22AB523A000B5E3B /* NewsTitleCell.h */,
+				A0420BCF22AB545E000B5E3B /* NewsTitleCell.m */,
+				A0420BD422AB5EDB000B5E3B /* AuthorBarCell.h */,
+				A0420BD222AB5DA2000B5E3B /* AuthorBarCell.m */,
+				A0420BD522AB6970000B5E3B /* WebViewCell.h */,
+				A0420BD622AB697D000B5E3B /* WebViewCell.m */,
 			);
 			path = ContentViewController;
 			sourceTree = "<group>";
@@ -851,6 +866,7 @@
 				24ED0A89229D7CC900F9814A /* NewsTableViewCell.m in Sources */,
 				51B51D452282B397007AA44B /* NewsDetailViewController.m in Sources */,
 				B55AE2D8229D379A00E7CD5F /* NewsCache.m in Sources */,
+				A0420BD722AB697D000B5E3B /* WebViewCell.m in Sources */,
 				5144FADA226B57FD00101E22 /* HomePageViewModel.m in Sources */,
 				5144FAE5226B74C500101E22 /* PageViewController.m in Sources */,
 				51B51D362281FAF8007AA44B /* TimeUtils.m in Sources */,
@@ -872,6 +888,7 @@
 				51C3AD40226B140A00EA3FD9 /* HomePageViewController.m in Sources */,
 				51B4BA8A22A75D5D00F2FF02 /* NewsDetailViewModel.m in Sources */,
 				517F4FB9227ACA6100FE65B3 /* RecommendViewModel.m in Sources */,
+				A0420BD322AB5DA2000B5E3B /* AuthorBarCell.m in Sources */,
 				A0E50E7F22993FC800268D7E /* Comment.m in Sources */,
 				24ED0A7B229014F600F9814A /* ProfileViewController.m in Sources */,
 				5144FADE226B582100101E22 /* MainPageViewModel.m in Sources */,
@@ -881,6 +898,7 @@
 				24ED0A86229832A600F9814A /* PrivateSettingViewController.m in Sources */,
 				5180E9F9228997630093220B /* ImageCell.m in Sources */,
 				24ED0A2C227B602E00F9814A /* UserTarBarViewController.m in Sources */,
+				A0420BD022AB545E000B5E3B /* NewsTitleCell.m in Sources */,
 				24ED0A8C22A12C0400F9814A /* BottomBounceView.m in Sources */,
 				51E0DD762282D602008F037D /* ViewController.m in Sources */,
 				24ED0A832298329000F9814A /* EditInformationViewController.m in Sources */,

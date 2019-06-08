@@ -22,7 +22,7 @@
     [self setUserName:@"中大小邋遢"];
     [self setCellHight:238];
     [self setCommentTime:[NSDate date]];
-    [self setCommentContent: @"去年有资格和勇士较量胜负的唯一球队，火箭。今年到目前为止最接近能打败勇士的还是火箭。去年有资格和勇士较量胜负的唯一球队，火箭。今年到目前为止最接近能打败勇士的还是火箭。去年有资格和勇士较量胜负的唯一球队，火箭。今年到目前为止最接近能打败勇士的还是火箭。"];
+    [self setCommentContent: @"去年有资格和勇士较量胜负的唯一球队，火箭。今年到目前为止最接近能打败勇士的还是火箭。去年有资格和勇士较量胜负的唯一球队，火箭。"];
     [self setThumbUpIcon:@"thumb_up_white"];
     [self setThumbUpCount:@"58"];
     return self;
