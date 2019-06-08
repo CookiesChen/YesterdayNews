@@ -14,7 +14,6 @@
 
 @interface CommentCell : UIView
 
-@property(nonatomic, strong) UIImageView *imageView;
 @property(nonatomic, strong) UIImageView *user_icon;
 @property(nonatomic, strong) UILabel *user_name;
 @property(nonatomic, strong) UILabel *comment_content;
