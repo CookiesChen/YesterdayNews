@@ -22,6 +22,14 @@
     CGFloat marginBottom;
 };
 
+@property(nonatomic, strong) UIImageView *user_icon;
+@property(nonatomic, strong) UILabel *user_name;
+@property(nonatomic, strong) UILabel *comment_content;
+@property(nonatomic, strong) UIImageView *thumb_up_icon;
+@property(nonatomic, strong) UILabel *thumb_up_count;
+@property(nonatomic, strong) UILabel *comment_time;
+@property(nonatomic, strong) Comment* comment;
+@property(nonatomic, assign) BOOL hasThumbUp;
 
 @end
 
@@ -104,7 +112,7 @@
         _user_name = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 0)];
         [_user_name setText:@"匿名用户"];
         [_user_name setTextColor:[UIColor pastelBlueColor]];
-        [_comment_content setFont: [UIFont systemFontOfSize: 18]];
+        [_comment_content setFont: [UIFont systemFontOfSize: 17]];
         [_comment_content setLineBreakMode: NSLineBreakByTruncatingTail];
         [_comment_content setNumberOfLines: 1];
         [_user_name sizeToFit];
@@ -115,7 +123,15 @@
 - (UIImageView *)thumb_up_icon {
     if(_thumb_up_icon == nil) {
         _thumb_up_icon = [[UIImageView alloc] initWithFrame:CGRectMake(32, 0, thumb_up_icon_width, thumb_up_icon_height)];
-        [_thumb_up_icon setImage:[UIImage imageNamed:@"thumb_up_white"]];
+        if(_hasThumbUp) {
+            [_thumb_up_icon setImage: [UIImage imageNamed: @"thumb_up_red"]];
+        }
+        else {
+            [_thumb_up_icon setImage:[UIImage imageNamed:@"thumb_up_white"]];
+        }
+        [_thumb_up_icon setUserInteractionEnabled: YES];
+        UITapGestureRecognizer *thumbUpClick = [[UITapGestureRecognizer alloc] initWithTarget: self action:@selector(handleThumbUp:)];
+        [_thumb_up_icon addGestureRecognizer: thumbUpClick];
     }
     return _thumb_up_icon;
 }
@@ -133,7 +149,7 @@
     if(_comment_content == nil) {
         _comment_content = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 0)];
         [_comment_content setText:@"这里是评论内容"];
-        [_comment_content setFont: [UIFont systemFontOfSize: 20]];
+        [_comment_content setFont: [UIFont systemFontOfSize: 17]];
         [_comment_content setLineBreakMode: NSLineBreakByTruncatingTail];
         [_comment_content setNumberOfLines: 0];
         [_comment_content sizeToFit];
@@ -164,6 +180,24 @@
     [self.comment_time setText: [TimeUtils getTimeDifference:self.comment.CommentTime]];
     [self fitLocation];
     [self fitCellFrame];
+}
+
+- (void)handleThumbUp: (UIGestureRecognizer *)gestureRecognizer
+{
+    if(!_hasThumbUp) {
+        [self.thumb_up_icon setImage: [UIImage imageNamed: @"thumb_up_red"]];
+        NSInteger newThumbUpNum = [self.thumb_up_count.text intValue] + 1;
+        NSString *newThumbUpCount = [NSString stringWithFormat: @"%ld", newThumbUpNum];
+        [self.thumb_up_count setText: newThumbUpCount];
+        self.comment.ThumbUpCount = newThumbUpCount;
+        [self saveData];
+        _hasThumbUp = true;
+    }
+}
+
+- (void)saveData
+{
+    
 }
 
 @end

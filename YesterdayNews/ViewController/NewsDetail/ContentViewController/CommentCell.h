@@ -14,14 +14,6 @@
 
 @interface CommentCell : UIView
 
-@property(nonatomic, strong) UIImageView *user_icon;
-@property(nonatomic, strong) UILabel *user_name;
-@property(nonatomic, strong) UILabel *comment_content;
-@property(nonatomic, strong) UIImageView *thumb_up_icon;
-@property(nonatomic, strong) UILabel *thumb_up_count;
-@property(nonatomic, strong) UILabel *comment_time;
-@property(nonatomic, strong) Comment* comment;
-
 - (void)updateViewByComment: (Comment *)comment;
 
 @end

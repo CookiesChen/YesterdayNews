@@ -353,7 +353,7 @@
 #define WIDTH self.frame.size.width
 #define HEIGHT self.frame.size.height
 
-@interface ContentViewController() <WKNavigationDelegate, UITableViewDataSource, UITableViewDelegate, WebViewCellDelegate>
+@interface ContentViewController() <WKNavigationDelegate, UITableViewDataSource, UITableViewDelegate, WebViewCellDelegate, UIScrollViewDelegate>
 {
     CGFloat margin;
     CGFloat marginTop;
@@ -414,9 +414,11 @@
 - (UITableView *)content {
     if(_content == nil) {
         self.identifier = @"reuseCell";
-        CGRect comment_frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-        _content = [[UITableView alloc] initWithFrame:comment_frame style:UITableViewStylePlain];
+        CGRect content_frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        _content = [[UITableView alloc] initWithFrame:content_frame style:UITableViewStylePlain];
         [_content setBackgroundColor:[UIColor whiteColor]];
+        [_content setBounces: NO];
+        _content.separatorStyle = UITableViewCellAccessoryNone;
         _content.dataSource = self;
         _content.delegate = self;
     }
@@ -446,6 +448,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier: cellID];
     }
     [cell setBackgroundColor:[UIColor whiteColor]];
+    [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
     for(UIView *view in cell.subviews){
         [view removeFromSuperview];
     }
@@ -486,7 +489,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.section == 2) {
-        return webViewHeight;
+        return webViewHeight + margin;
     }
     UITableViewCell *cell = [self tableView: _content cellForRowAtIndexPath: indexPath];
     return cell.frame.size.height;
