@@ -10,16 +10,11 @@
 #define CommentCell_h
 
 #import <UIKit/UIKit.h>
+#import "../../../Model/Comment/Comment.h"
 
 @interface CommentCell : UIView
 
-@property(nonatomic, strong) UIImageView *imageView;
-@property(nonatomic, strong) UIImageView *user_icon;
-@property(nonatomic, strong) UILabel *user_name;
-@property(nonatomic, strong) UILabel *comment_content;
-@property(nonatomic, strong) UIImageView *thumb_up_icon;
-@property(nonatomic, strong) UILabel *thumb_up_count;
-@property(nonatomic, strong) UILabel *comment_time;
+- (void)updateViewByComment: (Comment *)comment;
 
 @end
 #endif /* CommentCell_h */

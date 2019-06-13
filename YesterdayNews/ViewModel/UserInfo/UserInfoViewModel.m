@@ -32,7 +32,6 @@
     self.login = [RACSubject subject];
     self.logout = [RACSubject subject];
     self.reload = [RACSubject subject];
-    
     self.collectionNews = [[NSMutableArray alloc] init];
     self.commentNews = [[NSMutableArray alloc] init];
     self.likeNews = [[NSMutableArray alloc] init];

@@ -7,6 +7,7 @@
 //
 
 #import "ProfileViewController.h"
+#import "../../Utils/ManagerUtils/ViewModelManager.h"
 #import <SDWebImage/SDWebImage.h>
 
 #define NUM_SIZE 20
@@ -16,15 +17,18 @@
 
 @interface ProfileViewController ()
 
+@property(nonatomic, strong) ProfileViewModel *ViewModel;
 @property(nonatomic, strong) UIImageView *backgroundImg;
 @property(nonatomic, strong) UIImageView *userHeadImg;
 @property(nonatomic, strong) UILabel *userNameLabel;
+
 @property(nonatomic, strong) UILabel *userSignLabel;
+
 @property(nonatomic, strong) UILabel *likesNumLabel;
-@property(nonatomic, strong) UILabel *followingNumLabel;
-@property(nonatomic, strong) UILabel *follersNumLabel;
 @property(nonatomic, strong) UILabel *likesLabel;
+@property(nonatomic, strong) UILabel *followingNumLabel;
 @property(nonatomic, strong) UILabel *followingLabel;
+@property(nonatomic, strong) UILabel *follersNumLabel;
 @property(nonatomic, strong) UILabel *follersLabel;
 
 @end
@@ -52,6 +56,13 @@
 }
 
 - (void)initData {
+    self.ViewModel = [[ViewModelManager getManager] getViewModel: @"ProfileViewModel"];
+    
+    RACChannelTo(self.userNameLabel, text) = RACChannelTo(self.ViewModel, username);
+    RACChannelTo(self.likesNumLabel, text) = RACChannelTo(self.ViewModel, like);
+    RACChannelTo(self.followingNumLabel, text) = RACChannelTo(self.ViewModel, following);
+    RACChannelTo(self.follersNumLabel, text) = RACChannelTo(self.ViewModel, follower);
+    
     NSString *url = @"https://hbimg.huabanimg.com/954d812b554d7a23dda1b59c0f807446798aefa839a47-H6Z5G4_fw658";
     NSURL *imageURL = [NSURL URLWithString:url];
     UIImage *cachedImg = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:url];
@@ -62,18 +73,8 @@
         self.backgroundImg.image = cachedImg;
         self.userHeadImg.image = cachedImg;
     }
-    // set information
-    self.userNameLabel.text = @"UserName";
-    self.userSignLabel.text = @"练习时长两年半的个人练习生";
-    self.followingNumLabel.text = @"10";
-    self.follersNumLabel.text = @"66";
-    self.likesNumLabel.text = @"233";
 }
 
-// bind data ?
-- (void)setUIData {
-    self.userNameLabel.text = self.username;
-}
 
 - (UIImageView *) backgroundImg {
     if(_backgroundImg == nil) {
