@@ -13,6 +13,7 @@
 
 @property(nonatomic, strong) NSMutableArray *tableItems;
 @property(nonatomic, strong) UITableView *tableView;
+@property(nonatomic, strong) BottomBounceView *bbv;
 
 @end
 
@@ -30,12 +31,13 @@
 }
 
 - (void)initData {
-    self.tableItems = [@[@[@"头像",@"用户名", @"介绍"], @[@"性别", @"生日"]] mutableCopy];
+    self.tableItems = [@[@[@"头像", @"介绍"], @[@"性别", @"生日"]] mutableCopy];
 }
 
 - (void)setupView {
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:self.tableView];
+    self.bbv = [[BottomBounceView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
 }
 
 - (UITableView *)tableView {
@@ -47,18 +49,10 @@
     return _tableView;
 }
 
-- (void)editUsername {
-    BottomBounceView *bbv = [[BottomBounceView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    [bbv.ok addTarget:self action:@selector(changeUsername) forControlEvents:UIControlEventTouchUpInside];
-    [bbv showInView:self.view];
-}
-
-- (void)changeUsername {
-   
-}
-
 - (void)editDiscription {
-    
+    [self.bbv showTextFieldInView:self.view withReturnText:^(NSString *text) {
+        NSLog(@"###current discription - %@\n", text);
+    }];
 }
 
 - (void)editHeadImg {
@@ -92,29 +86,12 @@
 }
 
 - (void)editBirthday {
-    UIDatePicker *datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2 - 150, 0, 300, 200)];
-    // 设置地区: zh-中国
-    datePicker.locale = [NSLocale localeWithLocaleIdentifier:@"zh"];
-    datePicker.datePickerMode = UIDatePickerModeDate;
-    // 设置当前显示时间
-    [datePicker setDate:[NSDate date] animated:YES];
-    // 设置显示最大时间（此处为当前时间）
-    [datePicker setMaximumDate:[NSDate date]];
-    
-    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"\n\n\n\n\n\n\n\n\n\n" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    [self.bbv showDatePickerInView:self.view withReturnDate:^(NSDate *date) {
         NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];
         [dateFormat setDateFormat:@"yyyy-MM-dd"];//设定时间格式
-        NSString *dateString = [dateFormat stringFromDate:datePicker.date];
-        NSLog(@"%@", dateString);
+        NSString *dateString = [dateFormat stringFromDate:date];
+        NSLog(@"###current date - %@\n", dateString);
     }];
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        // do nothing
-    }];
-    [actionSheet.view addSubview:datePicker];
-    [actionSheet addAction:ok];
-    [actionSheet addAction:cancel];
-    [self presentViewController:actionSheet animated:YES completion:nil];
 }
 
 
@@ -155,9 +132,6 @@
                 [self editHeadImg];
                 break;
             case 1:
-                [self editUsername];
-                break;
-            case 2:
                 [self editDiscription];
                 break;
             default:

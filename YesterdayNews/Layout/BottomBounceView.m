@@ -7,6 +7,7 @@
 //
 
 #import "BottomBounceView.h"
+#import <Colours.h>
 
 @interface BottomBounceView ()
 
@@ -29,6 +30,7 @@
 - (instancetype) init {
     self = [super init];
     if(self){
+        self.contentHight = 200;
         [self setupConten];
     }
     return self;
@@ -41,7 +43,7 @@
     
     if(_contentView == nil) {
         _contentView = [[UIView alloc]initWithFrame:CGRectMake(0, self.frame.size.height - self.contentHight, self.frame.size.width, self.contentHight)];
-        _contentView.backgroundColor = [UIColor whiteColor];
+        _contentView.backgroundColor = [UIColor colorFromHexString:@"#efeff4"];
         [self addSubview:_contentView];
     }
     
@@ -50,7 +52,8 @@
         _ok.frame = CGRectMake(20, 8, 50, 30);
         [_ok setTitle:@"确定" forState:UIControlStateNormal];
         [_ok setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-        [_ok addTarget:self action:@selector(disMissView) forControlEvents:UIControlEventTouchUpInside];
+        _ok.titleLabel.font = [UIFont systemFontOfSize: 16.0];
+        [_ok addTarget:self action:@selector(okButtonClick) forControlEvents:UIControlEventTouchUpInside];
         [_contentView addSubview:_ok];
     }
     
@@ -59,17 +62,62 @@
         _cancel.frame = CGRectMake(self.frame.size.width - 70, 8, 50, 30);
         [_cancel setTitle:@"取消" forState:UIControlStateNormal];
         [_cancel setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        _cancel.titleLabel.font = [UIFont systemFontOfSize: 16.0];
         [_cancel addTarget:self action:@selector(disMissView) forControlEvents:UIControlEventTouchUpInside];
         [_contentView addSubview:_cancel];
     }
 }
 
+- (void) showTextFieldInView:(UIView *)view withReturnText:(ReturnTextBlock)block {
+    self.returnTextBlock = block;
+    [self addTextField];
+    [self showInView:view];
+}
+
+- (void) showDatePickerInView:(UIView *)view withReturnDate:(ReturnDateBlock)block {
+    self.returnDateBlock = block;
+    [self addDatePicker];
+    [self showInView:view];
+}
+
 - (void)addDatePicker {
-    
+    self.contentHight = 250;
+    [self.contentView setFrame:CGRectMake(0, self.frame.size.height - self.contentHight, self.frame.size.width, self.contentHight)];
+    if(_datePicker == nil) {
+        _datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(25, 40, self.frame.size.width - 50, self.contentHight - 80)];
+        // 设置地区: zh-中国
+        _datePicker.locale = [NSLocale localeWithLocaleIdentifier:@"zh"];
+        _datePicker.datePickerMode = UIDatePickerModeDate;
+        // 设置当前显示时间
+        [_datePicker setDate:[NSDate date] animated:YES];
+        // 设置显示最大时间（此处为当前时间）
+        [_datePicker setMaximumDate:[NSDate date]];
+    }
+    [_contentView addSubview:_datePicker];
 }
 
 - (void)addTextField {
-    
+    self.contentHight = 200;
+    [self.contentView setFrame:CGRectMake(0, self.frame.size.height - self.contentHight, self.frame.size.width, self.contentHight)];
+    if(_textView == nil) {
+        _textView = [[UITextView alloc] initWithFrame:CGRectMake(25, 40, self.frame.size.width - 50, self.contentHight - 80)];
+        [_textView setFont:[UIFont systemFontOfSize: 16.0]];
+        _textView.editable = YES;
+        _textView.backgroundColor = [UIColor whiteColor];
+        _textView.layer.cornerRadius = 10;
+    }
+    //_textField.text = username;
+    [_contentView addSubview:_textView];
+}
+
+- (void)okButtonClick {
+    if (self.returnTextBlock != nil && self.textView != nil) {
+        self.returnTextBlock(self.textView.text);
+    }
+    if (self.returnDateBlock != nil && self.datePicker != nil) {
+        self.returnDateBlock(self.datePicker.date);
+    }
+    [self disMissView];
 }
 
 - (void)showInView:(UIView *)view {
@@ -98,7 +146,10 @@
                      completion:^(BOOL finished){
                          [self removeFromSuperview];
                          [self.contentView removeFromSuperview];
-                         
+                         [self.textView removeFromSuperview];
+                         [self.datePicker removeFromSuperview];
+                         self.returnTextBlock = nil;
+                         self.returnDateBlock = nil;
                      }];
 }
 
