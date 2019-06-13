@@ -19,6 +19,8 @@
 - (NSString *)getUsername;
 - (NSString *)getToken;
 
+@property(nonatomic, assign) BOOL hasLogin;
+
 @end
 
 #endif /* User_h */

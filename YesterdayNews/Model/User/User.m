@@ -31,7 +31,9 @@ static User *user = nil;
 - (id)init {
     self = [super init];
     if(self) {
-        _username = [NSString alloc];
+        _username = @"";
+        _token = @"";
+        _hasLogin = false;
     }
     return self;
 }

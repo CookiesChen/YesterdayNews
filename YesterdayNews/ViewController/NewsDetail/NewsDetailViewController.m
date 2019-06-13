@@ -12,6 +12,7 @@
 #import <WebKit/WebKit.h>
 #import <Colours.h>
 #import <ReactiveObjC.h>
+#import "BottomBounceView.h"
 
 #define StatusBarHeight [[UIApplication sharedApplication] statusBarFrame].size.height
 #define TopBarHeight 50
@@ -50,6 +51,7 @@
 @property(nonatomic, strong) UIButton *collectButton;
 @property(nonatomic, strong) UIButton *praiseButton;
 @property(nonatomic, strong) UIButton *forwardButton;
+@property(nonatomic, strong) BottomBounceView *bbv;
 
 @property(nonatomic, strong) NewsDetailViewModel *ViewModel;
 
@@ -86,6 +88,8 @@
     [self.view addSubview: self.topBar];
     [self.view addSubview: self.content.view];
     [self.view addSubview: self.bottomBar];
+    self.bbv = [[BottomBounceView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+
 }
 
 // viewmodel绑定
@@ -198,6 +202,7 @@
         [_writeCommentButton setTitleColor:[UIColor black50PercentColor] forState:UIControlStateNormal];
         [_writeCommentButton setBackgroundColor:[UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0]];
         [_writeCommentButton.layer setCornerRadius:15.0];
+        [_writeCommentButton addTarget:self action:@selector(submitComment:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _writeCommentButton;
 }
@@ -244,6 +249,13 @@
         _forwardButton.imageView.contentMode = UIViewContentModeScaleAspectFill;
     }
     return _forwardButton;
+}
+
+- (void)submitComment:(UIButton*)sender
+{
+    [self.bbv showTextFieldInView:self.view withReturnText:^(NSString *text) {
+        NSLog(@"###current discription - %@\n", text);
+    }];
 }
 
 @end

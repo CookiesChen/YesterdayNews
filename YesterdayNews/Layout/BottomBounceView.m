@@ -107,6 +107,7 @@
         _textView.layer.cornerRadius = 10;
     }
     //_textField.text = username;
+    _textView.text = @"";
     [_contentView addSubview:_textView];
 }
 

@@ -68,6 +68,7 @@
         User *user = [User getInstance];
         [user setUsername:username];
         [user setToken: responseObject[@"token"]];
+        user.hasLogin = true;
         NSLog(@"[login] success");
         [[UIApplication sharedApplication].keyWindow yb_showHookTipView:[NSString stringWithFormat:@"欢迎回来, %@", username]];
         [[[ViewModelManager getManager] getViewModel:@"UserInfoViewModel"] userLogin];
