@@ -67,6 +67,8 @@
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         User *user = [User getInstance];
         [user setUsername:username];
+        [user setToken: responseObject[@"token"]];
+        user.hasLogin = true;
         NSLog(@"[login] success");
         [[UIApplication sharedApplication].keyWindow yb_showHookTipView:[NSString stringWithFormat:@"欢迎回来, %@", username]];
         [[[ViewModelManager getManager] getViewModel:@"UserInfoViewModel"] userLogin];
@@ -98,6 +100,8 @@
         _usernameInput.layer.cornerRadius = 17.5;
         _usernameInput.layer.masksToBounds = YES;
         [_usernameInput.layer setBorderWidth:1];
+        [_usernameInput setAutocorrectionType:UITextAutocorrectionTypeNo];
+        [_usernameInput setAutocapitalizationType:UITextAutocapitalizationTypeNone];
         [_usernameInput.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
         NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
         style.alignment = NSTextAlignmentCenter;
@@ -117,6 +121,8 @@
         _passwordInput.layer.cornerRadius = 17.5;
         _passwordInput.layer.masksToBounds = YES;
         [_passwordInput.layer setBorderWidth:1];
+        [_passwordInput setAutocorrectionType:UITextAutocorrectionTypeNo];
+        [_passwordInput setAutocapitalizationType:UITextAutocapitalizationTypeNone];
         [_passwordInput.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
         NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
         style.alignment = NSTextAlignmentCenter;

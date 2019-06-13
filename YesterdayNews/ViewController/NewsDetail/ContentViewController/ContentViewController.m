@@ -349,6 +349,7 @@
 #import "NewsTitleCell.h"
 #import "AuthorBarCell.h"
 #import "WebViewCell.h"
+#import "User.h"
 
 #define WIDTH self.frame.size.width
 #define HEIGHT self.frame.size.height
@@ -409,7 +410,14 @@
 // viewmodel绑定
 - (void)bindViewModel {
     self.ViewModel = [[ViewModelManager getManager] getViewModel: @"NewsDetailViewModel"];
-    NSLog(@"newsID:%@", self.ViewModel.newsID);
+    if(![User getInstance].hasLogin) {
+        NSLog(@"[LOG] User didn't login");
+    }
+    else {
+        NSLog(@"[LOG] Username:%@", [[User getInstance] getUsername]);
+        NSLog(@"[LOG] UserToken:%@", [[User getInstance] getToken]);
+    }
+    NSLog(@"[LOG] newsID:%@", self.ViewModel.newsID);
 }
 
 # pragma mark getters and setters
