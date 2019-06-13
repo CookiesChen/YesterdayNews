@@ -409,6 +409,7 @@
 // viewmodel绑定
 - (void)bindViewModel {
     self.ViewModel = [[ViewModelManager getManager] getViewModel: @"NewsDetailViewModel"];
+    NSLog(@"newsID:%@", self.ViewModel.newsID);
 }
 
 # pragma mark getters and setters

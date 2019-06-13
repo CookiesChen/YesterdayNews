@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "CommentCell.h"
 #import <Colours.h>
+#import <SDWebImage/SDWebImage.h>
 #import "../../../Utils/TimeUtils/TimeUtils.h"
 
 
@@ -174,7 +175,7 @@
     [self setComment: comment];
     [self.user_name setText: self.comment.UserName];
     [self.user_name sizeToFit];
-    [self.user_icon setImage: [UIImage imageNamed: self.comment.UserIcon]];
+    [self.user_icon sd_setImageWithURL:[NSURL URLWithString:self.comment.UserIcon] placeholderImage: [UIImage imageNamed:@"headImg"] options:SDWebImageAllowInvalidSSLCertificates];
     [self.thumb_up_count setText: self.comment.ThumbUpCount];
     [self.comment_content setText: self.comment.CommentContent];
     [self.comment_time setText: [TimeUtils getTimeDifference:self.comment.CommentTime]];
