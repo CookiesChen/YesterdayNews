@@ -79,7 +79,7 @@
         }];
     }];
     
-    [self.ViewModel refreshData];
+    [self.ViewModel loadMore];
 }
 
 // 初始化
@@ -192,11 +192,7 @@
     CGFloat contentOffsetY = self.content.contentOffset.y;
     CGFloat bottomOffset = self.content.contentSize.height - contentOffsetY;
     if(bottomOffset <= height){
-        for (int i = 0; i < 4; i++) {
-            News *news = [[News alloc] init];
-            news.tag = random()%2;
-            [self.ViewModel.news addObject:news];
-        }
+        [self.ViewModel loadMore];
 //        [self.ViewModel.news addObject: [[News alloc] init]];
 //        [self.ViewModel.news addObject: [[News alloc] init]];
 //        [self.ViewModel.news addObject: [[News alloc] init]];

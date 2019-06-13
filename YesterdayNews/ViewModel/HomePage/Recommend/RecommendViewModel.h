@@ -18,6 +18,6 @@
 @property(nonatomic, strong) NSMutableArray* news;
 
 - (void)refresh;
-- (void)refreshData;
+- (void)loadMore;
 
 @end

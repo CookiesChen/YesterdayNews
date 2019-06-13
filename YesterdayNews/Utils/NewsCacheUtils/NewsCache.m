@@ -23,11 +23,9 @@ int _cacheCount = 0;
 }
 
 + (NSMutableArray *)retrieveNewsWithOffset:(NSInteger)offset Count:(NSInteger)count {
-    if (_cacheCount == 0) {
-        _cacheCount = [NewsCacheDB countCache];
-    }
+    _cacheCount = [NewsCacheDB countCache];
 
-    if (_cacheCount < 2 * ( offset + count)) {
+    if (3 / 4 * _cacheCount <= offset + count) {
         NSString *url = [[NSString alloc] initWithFormat:@"http://localhost:3000/news/list/offset=%d&count=%@", _cacheCount, CONST_COUNT];
         AFHTTPSessionManager *manage = [AFHTTPSessionManager manager];
         // 设置请求体为JSON

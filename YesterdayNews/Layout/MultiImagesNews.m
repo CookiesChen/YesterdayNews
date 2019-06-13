@@ -142,7 +142,7 @@
     if(_comment == nil){
         _comment = [[UILabel alloc] initWithFrame:CGRectMake(margin, marginTop, WIDTH, 25)];
         _comment = [[UILabel alloc] initWithFrame:CGRectMake(margin+self.author.frame.size.width+10, marginTop, WIDTH, 25)];
-        [_comment setText: [self.news.comments stringByAppendingString:@"评论"]];
+        [_comment setText: self.news.comments];
         [_comment setFont: [UIFont systemFontOfSize: 15]];
         [_comment setTextColor: [UIColor black25PercentColor]];
         [_comment sizeToFit];
