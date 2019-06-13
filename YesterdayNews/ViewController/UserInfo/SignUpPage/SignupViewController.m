@@ -108,6 +108,8 @@
         _usernameInput.layer.cornerRadius = 17.5;
         _usernameInput.layer.masksToBounds = YES;
         [_usernameInput.layer setBorderWidth:1];
+        [_usernameInput setAutocorrectionType:UITextAutocorrectionTypeNo];
+        [_usernameInput setAutocapitalizationType:UITextAutocapitalizationTypeNone];
         [_usernameInput.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
         NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
         style.alignment = NSTextAlignmentCenter;
@@ -127,6 +129,8 @@
         _phoneInput.layer.cornerRadius = 17.5;
         _phoneInput.layer.masksToBounds = YES;
         [_phoneInput.layer setBorderWidth:1];
+        [_phoneInput setAutocorrectionType:UITextAutocorrectionTypeNo];
+        [_phoneInput setAutocapitalizationType:UITextAutocapitalizationTypeNone];
         [_phoneInput.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
         NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
         style.alignment = NSTextAlignmentCenter;
@@ -146,6 +150,8 @@
         _passwordInput.layer.cornerRadius = 17.5;
         _passwordInput.layer.masksToBounds = YES;
         [_passwordInput.layer setBorderWidth:1];
+        [_passwordInput setAutocorrectionType:UITextAutocorrectionTypeNo];
+        [_passwordInput setAutocapitalizationType:UITextAutocapitalizationTypeNone];
         [_passwordInput.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
         NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
         style.alignment = NSTextAlignmentCenter;

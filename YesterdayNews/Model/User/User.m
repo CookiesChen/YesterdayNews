@@ -11,6 +11,7 @@
 @interface User()
 
 @property(nonatomic, strong)NSString *username;
+@property(nonatomic, strong)NSString *token;
 
 @end
 
@@ -43,8 +44,18 @@ static User *user = nil;
     _username = username;
 }
 
+- (void)setToken:(NSString *)token
+{
+    _token = token;
+}
+
 - (NSString *)getUsername {
     return _username;
+}
+
+- (NSString *)getToken
+{
+    return _token;
 }
 
 @end

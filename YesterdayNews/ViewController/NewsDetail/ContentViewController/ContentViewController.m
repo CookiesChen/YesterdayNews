@@ -349,6 +349,7 @@
 #import "NewsTitleCell.h"
 #import "AuthorBarCell.h"
 #import "WebViewCell.h"
+#import "User.h"
 
 #define WIDTH self.frame.size.width
 #define HEIGHT self.frame.size.height

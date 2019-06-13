@@ -15,7 +15,9 @@
 
 + (User *)getInstance;
 - (void)setUsername:(NSString *)username;
+- (void)setToken:(NSString *)token;
 - (NSString *)getUsername;
+- (NSString *)getToken;
 
 @end
 
