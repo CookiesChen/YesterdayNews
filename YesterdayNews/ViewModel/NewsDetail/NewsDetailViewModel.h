@@ -11,6 +11,8 @@
 
 #import <Foundation/Foundation.h>
 #import <ReactiveObjC.h>
+#import <AFNetworking.h>
+#import "../../Model/News.h"
 #import "../../Model/Comment/Comment.h"
 
 @interface NewsDetailViewModel : NSObject
@@ -19,7 +21,9 @@
 @property(nonatomic, strong) NSString *htmlString;
 @property(nonatomic, strong) NSString *newsTitle;
 @property(nonatomic, strong) NSString *avatar;
-@property(nonatomic, strong) NSString *t;
+@property(nonatomic, strong) NSString *author;
+
+- (void)setNews:(News *)news;
 
 @end
 

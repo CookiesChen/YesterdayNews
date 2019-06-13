@@ -8,6 +8,7 @@
 
 #import "NewsDetailViewController.h"
 #import "ContentViewController/ContentViewController.h"
+#import "../../Utils/ManagerUtils/ViewModelManager.h"
 #import <WebKit/WebKit.h>
 #import <Colours.h>
 #import <ReactiveObjC.h>
@@ -50,6 +51,8 @@
 @property(nonatomic, strong) UIButton *praiseButton;
 @property(nonatomic, strong) UIButton *forwardButton;
 
+@property(nonatomic, strong) NewsDetailViewModel *ViewModel;
+
 @end
 
 @implementation NewsDetailViewController
@@ -87,6 +90,7 @@
 
 // viewmodel绑定
 - (void)bindViewModel {
+    self.ViewModel = [[ViewModelManager getManager] getViewModel:@"NewsDetailViewModel"];
     
 }
 

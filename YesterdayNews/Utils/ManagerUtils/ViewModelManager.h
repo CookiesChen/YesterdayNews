@@ -12,6 +12,7 @@
 #import <Foundation/Foundation.h>
 #import "../../ViewModel/UserInfo/UserInfoViewModel.h"
 #import "../../ViewModel/HomePage/Recommend/RecommendViewModel.h"
+#import "../../ViewModel/NewsDetail/NewsDetailViewModel.h"
 #import "../../ViewModel/UserInfo/ProfileViewModel/ProfileViewModel.h"
 
 @interface ViewModelManager : NSObject

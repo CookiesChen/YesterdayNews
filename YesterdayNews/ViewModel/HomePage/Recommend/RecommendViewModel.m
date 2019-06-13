@@ -50,6 +50,7 @@
         NSArray *newData = responseObject[@"data"];
         for(int i = 0; i < [newData count]; i++){
             News *news = [[News alloc] init];
+            [news setNewsId: newData[i][@"group_id"]];
             [news setTitle: newData[i][@"title"]];
             [news setAuthor: newData[i][@"author"]];
             [news setComments: [[NSString alloc] initWithFormat:@"%@", newData[i][@"comments"]]];

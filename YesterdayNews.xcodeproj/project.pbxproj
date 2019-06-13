@@ -224,9 +224,9 @@
 		24ED0A17227B602E00F9814A /* UserInfo */ = {
 			isa = PBXGroup;
 			children = (
-				24ED0A7C2296FDD400F9814A /* SettingPage */,
 				24ED0A18227B602E00F9814A /* UserInfoViewController.h */,
 				24ED0A1D227B602E00F9814A /* UserInfoViewController.m */,
+				24ED0A7C2296FDD400F9814A /* SettingPage */,
 				24ED0A19227B602E00F9814A /* LogInPage */,
 				24ED0A1F227B602E00F9814A /* SignUpPage */,
 				24ED0A22227B602E00F9814A /* UserTarBar */,

@@ -10,6 +10,7 @@
 #define WebViewCell_h
 
 #import <UIKit/UIKit.h>
+#import "../../../Utils/ManagerUtils/ViewModelManager.h"
 
 @protocol WebViewCellDelegate <NSObject>
 

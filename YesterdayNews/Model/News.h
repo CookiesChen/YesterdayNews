@@ -15,6 +15,7 @@ typedef enum : NSUInteger {
 
 @interface News : NSObject
 
+@property NSString *newsId;
 @property NSString *title;
 @property NSString *author;
 @property NSDate *time;

@@ -344,7 +344,7 @@
 #import <Colours.h>
 #import <ReactiveObjC.h>
 #import "CommentCell.h"
-#import "../../../ViewModel/NewsDetail/CommentsViewModel.h"
+#import "../../../Utils/ManagerUtils/ViewModelManager.h"
 #import "../../../Model/Comment/Comment.h"
 #import "NewsTitleCell.h"
 #import "AuthorBarCell.h"
@@ -368,7 +368,8 @@
 
 @property(nonatomic, strong) WebViewCell *webviewcell;
 
-@property(nonatomic, strong) CommentsViewModel *commentsViewModel;
+@property(nonatomic, strong) NewsDetailViewModel *ViewModel;
+
 @end
 
 @implementation ContentViewController
@@ -407,7 +408,7 @@
 
 // viewmodel绑定
 - (void)bindViewModel {
-    self.commentsViewModel = [[CommentsViewModel alloc] init];
+    self.ViewModel = [[ViewModelManager getManager] getViewModel: @"NewsDetailViewModel"];
 }
 
 # pragma mark getters and setters
@@ -437,7 +438,7 @@
 // row in section 数目
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return section==3?self.commentsViewModel.comments.count:1;
+    return section==3?self.ViewModel.comments.count:1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -456,13 +457,13 @@
     if(indexPath.section == 0) {
         [cell addSubview:[[NewsTitleCell alloc] initWithFrame:CGRectMake(margin, 0, self.frame.size.width-2*margin, 0)]];
         NewsTitleCell* cell_view = cell.subviews[0];
-        [cell_view updateViewByTitle: @"这款国剧正以风暴速度席卷朋友圈，年度王者终于来了！"];
+        [cell_view updateViewByTitle: self.ViewModel.newsTitle];
     }
     else if(indexPath.section == 1) {
         [cell addSubview: [[AuthorBarCell alloc] initWithFrame: CGRectMake(margin, 0, self.frame.size.width-2*margin, 0)]];
         AuthorBarCell *cell_view = cell.subviews[0];
         [cell_view.authorHeadImg setImage: [UIImage imageNamed: @"headImg"]];
-        [cell_view.authorName setText: @"电影烂番茄"];
+        [cell_view.authorName setText: self.ViewModel.author];
         [cell_view.authorInfo setText: @"优质影视领域创作者"];
     }
     else if(indexPath.section == 2) {
@@ -475,7 +476,7 @@
     else {
         [cell addSubview:[[CommentCell alloc] initWithFrame:CGRectMake(margin, 0, self.frame.size.width-2*margin, 0)]];
         CommentCell* cell_view = cell.subviews[0];
-        [cell_view updateViewByComment: self.commentsViewModel.comments[indexPath.row]];
+        [cell_view updateViewByComment: self.ViewModel.comments[indexPath.row]];
     }
     
     CGRect cell_frame = cell.frame;
