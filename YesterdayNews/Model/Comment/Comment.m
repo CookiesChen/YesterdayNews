@@ -18,6 +18,7 @@
 //    [self setTime: [NSDate date]];
 //    [self setComments: @"0评论"];
 //    [self setTag:SingleImageNewsTag];
+    [self setCommentID:@"3"];
     [self setUserIcon:@"headImg"];
     [self setUserName:@"中大小邋遢"];
     [self setCellHight:238];

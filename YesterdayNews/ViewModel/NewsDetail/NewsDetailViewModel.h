@@ -17,6 +17,7 @@
 
 @interface NewsDetailViewModel : NSObject
 
+@property(nonatomic, strong) NSString *newsID;
 @property(nonatomic, strong) NSMutableArray *comments;
 @property(nonatomic, strong) NSString *htmlString;
 @property(nonatomic, strong) NSString *newsTitle;
