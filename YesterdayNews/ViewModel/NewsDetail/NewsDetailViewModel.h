@@ -15,6 +15,13 @@
 #import "../../Model/News.h"
 #import "../../Model/Comment/Comment.h"
 
+@protocol CommentDelegate <NSObject>
+
+@required
+- (void)reloadCommentData;
+
+@end
+
 @interface NewsDetailViewModel : NSObject
 
 @property(nonatomic, strong) NSString *newsID;
@@ -24,8 +31,11 @@
 @property(nonatomic, strong) NSString *avatar;
 @property(nonatomic, strong) NSString *author;
 
-- (void)setNews:(News *)news;
+@property(nonatomic, weak) id<CommentDelegate> commentDelegate;
 
+- (void)setNews:(News *)news;
+- (void)addCommentsWithNewsID:(NSString *)newsID UserID:(NSString *)userID Time:(NSString *)time Content:(NSString *)content;
+- (void)addThumbUpCountWithCommentID:(NSString *)commentID UserID:(NSString *)userID;
 @end
 
 #endif /* NewsDetailViewModel_h */

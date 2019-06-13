@@ -255,6 +255,11 @@
 {
     [self.bbv showTextFieldInView:self.view withReturnText:^(NSString *text) {
         NSLog(@"###current discription - %@\n", text);
+        Comment *comment = [[Comment alloc] init];
+        comment.UserName = [[User getInstance] getUsername];
+        comment.CommentContent = text;
+        NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[[NSDate date] timeIntervalSince1970]*1000];
+        [self.ViewModel addCommentsWithNewsID:self.ViewModel.newsID UserID:[[User getInstance] getUsername] Time:timeSp Content:text];
     }];
 }
 

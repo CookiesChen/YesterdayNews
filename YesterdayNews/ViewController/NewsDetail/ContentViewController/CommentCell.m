@@ -11,6 +11,7 @@
 #import <Colours.h>
 #import <SDWebImage/SDWebImage.h>
 #import "../../../Utils/TimeUtils/TimeUtils.h"
+#import "ViewModelManager.h"
 
 
 @interface CommentCell()
@@ -53,6 +54,8 @@
     space = 5;
     marginBottom = 20;
     
+    // 计算是否点赞过
+    [self computeIfThumbUp];
     // 设置背景色
     [self setBackgroundColor:[UIColor whiteColor]];
     // 添加子view
@@ -186,19 +189,18 @@
 - (void)handleThumbUp: (UIGestureRecognizer *)gestureRecognizer
 {
     if(!_hasThumbUp) {
-        [self.thumb_up_icon setImage: [UIImage imageNamed: @"thumb_up_red"]];
-        NSInteger newThumbUpNum = [self.thumb_up_count.text intValue] + 1;
-        NSString *newThumbUpCount = [NSString stringWithFormat: @"%ld", newThumbUpNum];
-        [self.thumb_up_count setText: newThumbUpCount];
-        self.comment.ThumbUpCount = newThumbUpCount;
-        [self saveData];
-        _hasThumbUp = true;
+        NewsDetailViewModel *ViewModel = [[ViewModelManager getManager] getViewModel:@"NewsDetailViewModel"];
+        [ViewModel addThumbUpCountWithCommentID:_comment.commentID UserID: [[User getInstance] getUsername]];
+//        [self.thumb_up_icon setImage: [UIImage imageNamed: @"thumb_up_red"]];
+//        _hasThumbUp = true;
+        [self fitLocation];
     }
 }
 
-- (void)saveData
+// 计算是否点赞过
+- (void)computeIfThumbUp
 {
-    
+    _hasThumbUp = false;
 }
 
 @end

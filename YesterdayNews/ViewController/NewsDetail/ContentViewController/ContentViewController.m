@@ -354,7 +354,7 @@
 #define WIDTH self.frame.size.width
 #define HEIGHT self.frame.size.height
 
-@interface ContentViewController() <WKNavigationDelegate, UITableViewDataSource, UITableViewDelegate, WebViewCellDelegate, UIScrollViewDelegate>
+@interface ContentViewController() <WKNavigationDelegate, UITableViewDataSource, UITableViewDelegate, WebViewCellDelegate, UIScrollViewDelegate, CommentDelegate>
 {
     CGFloat margin;
     CGFloat marginTop;
@@ -410,6 +410,7 @@
 // viewmodel绑定
 - (void)bindViewModel {
     self.ViewModel = [[ViewModelManager getManager] getViewModel: @"NewsDetailViewModel"];
+    self.ViewModel.commentDelegate = self;
     if(![User getInstance].hasLogin) {
         NSLog(@"[LOG] User didn't login");
     }
@@ -519,6 +520,14 @@
     NSLog(@"reloadWebViewData: %zd", cellHeight);
     webViewHeight = cellHeight;
     [self.content reloadData];
+}
+
+# pragma mark -CommentDelegate
+- (void)reloadCommentData
+{
+    // 刷新comments队列
+    NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:3];
+    [self.content reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
 }
 
 @end
