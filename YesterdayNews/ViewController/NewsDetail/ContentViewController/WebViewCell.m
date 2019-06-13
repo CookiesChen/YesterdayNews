@@ -11,7 +11,7 @@
 #import "WebViewCell.h"
 
 
-@interface WebViewCell()
+@interface WebViewCell() <WKNavigationDelegate>
 {
     CGFloat marginTop;
     CGFloat cellHeight;
@@ -62,39 +62,15 @@
     [self setFrame:cell_frame];
 }
 
-# pragma KVO
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
-    if([keyPath isEqualToString:@"contentSize"]) {
-        CGFloat height = self.webView.scrollView.contentSize.height;
-        CGRect newFrame = self.webView.frame;
-        newFrame.size.height = height;
-        [self.webView setFrame:newFrame];
-        //        [self.content setContentSize:CGSizeMake(WIDTH, marginTop+height)];
+- (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation {
+    [self.webView evaluateJavaScript:@"document.body.offsetHeight" completionHandler:^(id _Nullable a, NSError * _Nullable error) {
+        CGRect frame = webView.frame;
+        frame.size.height = webView.scrollView.contentSize.height;
+        webView.frame= frame;
         
-        // 注入js调整图片大小
-        NSString *js = @"function imgAutoFit(){\
-        var imgs = document.getElementsByTagName('img');\
-        for(let i = 0; i < imgs.length; i++){\
-        let img = imgs[i];\
-        let imgWidth = img.width;\
-        let imgHeight = img.height;\
-        let factor = imgHeight/imgWidth;\
-        img.style.maxWidth = %f;\
-        img.height = img.width*factor;\
-        }\
-        }";
-        js = [NSString stringWithFormat:js, self.frame.size.width];
-        [self.webView evaluateJavaScript:js completionHandler:nil];
-        [self.webView evaluateJavaScript:@"imgAutoFit()" completionHandler:nil];
-        [self.webView sizeToFit];
-        
-        // 通知父页面tableview reloaddata
-        if(_webView.frame.size.height > cellHeight) {
-            NSLog(@"change:%f, %f", _webView.frame.size.height, cellHeight);
-            cellHeight = _webView.frame.size.height + marginTop;
-            [self reloadDataActionBack];
-        }
-    }
+        cellHeight = _webView.frame.size.height + marginTop;
+        [self reloadDataActionBack];
+    }];
 }
 
 
@@ -115,12 +91,12 @@
             NSString *s = x;
             if(s != nil){
                 NSString *head = @"<meta name=\"viewport\" content=\"width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no\" />";
-                [self->_webView loadHTMLString:[head stringByAppendingString:s] baseURL: nil];
+                NSString *css = @"<style type=\"text/css\">img{max-width: 100%;width: 100%;height: auto;}</style>";
+                [self->_webView loadHTMLString:[[head stringByAppendingString:s] stringByAppendingString:css] baseURL: nil];
                 [self->_webView.scrollView setScrollEnabled: NO];
-                // 监听webview, 实现高度自适应
-                [self->_webView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
             }
         }];
+        _webView.navigationDelegate = self;
     }
     return _webView;
 }
