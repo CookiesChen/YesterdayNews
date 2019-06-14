@@ -198,8 +198,6 @@
     if(!_hasThumbUp) {
         NewsDetailViewModel *ViewModel = [[ViewModelManager getManager] getViewModel:@"NewsDetailViewModel"];
         [ViewModel addThumbUpCountWithCommentID:_comment.commentID UserID: [[User getInstance] getUsername]];
-//        [self.thumb_up_icon setImage: [UIImage imageNamed: @"thumb_up_red"]];
-//        _hasThumbUp = true;
         [self fitLocation];
     }
 }
@@ -207,7 +205,12 @@
 // 计算是否点赞过
 - (void)computeIfThumbUp
 {
-    _hasThumbUp = false;
+    NewsDetailViewModel *ViewModel = [[ViewModelManager getManager] getViewModel:@"NewsDetailViewModel"];
+    for (Comment *starComment in ViewModel.myStarComments) {
+        if([starComment.commentID isEqualToString: self.comment.commentID]){
+            _hasThumbUp = true;
+        }
+    }
 }
 
 @end

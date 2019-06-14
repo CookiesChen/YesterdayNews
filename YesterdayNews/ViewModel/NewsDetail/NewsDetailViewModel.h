@@ -26,6 +26,7 @@
 
 @property(nonatomic, strong) NSString *newsID;
 @property(nonatomic, strong) NSMutableArray *comments;
+@property(nonatomic, strong) NSMutableArray *myStarComments;
 @property(nonatomic, strong) NSString *htmlString;
 @property(nonatomic, strong) NSString *newsTitle;
 @property(nonatomic, strong) NSString *avatar;

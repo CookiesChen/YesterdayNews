@@ -397,7 +397,7 @@
     margin = 20.0f;
     marginTop = 20.0f;
     self.identifier = @"reuseCell";
-    webViewHeight = 742.0f;
+    webViewHeight = 0.0f;
 }
 
 // ui布局
@@ -478,7 +478,7 @@
     }
     else if(indexPath.section == 2) {
         if(self.webviewcell == nil) {
-            self.webviewcell = [[WebViewCell alloc] initWithFrame: CGRectMake(margin, 0, self.frame.size.width-2*margin, 742)];
+            self.webviewcell = [[WebViewCell alloc] initWithFrame: CGRectMake(margin, 0, self.frame.size.width-2*margin, webViewHeight)];
             self.webviewcell.delegate = self;
         }
         [cell addSubview: self.webviewcell];

@@ -29,16 +29,27 @@
 
 - (void)initialize {
     self.comments = [[NSMutableArray alloc] init];
-//    for (int i = 0; i < 8; i++) {
-//        [self.comments addObject:[[Comment alloc] init]];
-//    }
+    self.myStarComments = [[NSMutableArray alloc] init];
 }
 
 - (void)setNews:(News *)news {
     self.newsTitle = [news title];
     self.author = [news author];
     self.newsID = [news newsId];
-    /* 获取新闻内容 */
+    
+    // 获取新闻内容
+    [self getNewsDetail: news];
+    
+    // 获取新闻评论列表
+    [self getCommentList: news];
+    
+    // 获取我点赞过的评论列表
+    [self getMyStarCommentList: [[User getInstance] getUsername]];
+}
+
+/* 获取新闻详情内容 */
+- (void)getNewsDetail:(News *)news
+{
     NSString *url = [NSString stringWithFormat: @"http://localhost:3000/news/content/id=%@", [news newsId]];
     AFHTTPSessionManager *manage = [AFHTTPSessionManager manager];
     // 设置请求体为JSON
@@ -52,34 +63,10 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"[get content] fail");
     }];
-    
-    /* 获取评论列表 */
-    url = [NSString stringWithFormat: @"http://localhost:3000/comment/newsID=%@", [news newsId]];
-    [manage GET:url parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSArray *commentsData = [NSArray arrayWithArray: responseObject[@"comments"]];
-        [self.comments removeAllObjects];
-        for (id commentData in commentsData) {
-            Comment *temp = [[Comment alloc] init];
-            temp.ThumbUpCount = [NSString stringWithFormat:@"%@",commentData[@"stars"]];
-            temp.CommentContent = commentData[@"content"];
-            NSTimeInterval interval = [commentData[@"time"] longLongValue]/1000;
-            temp.CommentTime = [NSDate dateWithTimeIntervalSince1970:interval];
-            temp.UserName = commentData[@"userID"];
-            temp.commentID = [NSString stringWithFormat:@"%@",commentData[@"commentID"]];
-            temp.UserIcon = [NSString stringWithFormat: @"http://serverIP/image/avatar/%@.png", commentData[@"userID"]];
-            [self.comments addObject: temp];
-        }
-        NSLog(@"commentData:%@", responseObject[@"comments"]);
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"[get comments] fail");
-    }];
-    
-    /* 获取我的评论点赞 TODO*/
-    
 }
 
+
+/* 提交评论 */
 - (void)addCommentsWithNewsID:(NSString *)newsID UserID:(NSString *)userID Time:(NSString *)time Content:(NSString *)content
 {
     // 查看是否已登陆
@@ -125,6 +112,7 @@
     }];
 }
 
+/* 提交点赞 */
 - (void)addThumbUpCountWithCommentID:(NSString *)commentID UserID:(NSString *)userID
 {
     // 查看是否已登陆
@@ -147,13 +135,17 @@
     manage.responseSerializer = [AFJSONResponseSerializer serializer];
     [manage POST:url parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        // 如果点赞成功
-        // 更新viewmodel
+        // 如果点赞成功,更新viewmodel
+        // 评论队列comments修改点赞数
         for (Comment *comment in _comments) {
             if([comment.commentID isEqualToString:commentID]) {
                 comment.ThumbUpCount = [NSString stringWithFormat:@"%@", responseObject[@"count"]];
             }
         }
+        // 我点赞过的评论队列要添加这个评论
+        Comment *newStarComment = [[Comment alloc] init];
+        newStarComment.commentID = commentID;
+        [_myStarComments addObject:newStarComment];
         // 提示框呈现
         [[UIApplication sharedApplication].keyWindow yb_showHookTipView:@"点赞成功"];
         // 代理响应reloadData方法更新界面
@@ -163,6 +155,77 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"[LOG] post star fail");
         [[UIApplication sharedApplication].keyWindow yb_showForkTipView:@"点赞失败"];
+    }];
+}
+
+
+/* 获取新闻评论列表 */
+- (void)getCommentList:(News *)news
+{
+    // AFNetManager
+    AFHTTPSessionManager *manage = [AFHTTPSessionManager manager];
+    // 设置请求体为JSON
+    manage.requestSerializer = [AFJSONRequestSerializer serializer];
+    // 添加cookie-token
+    NSString *cookieStr = [NSString stringWithFormat:@"Bearer %@", [[User getInstance] getToken]];
+    [manage.requestSerializer setValue: cookieStr forHTTPHeaderField:@"Authorization"];
+    // 设置url
+    NSString *url = [NSString stringWithFormat: @"http://localhost:3000/comment/newsID=%@", [news newsId]];
+    [manage GET:url parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        // 成功回调
+        NSArray *commentsData = [NSArray arrayWithArray: responseObject[@"comments"]];
+        [self.comments removeAllObjects];
+        for (id commentData in commentsData) {
+            Comment *temp = [[Comment alloc] init];
+            temp.ThumbUpCount = [NSString stringWithFormat:@"%@",commentData[@"stars"]];
+            temp.CommentContent = commentData[@"content"];
+            NSTimeInterval interval = [commentData[@"time"] longLongValue]/1000;
+            temp.CommentTime = [NSDate dateWithTimeIntervalSince1970:interval];
+            temp.UserName = commentData[@"userID"];
+            temp.commentID = [NSString stringWithFormat:@"%@",commentData[@"commentID"]];
+            temp.UserIcon = [NSString stringWithFormat: @"http://serverIP/image/avatar/%@.png", commentData[@"userID"]];
+            [self.comments addObject: temp];
+        }
+        NSLog(@"[LOG] commentData:%@", responseObject[@"comments"]);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        // 失败回调
+        NSLog(@"[LOG] get comments fail");
+    }];
+}
+
+/* 获取我的点赞评论 */
+- (void)getMyStarCommentList: (NSString*) username
+{
+    // AFNetManager
+    AFHTTPSessionManager *manage = [AFHTTPSessionManager manager];
+    // 设置请求体为JSON
+    manage.requestSerializer = [AFJSONRequestSerializer serializer];
+    // 添加cookie-token
+    NSString *cookieStr = [NSString stringWithFormat:@"Bearer %@", [[User getInstance] getToken]];
+    [manage.requestSerializer setValue: cookieStr forHTTPHeaderField:@"Authorization"];
+    // 设置url
+    NSString *url = [NSString stringWithFormat: @"http://localhost:3000/star/comments/username=%@", username];
+    [manage GET:url parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        // 成功回调
+        NSArray *commentsData = [NSArray arrayWithArray: responseObject[@"data"]];
+        [self.myStarComments removeAllObjects];
+        for (id commentData in commentsData) {
+            Comment *temp = [[Comment alloc] init];
+            temp.ThumbUpCount = [NSString stringWithFormat:@"%@",commentData[@"stars"]];
+            temp.CommentContent = commentData[@"content"];
+            NSTimeInterval interval = [commentData[@"time"] longLongValue]/1000;
+            temp.CommentTime = [NSDate dateWithTimeIntervalSince1970:interval];
+            temp.UserName = commentData[@"userID"];
+            temp.commentID = [NSString stringWithFormat:@"%@",commentData[@"commentID"]];
+            temp.UserIcon = [NSString stringWithFormat: @"http://serverIP/image/avatar/%@.png", commentData[@"userID"]];
+            [self.myStarComments addObject: temp];
+        }
+        NSLog(@"[LOG] myStarComments:%@", responseObject[@"data"]);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        // 失败回调
+        NSLog(@"[LOG] get starComments fail");
     }];
 }
 
