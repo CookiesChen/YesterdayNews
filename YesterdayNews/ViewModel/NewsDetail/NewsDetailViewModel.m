@@ -38,6 +38,7 @@
     self.newsTitle = [news title];
     self.author = [news author];
     self.newsID = [news newsId];
+    /* 获取新闻内容 */
     NSString *url = [NSString stringWithFormat: @"http://localhost:3000/news/content/id=%@", [news newsId]];
     AFHTTPSessionManager *manage = [AFHTTPSessionManager manager];
     // 设置请求体为JSON
@@ -51,6 +52,8 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"[get content] fail");
     }];
+    
+    /* 获取评论列表 */
     url = [NSString stringWithFormat: @"http://localhost:3000/comment/newsID=%@", [news newsId]];
     [manage GET:url parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
         
@@ -59,25 +62,22 @@
         [self.comments removeAllObjects];
         for (id commentData in commentsData) {
             Comment *temp = [[Comment alloc] init];
-            temp.ThumbUpCount = [NSString stringWithFormat:@"%.0f",commentData[@"stars"]];
+            temp.ThumbUpCount = [NSString stringWithFormat:@"%@",commentData[@"stars"]];
             temp.CommentContent = commentData[@"content"];
             NSTimeInterval interval = [commentData[@"time"] longLongValue]/1000;
             temp.CommentTime = [NSDate dateWithTimeIntervalSince1970:interval];
             temp.UserName = commentData[@"userID"];
-            temp.commentID = [NSString stringWithFormat:@"%.0f",commentData[@"commentID"]];
+            temp.commentID = [NSString stringWithFormat:@"%@",commentData[@"commentID"]];
             temp.UserIcon = [NSString stringWithFormat: @"http://serverIP/image/avatar/%@.png", commentData[@"userID"]];
             [self.comments addObject: temp];
         }
         NSLog(@"commentData:%@", responseObject[@"comments"]);
-//        for(id comment in responseObject[@"comments"]) {
-//            Comment temp = [[Comment alloc] init];
-//            temp.ThumbUpCount = [NSString stringWithFormat:@"%f", comment.stars]
-//            [self.comments]
-//
-//        }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"[get comments] fail");
     }];
+    
+    /* 获取我的评论点赞 TODO*/
+    
 }
 
 - (void)addCommentsWithNewsID:(NSString *)newsID UserID:(NSString *)userID Time:(NSString *)time Content:(NSString *)content

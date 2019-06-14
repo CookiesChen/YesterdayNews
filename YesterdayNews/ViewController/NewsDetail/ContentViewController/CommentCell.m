@@ -176,12 +176,19 @@
 - (void)updateViewByComment: (Comment *)comment
 {
     [self setComment: comment];
+    [self computeIfThumbUp];
     [self.user_name setText: self.comment.UserName];
     [self.user_name sizeToFit];
     [self.user_icon sd_setImageWithURL:[NSURL URLWithString:self.comment.UserIcon] placeholderImage: [UIImage imageNamed:@"headImg"] options:SDWebImageAllowInvalidSSLCertificates];
     [self.thumb_up_count setText: self.comment.ThumbUpCount];
     [self.comment_content setText: self.comment.CommentContent];
     [self.comment_time setText: [TimeUtils getTimeDifference:self.comment.CommentTime]];
+    if(_hasThumbUp) {
+        [self.thumb_up_icon setImage:[UIImage imageNamed:@"thumb_up_red"]];
+    }
+    else {
+        [self.thumb_up_icon setImage:[UIImage imageNamed:@"thumb_up_white"]];
+    }
     [self fitLocation];
     [self fitCellFrame];
 }
