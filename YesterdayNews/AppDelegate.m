@@ -9,6 +9,10 @@
 #import "AppDelegate.h"
 #import "ViewController.h"
 #import <UserNotifications/UserNotifications.h>
+#import <AFNetworking.h>
+#import "YBImageBrowserTipView.h"
+#import "Model/User/User.h"
+#import "Utils/ManagerUtils/ViewModelManager.h"
 
 @interface AppDelegate (){
     ViewController *vc;
@@ -23,6 +27,16 @@
     vc = [[ViewController alloc] init];
     [self.window makeKeyAndVisible];
     [self.window setRootViewController: vc];
+    
+    // get local token
+    NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"TOKEN"];
+    if(token != nil) {
+        NSLog(@"get token:  %@\n", token);
+        [self checkToke:token];
+    }
+    else {
+        NSLog(@"---------no token--------\n");
+    }
     
     [self registerAPN];
     return YES;
@@ -41,6 +55,31 @@
                                               categories:nil];
         [[UIApplication sharedApplication] registerUserNotificationSettings:setting];
     }
+}
+
+- (void)checkToke:(NSString *)token {
+    NSString *url = @"http://localhost:3000/user/verification"; //check token url
+    NSDictionary *parameters = @{@"token": token};
+    AFHTTPSessionManager *manage = [AFHTTPSessionManager manager];
+    // 设置请求体为JSON
+    manage.requestSerializer = [AFJSONRequestSerializer serializer];
+    // 设置响应体为JSON
+    manage.responseSerializer = [AFJSONResponseSerializer serializer];
+    [manage POST:url parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSString *username = responseObject[@"username"];
+        User *user = [User getInstance];
+        [user setUsername:username];
+        [user setToken:token];
+        user.hasLogin = true;
+        
+        NSLog(@"[login] auto login");
+        [[UIApplication sharedApplication].keyWindow yb_showHookTipView:[NSString stringWithFormat:@"欢迎回来, %@", username]];
+        [[[ViewModelManager getManager] getViewModel:@"UserInfoViewModel"] userLogin];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
 }
 
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center
