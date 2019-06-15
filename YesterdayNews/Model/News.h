@@ -11,6 +11,7 @@
 typedef enum : NSUInteger {
     MultiImagesNewsTag,
     SingleImageNewsTag,
+    PureTextNewsTag
 } NewsTag;
 
 @interface News : NSObject

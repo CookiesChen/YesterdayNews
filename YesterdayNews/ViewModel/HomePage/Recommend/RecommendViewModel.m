@@ -59,8 +59,10 @@
         }
         if([rnews.images count] >= 3){
             rnews.tag = random()%2;
+        } else if([rnews.images count] == 1){
+            rnews.tag = SingleImageNewsTag;
         } else {
-            rnews.tag = 1;
+            rnews.tag = PureTextNewsTag;
         }
         [rnews setTime: [NSDate dateWithTimeIntervalSince1970: [obj[@"time"] longLongValue]/1000]];
         [self.news addObject: rnews];

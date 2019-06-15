@@ -129,7 +129,7 @@ YBImageBrowserDataSource>
 
 # pragma getter and setter
 - (UILabel *)title {
-    if(_time == nil) {
+    if(_title == nil) {
         // _title = [[UILabel alloc] initWithFrame:CGRectMake(margin, marginTop, (WIDTH-2*margin)*2/3, 0)];
         _title = [[UILabel alloc] initWithFrame:CGRectMake(margin, marginTop, WIDTH - 2*margin - self.collectionView.frame.size.width - padding, 0)];
         [_title setText: self.news.title];
