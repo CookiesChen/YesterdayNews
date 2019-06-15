@@ -17,6 +17,11 @@
     return [[IDBManager getInstance] execSQL:SQL];
 }
 
++ (BOOL)updateNewsComments:(int)comments WithID:(NSString *)newsID {
+    NSString *SQL = [[NSString alloc] initWithFormat:@"UPDATE NewsCache SET comments = '%d' WHERE ID = '%@';", comments, newsID];
+    return [[IDBManager getInstance] execSQL:SQL];
+}
+
 + (BOOL)clearCacheDB {
     NSString *SQL = @"DELETE FROM NewsCache;";
     return [[IDBManager getInstance] execSQL:SQL];
