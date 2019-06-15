@@ -116,7 +116,7 @@
 
 # pragma getter and setter
 - (UILabel *)title {
-    if(_time == nil) {
+    if(_title == nil) {
         _title = [[UILabel alloc] initWithFrame:CGRectMake(margin, marginTop, WIDTH-2*margin, 100)];
         [_title setText: [self.news title]];
         [_title setFont: [UIFont systemFontOfSize: 20]];
