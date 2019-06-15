@@ -88,6 +88,15 @@ typedef struct SettingItem {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"确认退出" message:@"确认退出当前账号吗？" preferredStyle:UIAlertControllerStyleAlert];
     _okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *_Nonnull action) {
         [self.viewModel userLogout];
+        User *user = [User getInstance];
+        user.hasLogin = false;
+        [user setUsername:@""];
+        [user setToken:@""];
+        
+        // delete local token
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"TOKEN"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
         [self.navigationController popViewControllerAnimated:YES];
     }];
     _cancelAction =[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
