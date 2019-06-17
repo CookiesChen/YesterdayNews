@@ -71,6 +71,7 @@
 - (void) showTextFieldInView:(UIView *)view withReturnText:(ReturnTextBlock)block {
     self.returnTextBlock = block;
     [self addTextField];
+    [self registNotification];
     [self showInView:view];
 }
 
@@ -152,6 +153,33 @@
                          self.returnTextBlock = nil;
                          self.returnDateBlock = nil;
                      }];
+}
+
+#pragma mark notification 通知管理
+- (void)registNotification {
+    // observe keyboard hide and show notifications to resize the text view appropriately
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+#pragma mark --键盘弹出收起管理
+-(void)keyboardWillShow:(NSNotification *)note {
+    //获取键盘高度
+    NSDictionary* info = [note userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        self.alpha = 1.0;
+        [self.contentView setFrame:CGRectMake(0, self.frame.size.height - self.contentHight - kbSize.height, self.frame.size.width, self.contentHight)];
+    } completion:nil];
+}
+
+-(void)keyboardWillHide:(NSNotification *)note {
+    [UIView animateWithDuration:0.3 animations:^{
+        self.alpha = 1.0;
+        [self.contentView setFrame:CGRectMake(0, self.frame.size.height - self.contentHight, self.frame.size.width, self.contentHight)];
+    } completion:nil];
 }
 
 @end
