@@ -10,6 +10,7 @@
 #import "../../../Utils/Notification/INotification.h"
 #import "../../../Utils/TimeUtils/TimeUtils.h"
 #import "../../../Layout/MultiImagesNews.h"
+#import "../../../Layout/PureTextNews.h"
 #import "../../../Model/News.h"
 #import "../../NewsDetail/NewsDetailViewController.h"
 #import "../../../Layout/SingleImageNews.h"
@@ -143,13 +144,17 @@
     if(cell.subviews.count == 0) {
         // NSLog(@"add sub view: item:%zd, tag:%zd", indexPath.row, cell.tag);
         switch (tag) {
-            case 0:
+            case MultiImagesNewsTag:
                 // 多图
                 [cell addSubview: [[MultiImagesNews alloc] initWithFrame: CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height) andNews:self.ViewModel.news[indexPath.row]]];
                 break;
-            case 1:
+            case SingleImageNewsTag:
                 // 单图
                 [cell addSubview: [[SingleImageNews alloc] initWithFrame: CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height) andNews:self.ViewModel.news[indexPath.row]]];
+                break;
+            case PureTextNewsTag:
+                // 纯文本
+                [cell addSubview:[[PureTextNews alloc] initWithFrame:CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height) andNews:self.ViewModel.news[indexPath.row]]];
                 break;
             default:
                 // 默认多图
@@ -172,11 +177,14 @@
     News *news = [self.ViewModel.news objectAtIndex:indexPath.row];
     NewsTag tag = [news tag];
     switch (tag) {
-        case 0:
+        case MultiImagesNewsTag:
             cellSize = CGSizeMake(WIDTH, 230);
             break;
-        case 1:
+        case SingleImageNewsTag:
             cellSize = CGSizeMake(WIDTH, 140);
+            break;
+        case PureTextNewsTag:
+            cellSize = CGSizeMake(WIDTH, [PureTextNews itemHeight]);
             break;
         default:
             cellSize = CGSizeMake(WIDTH, 300);

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02BAA06222B48EA6004C0E51 /* PureTextNews.m in Sources */ = {isa = PBXBuildFile; fileRef = 02BAA06122B48EA6004C0E51 /* PureTextNews.m */; };
 		24ED0A27227B602E00F9814A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED0A1A227B602E00F9814A /* LoginViewController.m */; };
 		24ED0A28227B602E00F9814A /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED0A1D227B602E00F9814A /* UserInfoViewController.m */; };
 		24ED0A2A227B602E00F9814A /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED0A20227B602E00F9814A /* SignupViewController.m */; };
@@ -80,6 +81,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		02BAA06022B48E80004C0E51 /* PureTextNews.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PureTextNews.h; sourceTree = "<group>"; };
+		02BAA06122B48EA6004C0E51 /* PureTextNews.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PureTextNews.m; sourceTree = "<group>"; };
 		07AA0FE3601FE1262409EB2B /* libPods-YesterdayNewsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YesterdayNewsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F0E4A0C7DDF17D008A78D0E /* libPods-YesterdayNewsUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YesterdayNewsUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		24ED0A18227B602E00F9814A /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoViewController.h; sourceTree = "<group>"; };
@@ -398,6 +401,8 @@
 			children = (
 				51B51D3B228298EA007AA44B /* SingleImageNews.h */,
 				51B51D3C228298FB007AA44B /* SingleImageNews.m */,
+				02BAA06022B48E80004C0E51 /* PureTextNews.h */,
+				02BAA06122B48EA6004C0E51 /* PureTextNews.m */,
 				51B51D402282996A007AA44B /* MultiImagesNews.h */,
 				51B51D3E22829960007AA44B /* MultiImagesNews.m */,
 				5180E9F7228997570093220B /* ImageCell.h */,
@@ -882,6 +887,7 @@
 				B55AE2D2229D378D00E7CD5F /* IDBManager.m in Sources */,
 				B55AE2D9229D379A00E7CD5F /* NewsCacheDB.m in Sources */,
 				51B51D3D228298FB007AA44B /* SingleImageNews.m in Sources */,
+				02BAA06222B48EA6004C0E51 /* PureTextNews.m in Sources */,
 				E79A7E9E2273F34300FB5F9D /* INotification.m in Sources */,
 				51DDC83122A25BF10008B24C /* ProfileViewModel.m in Sources */,
 				51DDC82D22A218090008B24C /* ViewModelManager.m in Sources */,
