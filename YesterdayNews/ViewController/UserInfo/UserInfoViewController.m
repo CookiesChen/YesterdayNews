@@ -76,6 +76,7 @@
     [self bindViewModel];
     [self initData];
     [self setupView];
+    [self autoLogin];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -171,6 +172,17 @@
     self.part3.transform = CGAffineTransformTranslate(self.part3.transform, 0, self.part3.frame.size.height);
     // ------------------------------------------------------------
     
+}
+
+- (void)autoLogin {
+    User *user = [User getInstance];
+    if(user.hasLogin == true) {
+        //[self showUserInfoAnimation];
+        self.part1.alpha = 100;
+        self.toLoginButton.alpha = 0;
+        self.tableView.transform = CGAffineTransformTranslate(self.part1.transform, 0, 70);
+        self.part2.transform = CGAffineTransformTranslate(self.part1.transform, 0, 70);
+    }
 }
 
 - (void)bindViewModel {
