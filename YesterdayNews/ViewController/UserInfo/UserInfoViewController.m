@@ -384,6 +384,11 @@
         controller.viewModel = self.viewModel;
         [self.navigationController pushViewController:controller animated:YES];
     }
+    if(indexPath.section == 1) {
+        ProfileViewModel *profileViewModel = [[ViewModelManager getManager] getViewModel:@"ProfileViewModel"];
+        int like = [profileViewModel.like intValue];
+        profileViewModel.like = [NSString stringWithFormat:@"%d", ++like];
+    }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
