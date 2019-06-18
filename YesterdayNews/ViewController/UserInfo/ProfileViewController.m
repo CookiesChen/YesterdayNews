@@ -69,6 +69,7 @@
 - (void)setUserIconUrl:(NSString *)userIconUrl
 {
     NSURL *imageURL = [NSURL URLWithString:userIconUrl];
+    [[SDImageCache sharedImageCache] removeImageForKey:userIconUrl withCompletion:nil];
     UIImage *cachedImg = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:userIconUrl];
     if (!cachedImg) {
         [self.backgroundImg sd_setImageWithURL:imageURL placeholderImage:nil];
