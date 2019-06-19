@@ -107,6 +107,8 @@
     if(_user_icon == nil) {
         _user_icon = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, user_icon_width, user_icon_height)];
         [_user_icon setImage:[UIImage imageNamed:@"headImg"]];
+        _user_icon.layer.masksToBounds = YES;
+        _user_icon.layer.cornerRadius = _user_icon.frame.size.width/2;
     }
     return _user_icon;
 }
