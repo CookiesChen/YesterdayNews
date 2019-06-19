@@ -19,10 +19,10 @@
 @property(nonatomic, strong) NSString *like;
 @property(nonatomic, strong) NSString *following;
 @property(nonatomic, strong) NSString *follower;
-@property(nonatomic, strong) UIImage *icon;
 @property(nonatomic, strong) NSString *userIconUrl;
 
 - (void)updateIconwithIconData:(NSData *)iconData withUserName:(NSString *)name;
+- (void)refreshData;
 
 @end
 

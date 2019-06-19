@@ -99,12 +99,12 @@
         NSTimeInterval interval = [time longLongValue]/1000;
         newComment.CommentTime = [NSDate dateWithTimeIntervalSince1970:interval];
         newComment.CommentContent = content;
-        [_comments addObject: newComment];
+        [self.comments addObject: newComment];
         // 提示框呈现
         [[UIApplication sharedApplication].keyWindow yb_showHookTipView:@"提交评论成功"];
         // 代理响应reloadData方法更新界面
-        if ([_commentDelegate respondsToSelector:@selector(reloadCommentData)]) {
-            [_commentDelegate reloadCommentData];
+        if ([self.commentDelegate respondsToSelector:@selector(reloadCommentData)]) {
+            [self.commentDelegate reloadCommentData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"[LOG] post comments fail");
@@ -137,7 +137,7 @@
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         // 如果点赞成功,更新viewmodel
         // 评论队列comments修改点赞数
-        for (Comment *comment in _comments) {
+        for (Comment *comment in self.comments) {
             if([comment.commentID isEqualToString:commentID]) {
                 comment.ThumbUpCount = [NSString stringWithFormat:@"%@", responseObject[@"count"]];
             }
@@ -145,12 +145,12 @@
         // 我点赞过的评论队列要添加这个评论
         Comment *newStarComment = [[Comment alloc] init];
         newStarComment.commentID = commentID;
-        [_myStarComments addObject:newStarComment];
+        [self.myStarComments addObject:newStarComment];
         // 提示框呈现
         [[UIApplication sharedApplication].keyWindow yb_showHookTipView:@"点赞成功"];
         // 代理响应reloadData方法更新界面
-        if ([_commentDelegate respondsToSelector:@selector(reloadCommentData)]) {
-            [_commentDelegate reloadCommentData];
+        if ([self.commentDelegate respondsToSelector:@selector(reloadCommentData)]) {
+            [self.commentDelegate reloadCommentData];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"[LOG] post star fail");
@@ -184,7 +184,7 @@
             temp.CommentTime = [NSDate dateWithTimeIntervalSince1970:interval];
             temp.UserName = commentData[@"userID"];
             temp.commentID = [NSString stringWithFormat:@"%@",commentData[@"commentID"]];
-            temp.UserIcon = [NSString stringWithFormat: @"http://serverIP/image/avatar/%@.png", commentData[@"userID"]];
+            temp.UserIcon = [NSString stringWithFormat: @"http://localhost:3000/image/avatar/%@.png", commentData[@"userID"]];
             [self.comments addObject: temp];
         }
         NSLog(@"[LOG] commentData:%@", responseObject[@"comments"]);
@@ -219,7 +219,7 @@
             temp.CommentTime = [NSDate dateWithTimeIntervalSince1970:interval];
             temp.UserName = commentData[@"userID"];
             temp.commentID = [NSString stringWithFormat:@"%@",commentData[@"commentID"]];
-            temp.UserIcon = [NSString stringWithFormat: @"http://serverIP/image/avatar/%@.png", commentData[@"userID"]];
+            temp.UserIcon = [NSString stringWithFormat: @"http://localhost:3000/image/avatar/%@.png", commentData[@"userID"]];
             [self.myStarComments addObject: temp];
         }
         NSLog(@"[LOG] myStarComments:%@", responseObject[@"data"]);
