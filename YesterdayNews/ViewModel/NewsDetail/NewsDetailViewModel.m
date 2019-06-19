@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "YBImageBrowserTipView.h"
 #import "User.h"
+#import "ViewModelManager.h"
 
 @interface NewsDetailViewModel()
 
@@ -99,6 +100,8 @@
         NSTimeInterval interval = [time longLongValue]/1000;
         newComment.CommentTime = [NSDate dateWithTimeIntervalSince1970:interval];
         newComment.CommentContent = content;
+        ProfileViewModel *ViewModel = [[ViewModelManager getManager] getViewModel: @"ProfileViewModel"];
+        newComment.UserIcon = ViewModel.userIconUrl;
         [self.comments addObject: newComment];
         // 提示框呈现
         [[UIApplication sharedApplication].keyWindow yb_showHookTipView:@"提交评论成功"];
