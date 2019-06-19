@@ -21,21 +21,16 @@
 {
     self = [super init];
     if(self){
-        [self initialize];
+        [self refreshData];
         
     }
     return self;
 }
 
-- (void)initialize
+- (void)refreshData
 {
-    // async load UIImage with url
-    self.userIconUrl = @"http://localhost:3000/image/avatar/MTc2MjI0NjU3MTIwMDE4MDIxMDU=.png";
-//    NSURL *imgUrl = [NSURL URLWithString:self.userIconUrl];
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-//        NSData *imgData = [NSData dataWithContentsOfURL:imgUrl];
-//        self.icon = [UIImage imageWithData:imgData];
-//    });
+    // post request to get usericon url
+    [self getUserIconwithUserName: [[User getInstance] getUsername]];
     // other property like username and so on
     self.username = [[User getInstance] getUsername];
     self.like = @"1";
@@ -43,6 +38,7 @@
     self.follower = @"3";
 }
 
+/* 更新头像 */
 - (void)updateIconwithIconData:(NSData *)iconData withUserName:(NSString *)name
 {
     // post request to change user icon
@@ -53,10 +49,6 @@
         return;
     }
     NSString *url = @"http://localhost:3000/user/avatar";
-    NSDictionary *parameters = @{
-                                 @"file":iconData,
-                                 @"username":[[User getInstance] getUsername]
-                                 };
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     // 设置请求体和响应体为JSON
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -82,7 +74,38 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [[UIApplication sharedApplication].keyWindow yb_showHookTipView:@"头像修改失败"];
     }];
-    
+}
+
+/* 获取头像 */
+- (void)getUserIconwithUserName:(NSString *)username
+{
+    // AFNetManager
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    // 设置请求体和响应体为JSON
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    // 添加cookie-token
+    NSString *cookieStr = [NSString stringWithFormat:@"Bearer %@", [[User getInstance] getToken]];
+    [manager.requestSerializer setValue: cookieStr forHTTPHeaderField:@"Authorization"];
+    // 设置url
+    NSString *url = [NSString stringWithFormat: @"http://localhost:3000/user/info/%@", username];
+    [manager GET:url parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        // 成功回调
+        NSDictionary *userInfoDic = responseObject[@"username"];
+        id avatar = [userInfoDic objectForKey:@"avatar"];
+        // 没有设置过头像
+        if(avatar == nil || !avatar || avatar == [NSNull null]) {
+            self.userIconUrl = @"http://localhost:3000/image/avatar/MTc2MjI0NjU3MTIwMDE4MDIxMDU=.png";
+        }
+        // 设置过头像
+        else {
+            self.userIconUrl = [NSString stringWithFormat:@"http://localhost:3000/image/avatar/%@.png", username];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        // 失败回调
+        NSLog(@"[LOG] get usericon fail");
+    }];
 }
 
 @end
