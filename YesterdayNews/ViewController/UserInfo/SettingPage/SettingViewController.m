@@ -9,6 +9,7 @@
 #import "SettingViewController.h"
 #import "SubSettingViewController/EditInformationViewController.h"
 #import "SubSettingViewController/PrivateSettingViewController.h"
+#import "ViewModelManager.h"
 
 typedef enum ItemType {
     Edit,

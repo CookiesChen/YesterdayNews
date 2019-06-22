@@ -73,7 +73,8 @@
         // local save token
         [[NSUserDefaults standardUserDefaults] setObject:[user getToken] forKey:@"TOKEN"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        
+        // refresh ProfileViewModel
+        [[[ViewModelManager getManager] getViewModel:@"ProfileViewModel"] refreshData];
         NSLog(@"[login] success");
         [[UIApplication sharedApplication].keyWindow yb_showHookTipView:[NSString stringWithFormat:@"欢迎回来, %@", username]];
         

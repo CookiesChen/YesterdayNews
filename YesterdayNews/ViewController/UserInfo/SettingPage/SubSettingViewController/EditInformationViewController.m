@@ -8,8 +8,10 @@
 
 #import "EditInformationViewController.h"
 #import "../../../../Layout/BottomBounceView.h"
+#import "UserInfoViewController.h"
+#import "ViewModelManager.h"
 
-@interface EditInformationViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface EditInformationViewController () <UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property(nonatomic, strong) NSMutableArray *tableItems;
 @property(nonatomic, strong) UITableView *tableView;
@@ -58,7 +60,7 @@
 - (void)editHeadImg {
     UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
+        [self imagePickActionControl];
     }];
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         // do nothing
@@ -93,6 +95,47 @@
         NSLog(@"###current date - %@\n", dateString);
     }];
 }
+
+- (void)imagePickActionControl
+{
+    NSLog(@"[LOG] imagePickActionControl");
+    NSUInteger sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.delegate = self;
+    imagePickerController.allowsEditing = YES;
+    imagePickerController.sourceType = sourceType;
+    [self presentViewController:imagePickerController animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info
+{
+    NSLog(@"[LOG] didFinishPickingMediaWithInfo");
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    NSString *imageName = [NSString stringWithFormat:@"%@.png", [[User getInstance] getUsername]];
+    NSLog(@"[LOG] save user icon name:%@", imageName);
+    [self savePickUserIcon:image withName:imageName];
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)savePickUserIcon:(UIImage *)image withName:(NSString *)imageName
+{
+    // 获取imageData和config path
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
+    NSString *docPath = [NSHomeDirectory() stringByAppendingString:@"/Documents/image/avatar"];
+    NSString *fullPath = [docPath stringByAppendingPathComponent:imageName];
+    NSLog(@"[LOG] save user icon path: %@", fullPath);
+    // 检查Documentsd头像存储路径，若无则创建目录
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if(![fileManager fileExistsAtPath:docPath]) {
+        [fileManager createDirectoryAtPath:docPath withIntermediateDirectories:nil attributes:nil error:nil];
+    }
+    // 存储选择的头像
+    [imageData writeToFile:fullPath atomically:NO];
+    // 更新ViewModel
+    ProfileViewModel *ViewModel = [[ViewModelManager getManager] getViewModel: @"ProfileViewModel"];
+    [ViewModel updateIconwithIconData: imageData withUserName:[[User getInstance] getUsername]];
+}
+
 
 
 

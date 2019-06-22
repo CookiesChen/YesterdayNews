@@ -30,6 +30,7 @@
 @property(nonatomic, strong) UILabel *followingLabel;
 @property(nonatomic, strong) UILabel *follersNumLabel;
 @property(nonatomic, strong) UILabel *follersLabel;
+@property(nonatomic, strong) NSString *userIconUrl;
 
 @end
 
@@ -62,10 +63,14 @@
     RACChannelTo(self.likesNumLabel, text) = RACChannelTo(self.ViewModel, like);
     RACChannelTo(self.followingNumLabel, text) = RACChannelTo(self.ViewModel, following);
     RACChannelTo(self.follersNumLabel, text) = RACChannelTo(self.ViewModel, follower);
-    
-    NSString *url = @"https://hbimg.huabanimg.com/954d812b554d7a23dda1b59c0f807446798aefa839a47-H6Z5G4_fw658";
-    NSURL *imageURL = [NSURL URLWithString:url];
-    UIImage *cachedImg = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:url];
+    RACChannelTo(self, userIconUrl) = RACChannelTo(self.ViewModel, userIconUrl);
+}
+
+- (void)setUserIconUrl:(NSString *)userIconUrl
+{
+    NSURL *imageURL = [NSURL URLWithString:userIconUrl];
+    [[SDImageCache sharedImageCache] removeImageForKey:userIconUrl withCompletion:nil];
+    UIImage *cachedImg = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:userIconUrl];
     if (!cachedImg) {
         [self.backgroundImg sd_setImageWithURL:imageURL placeholderImage:nil];
         [self.userHeadImg sd_setImageWithURL:imageURL placeholderImage:nil];
@@ -79,7 +84,7 @@
 - (UIImageView *) backgroundImg {
     if(_backgroundImg == nil) {
         _backgroundImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 320)];
-        _backgroundImg.contentMode = UIViewContentModeScaleAspectFill;
+        _backgroundImg.contentMode = UIViewContentModeScaleToFill;
         // 毛玻璃
         UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
         UIVisualEffectView *effectview = [[UIVisualEffectView alloc] initWithEffect:blur];
