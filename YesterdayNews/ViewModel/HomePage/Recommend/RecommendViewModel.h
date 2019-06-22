@@ -19,5 +19,6 @@
 
 - (void)refresh;
 - (void)loadMore;
+- (void)updateCommentById:(NSString*)newsID andCount:(NSInteger)count;
 
 @end

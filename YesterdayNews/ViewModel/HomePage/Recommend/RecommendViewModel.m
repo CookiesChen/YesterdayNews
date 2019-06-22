@@ -47,6 +47,7 @@
         [rnews setNewsId: obj[@"ID"]];
         [rnews setAuthor: obj[@"author"]];
         [rnews setTitle: obj[@"title"]];
+        [rnews setComments: [NSString stringWithFormat: @"%@",obj[@"comments"]]];
         NSData *jsonString = [obj[@"images"] dataUsingEncoding:NSUTF8StringEncoding];
         NSArray *dic = [NSJSONSerialization JSONObjectWithData:jsonString
                                                             options:NSJSONReadingMutableContainers
@@ -125,6 +126,15 @@
 - (void)run {
     // update data
     [NSThread sleepForTimeInterval:2];
+    [self.success sendNext:@"success"];
+}
+
+- (void)updateCommentById:(NSString*)newsID andCount:(NSInteger)count {
+    [self.news enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if([[self.news objectAtIndex:idx] newsId] == newsID){
+            [[self.news objectAtIndex:idx] setComments:[NSString stringWithFormat:@"%ld", (long)count]];
+        }
+    }];
     [self.success sendNext:@"success"];
 }
 

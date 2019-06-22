@@ -11,6 +11,7 @@
 #import "YBImageBrowserTipView.h"
 #import "User.h"
 #import "ViewModelManager.h"
+#import "../../Utils/NewsCacheUtils/NewsCacheDB.h"
 
 @interface NewsDetailViewModel()
 
@@ -92,8 +93,7 @@
     manage.responseSerializer = [AFJSONResponseSerializer serializer];
     [manage POST:url parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        // 如果添加评论成功
-        // 更新viewmodel
+        // 添加评论成功
         Comment *newComment = [[Comment alloc] init];
         newComment.commentID = [NSString stringWithFormat:@"%@",responseObject[@"data"]];
         newComment.UserName = userID;
@@ -101,6 +101,7 @@
         newComment.CommentTime = [NSDate dateWithTimeIntervalSince1970:interval];
         newComment.CommentContent = content;
         ProfileViewModel *ViewModel = [[ViewModelManager getManager] getViewModel: @"ProfileViewModel"];
+        //NSInteger count = [(News)responseObject[@"news"] ]
         newComment.UserIcon = ViewModel.userIconUrl;
         [self.comments addObject: newComment];
         // 提示框呈现
@@ -109,6 +110,11 @@
         if ([self.commentDelegate respondsToSelector:@selector(reloadCommentData)]) {
             [self.commentDelegate reloadCommentData];
         }
+        // 更新缓存和推荐页面评论
+        NSInteger commentCount = [responseObject[@"news"][@"comments"] integerValue];
+        BOOL temp = [NewsCacheDB updateNewsComments:commentCount WithID: newsID];
+        RecommendViewModel *recommendVM = [[ViewModelManager getManager] getViewModel: @"RecommendViewModel"];
+        [recommendVM updateCommentById: newsID andCount: commentCount];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"[LOG] post comments fail");
         [[UIApplication sharedApplication].keyWindow yb_showForkTipView:@"提交评论失败"];

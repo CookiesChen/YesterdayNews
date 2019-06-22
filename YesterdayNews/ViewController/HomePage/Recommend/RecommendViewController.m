@@ -41,7 +41,6 @@
 # pragma mark life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self setupView];
     [self bindViewModel];
 }

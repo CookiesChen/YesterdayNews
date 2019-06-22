@@ -91,7 +91,7 @@
 - (UILabel *)comment {
     if (_comment == nil) {
         _comment = [[UILabel alloc] initWithFrame:CGRectMake(margin + _author.frame.size.width + 10, marginTop + _title.frame.size.height + 10, WIDTH, 25)];
-        [_comment setText:self.news.comments];
+        [_comment setText: [NSString stringWithFormat:@"%@评论", self.news.comments]];
         [_comment setFont: [UIFont systemFontOfSize: 15]];
         [_comment setTextColor: [UIColor black25PercentColor]];
         [_comment sizeToFit];
