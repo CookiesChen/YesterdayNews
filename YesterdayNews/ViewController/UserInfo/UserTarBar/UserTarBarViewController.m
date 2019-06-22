@@ -69,9 +69,9 @@
 // viewmodel绑定
 - (void)bindViewModel {
     [self.viewModel loadCommentNews];
-    //[self.viewModel loadCollectionNews];
-    //[self.viewModel loadLikeNews];
-    //[self.viewModel loadHistoryNews];
+    [self.viewModel loadCollectionNews];
+    [self.viewModel loadLikeNews];
+    [self.viewModel loadHistoryNews];
     //[self.viewModel loadRecommendNews];
 }
 
