@@ -72,7 +72,7 @@
     [self.viewModel loadCollectionNews];
     [self.viewModel loadLikeNews];
     [self.viewModel loadHistoryNews];
-    [self.viewModel loadRecommendNews];
+    //[self.viewModel loadRecommendNews];
 }
 
 - (void)setCurrentPage:(NSInteger) index {

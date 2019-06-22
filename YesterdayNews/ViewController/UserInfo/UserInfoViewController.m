@@ -109,6 +109,7 @@
         UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 300, self.view.frame.size.width, self.view.frame.size.height - 330) style:UITableViewStyleGrouped];
         tableView.delegate = self;
         tableView.dataSource = self;
+        tableView.scrollEnabled = NO;
         tableView;
     });
     //[self.part2 addSubview:self.tableView];
