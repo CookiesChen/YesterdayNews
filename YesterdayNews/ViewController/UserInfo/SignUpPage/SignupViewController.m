@@ -66,6 +66,8 @@
         NSLog(@"%@", responseObject);
         // 弹出提示框 提醒用户返回去登录
         [[UIApplication sharedApplication].keyWindow yb_showHookTipView:@"注册成功，请前往登录页面"];
+        [self.usernameInput setText:@""];
+        [self.passwordInput setText:@""];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         id response = [NSJSONSerialization JSONObjectWithData:error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] options:0 error:nil];
         NSLog(@"---------%@", error);
@@ -149,6 +151,7 @@
         _passwordInput.font = [UIFont systemFontOfSize:14];
         _passwordInput.layer.cornerRadius = 17.5;
         _passwordInput.layer.masksToBounds = YES;
+        _passwordInput.secureTextEntry = YES;
         [_passwordInput.layer setBorderWidth:1];
         [_passwordInput setAutocorrectionType:UITextAutocorrectionTypeNo];
         [_passwordInput setAutocapitalizationType:UITextAutocapitalizationTypeNone];
