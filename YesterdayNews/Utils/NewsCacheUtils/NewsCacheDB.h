@@ -13,7 +13,7 @@
 
 + (BOOL)addNewsWithID:(NSString *)newsID Title:(NSString *)title Author:(NSString *)author Time:(NSString *)time Comments:(int)comments Images:(NSString *)images;
 
-+ (BOOL)updateNewsComments:(int)comments WithID:(NSString *)newsID;
++ (BOOL)updateNewsComments:(NSInteger)comments WithID:(NSString *)newsID;
 
 + (BOOL)clearCacheDB;
 
