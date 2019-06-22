@@ -43,6 +43,7 @@
     self.manage.requestSerializer = [AFJSONRequestSerializer serializer];
     // 设置响应体为JSON
     self.manage.responseSerializer = [AFJSONResponseSerializer serializer];
+    
 }
 
 - (void)userLogin {
@@ -56,6 +57,11 @@
 }
 
 - (void)loadNewsTo: (NSMutableArray*)list withURL: (NSString*)url {
+    // Authorization: Bearer token_str
+    // 设置请求头token
+    NSString *token = [[User getInstance] getToken];
+    [self.manage.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", token] forHTTPHeaderField:@"Authorization"];
+    
     [self.manage GET:url parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -70,19 +76,24 @@
             interval /= 1000.0;
             [news setTime: [NSDate dateWithTimeIntervalSince1970: interval]];
             NSData *jsonString = [newData[i][@"image_infos"] dataUsingEncoding:NSUTF8StringEncoding];
-            NSArray *dic = [NSJSONSerialization JSONObjectWithData:jsonString
-                                                           options:NSJSONReadingMutableContainers
-                                                             error:nil];
-            news.images = [[NSMutableArray alloc] init];
-            for(int j = 0; j < [dic count]; j++){
-                NSString *prefix = dic[j][@"url_prefix"];
-                NSString *url = dic[j][@"web_uri"];
-                [ news.images addObject: [prefix stringByAppendingString:url]];
+            if(jsonString != nil) {
+                NSArray *dic = [NSJSONSerialization JSONObjectWithData:jsonString
+                                                               options:NSJSONReadingMutableContainers
+                                                                 error:nil];
+                news.images = [[NSMutableArray alloc] init];
+                for(int j = 0; j < [dic count]; j++){
+                    NSString *prefix = dic[j][@"url_prefix"];
+                    NSString *url = dic[j][@"web_uri"];
+                    [ news.images addObject: [prefix stringByAppendingString:url]];
+                }
+                if([news.images count] == 0){
+                    news.tag = 0;
+                } else {
+                    news.tag = 1;
+                }
             }
-            if([news.images count] == 0){
+            else {
                 news.tag = 0;
-            } else {
-                news.tag = 1;
             }
             [result addObject: news];
         }
@@ -92,6 +103,7 @@
         NSLog(@"[load news] success");
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"[load news] fail: %@", url);
+        NSLog(@"[error] %@", error);
     }];
 }
 
@@ -100,7 +112,8 @@
 }
 
 - (void)loadCommentNews {
-    [self loadNewsTo:self.commentNews withURL:@"http://localhost:3000/news/list/offset=5&&count=5"];
+    NSString *username = [[User getInstance] getUsername];
+    [self loadNewsTo:self.commentNews withURL: [NSString stringWithFormat:@"http://localhost:3000/comment/username=%@", username]];
 }
 
 - (void)loadLikeNews {

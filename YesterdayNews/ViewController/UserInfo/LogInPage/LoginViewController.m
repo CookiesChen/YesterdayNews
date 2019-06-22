@@ -76,6 +76,11 @@
         
         NSLog(@"[login] success");
         [[UIApplication sharedApplication].keyWindow yb_showHookTipView:[NSString stringWithFormat:@"欢迎回来, %@", username]];
+        
+        [self.usernameInput setText:@""];
+        [self.passwordInput setText:@""];
+        
+        
         [[[ViewModelManager getManager] getViewModel:@"UserInfoViewModel"] userLogin];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         id response = [NSJSONSerialization JSONObjectWithData:error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] options:0 error:nil];
@@ -125,6 +130,7 @@
         _passwordInput.font = [UIFont systemFontOfSize:14];
         _passwordInput.layer.cornerRadius = 17.5;
         _passwordInput.layer.masksToBounds = YES;
+        _passwordInput.secureTextEntry = YES;
         [_passwordInput.layer setBorderWidth:1];
         [_passwordInput setAutocorrectionType:UITextAutocorrectionTypeNo];
         [_passwordInput setAutocapitalizationType:UITextAutocapitalizationTypeNone];
