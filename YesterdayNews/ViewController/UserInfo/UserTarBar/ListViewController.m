@@ -10,6 +10,7 @@
 #import <Colours.h>
 #import <ReactiveObjC.h>
 #import "../../NewsDetail/NewsDetailViewController.h"
+#import "../../../Utils/ManagerUtils/ViewModelManager.h"
 
 #define HEIGHT self.view.frame.size.height
 #define WIDTH self.view.frame.size.width
@@ -87,6 +88,7 @@
 #pragma mark ------------ UITableViewDelegate ------------------
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [[[ViewModelManager getManager] getViewModel: @"NewsDetailViewModel"] setNews: self.newsList[indexPath.row]];
     [self.navigationController pushViewController:[[NewsDetailViewController alloc]init] animated:YES];
 }
 
@@ -126,7 +128,7 @@
 
 - (UITableView *)tableView {
     if(_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT - 100) style:UITableViewStyleGrouped];
         [_tableView setBackgroundColor: [UIColor colorFromHexString:@"#efeff4"]];
         _tableView.delegate = self;
         _tableView.dataSource = self;

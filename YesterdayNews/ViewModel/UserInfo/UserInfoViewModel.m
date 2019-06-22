@@ -58,9 +58,9 @@
 
 - (void)loadNewsTo: (NSMutableArray*)list withURL: (NSString*)url {
     // Authorization: Bearer token_str
-    // 设置请求头token
-    NSString *token = [[User getInstance] getToken];
-    [self.manage.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", token] forHTTPHeaderField:@"Authorization"];
+    // 添加cookie-token
+    NSString *cookieStr = [NSString stringWithFormat:@"Bearer %@", [[User getInstance] getToken]];
+    [self.manage.requestSerializer setValue: cookieStr forHTTPHeaderField:@"Authorization"];
     
     [self.manage GET:url parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
         
@@ -69,13 +69,13 @@
         NSArray *newData = responseObject[@"data"];
         for(int i = 0; i < [newData count]; i++){
             News *news = [[News alloc] init];
+            [news setNewsId: newData[i][@"group_id"]];
             [news setTitle: newData[i][@"title"]];
             [news setAuthor: newData[i][@"author"]];
-            [news setComments: [[NSString alloc] initWithFormat:@"%@", newData[i][@"comments"]]];
             NSTimeInterval interval = [newData[i][@"time"] longLongValue];
             interval /= 1000.0;
             [news setTime: [NSDate dateWithTimeIntervalSince1970: interval]];
-            NSData *jsonString = [newData[i][@"image_infos"] dataUsingEncoding:NSUTF8StringEncoding];
+            NSData *jsonString = [newData[i][@"images"] dataUsingEncoding:NSUTF8StringEncoding];
             if(jsonString != nil) {
                 NSArray *dic = [NSJSONSerialization JSONObjectWithData:jsonString
                                                                options:NSJSONReadingMutableContainers
@@ -108,7 +108,8 @@
 }
 
 - (void)loadCollectionNews {
-    [self loadNewsTo:self.collectionNews withURL:@"http://localhost:3000/news/list/offset=0&&count=5"];
+    NSString *username = [[User getInstance] getUsername];
+    [self loadNewsTo:self.collectionNews withURL: [NSString stringWithFormat:@"http://localhost:3000/collection/username=%@", username]];
 }
 
 - (void)loadCommentNews {
@@ -117,11 +118,13 @@
 }
 
 - (void)loadLikeNews {
-    [self loadNewsTo:self.likeNews withURL:@"http://localhost:3000/news/list/offset=10&&count=5"];
+    NSString *username = [[User getInstance] getUsername];
+    [self loadNewsTo:self.likeNews withURL: [NSString stringWithFormat:@"http://localhost:3000/star/username=%@", username]];
 }
 
 - (void)loadHistoryNews{
-    [self loadNewsTo:self.historyNews withURL:@"http://localhost:3000/news/list/offset=15&&count=5"];
+    NSString *username = [[User getInstance] getUsername];
+    [self loadNewsTo:self.historyNews withURL: [NSString stringWithFormat:@"http://localhost:3000/history/username=%@", username]];
 }
 
 - (void)loadRecommendNews {

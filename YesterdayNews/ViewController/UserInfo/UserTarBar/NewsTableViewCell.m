@@ -63,9 +63,9 @@
     CGRect frame = [self frame];
     
     if(newsItem.tag == 0) {
-        [self.title setFrame:CGRectMake(60, 55, self.contentView.frame.size.width - 120, 50)];
-        [self.gray setFrame:CGRectMake(0, 100, self.contentView.frame.size.width, 5)];
-        frame.size.height = 105;
+        frame.size.height = 135;
+        [self.title setFrame:CGRectMake(60, 55, frame.size.width - 120, 50)];
+        [self.gray setFrame:CGRectMake(0, frame.size.height - 5, frame.size.width, 5)];
     }
     else if(newsItem.tag == 1) {
         [self.title setFrame:CGRectMake(60, 55, self.contentView.frame.size.width - 200, 50)];
@@ -89,9 +89,11 @@
 
 - (UILabel *)title {
     if(_title == nil) {
-        _title = [[UILabel alloc] initWithFrame:CGRectMake(60, 55, self.contentView.frame.size.width, 50)];
+        _title = [[UILabel alloc] initWithFrame:CGRectMake(60, 55, self.frame.size.width, 50)];
         _title.textColor = [UIColor blackColor];
+        //_title.backgroundColor = [UIColor yellowColor];
         [_title setFont: [UIFont systemFontOfSize: 16]];
+        _title.numberOfLines = 2;
         _title.numberOfLines = 0;
     }
     return _title;
