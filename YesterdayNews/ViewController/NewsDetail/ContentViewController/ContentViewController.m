@@ -344,6 +344,7 @@
 #import <Colours.h>
 #import <ReactiveObjC.h>
 #import "CommentCell.h"
+#import "NoCommentCell.h"
 #import "../../../Utils/ManagerUtils/ViewModelManager.h"
 #import "../../../Model/Comment/Comment.h"
 #import "NewsTitleCell.h"
@@ -448,7 +449,7 @@
 // row in section 数目
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return section==3?self.ViewModel.comments.count:1;
+    return (section==3&&_ViewModel.comments.count!=0)?self.ViewModel.comments.count:1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -484,9 +485,26 @@
         [cell addSubview: self.webviewcell];
     }
     else {
-        [cell addSubview:[[CommentCell alloc] initWithFrame:CGRectMake(margin, 0, self.frame.size.width-2*margin, 0)]];
-        CommentCell* cell_view = cell.subviews[0];
-        [cell_view updateViewByComment: self.ViewModel.comments[indexPath.row]];
+        // NSLog(@"[LOG] comments number: %d",_ViewModel.comments.count);
+        switch (_ViewModel.comments.count) {
+            case 0:
+            {
+                NoCommentCell* noCommentCell = [[NoCommentCell alloc] initWithFrame:CGRectMake(margin, 0, self.frame.size.width - 2 * margin, 40)];
+                [noCommentCell updateViewByComment:@"还没有人评论"];
+                // NSLog(@"[LOG] %f, %f, %f, %f", noCommentCell.frame.origin.x, noCommentCell.frame.origin.y, noCommentCell.frame.size.width, noCommentCell.frame.size.height);
+                [cell addSubview:noCommentCell];
+                
+                break;
+            }
+            default:
+            {
+                [cell addSubview:[[CommentCell alloc] initWithFrame:CGRectMake(margin, 0, self.frame.size.width - 2 * margin, 0)]];
+                CommentCell* cell_view = cell.subviews[0];
+                [cell_view updateViewByComment: self.ViewModel.comments[indexPath.row]];
+                break;
+            }
+        }
+        
     }
     
     CGRect cell_frame = cell.frame;

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		024B930F22BDCF30006BA6D5 /* NoCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 024B930E22BDCF30006BA6D5 /* NoCommentCell.m */; };
 		02BAA06222B48EA6004C0E51 /* PureTextNews.m in Sources */ = {isa = PBXBuildFile; fileRef = 02BAA06122B48EA6004C0E51 /* PureTextNews.m */; };
 		24ED0A27227B602E00F9814A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED0A1A227B602E00F9814A /* LoginViewController.m */; };
 		24ED0A28227B602E00F9814A /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24ED0A1D227B602E00F9814A /* UserInfoViewController.m */; };
@@ -81,6 +82,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		024B930D22BDCF07006BA6D5 /* NoCommentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoCommentCell.h; sourceTree = "<group>"; };
+		024B930E22BDCF30006BA6D5 /* NoCommentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoCommentCell.m; sourceTree = "<group>"; };
 		02BAA06022B48E80004C0E51 /* PureTextNews.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PureTextNews.h; sourceTree = "<group>"; };
 		02BAA06122B48EA6004C0E51 /* PureTextNews.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PureTextNews.m; sourceTree = "<group>"; };
 		07AA0FE3601FE1262409EB2B /* libPods-YesterdayNewsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YesterdayNewsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -349,6 +352,8 @@
 				518171F82297795A003DB421 /* ContentViewController.m */,
 				A0E50E6D2297DA2900268D7E /* CommentCell.h */,
 				A0E50E6E2297DA3500268D7E /* CommentCell.m */,
+				024B930D22BDCF07006BA6D5 /* NoCommentCell.h */,
+				024B930E22BDCF30006BA6D5 /* NoCommentCell.m */,
 				A0420BCE22AB523A000B5E3B /* NewsTitleCell.h */,
 				A0420BCF22AB545E000B5E3B /* NewsTitleCell.m */,
 				A0420BD422AB5EDB000B5E3B /* AuthorBarCell.h */,
@@ -876,6 +881,7 @@
 				5144FAE5226B74C500101E22 /* PageViewController.m in Sources */,
 				51B51D362281FAF8007AA44B /* TimeUtils.m in Sources */,
 				24ED0A2A227B602E00F9814A /* SignupViewController.m in Sources */,
+				024B930F22BDCF30006BA6D5 /* NoCommentCell.m in Sources */,
 				24ED0A2B227B602E00F9814A /* ListViewController.m in Sources */,
 				51B51D3F22829960007AA44B /* MultiImagesNews.m in Sources */,
 				A0E50E7B22993E9500268D7E /* CommentsViewModel.m in Sources */,
